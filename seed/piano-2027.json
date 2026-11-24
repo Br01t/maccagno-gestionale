@@ -1,0 +1,498 @@
+{
+ "v": 2,
+ "geo": 2,
+ "ts": 1795547366031,
+ "items": [
+  {
+   "t": "line",
+   "k": "Recinzione",
+   "l": "Recinto 10×10 m (100 m²)",
+   "p": [
+    [
+     55.0,
+     87.0
+    ],
+    [
+     65.6,
+     87.0
+    ],
+    [
+     65.6,
+     97.6
+    ],
+    [
+     55.0,
+     97.6
+    ],
+    [
+     55.0,
+     87.0
+    ]
+   ],
+   "v": "1245"
+  },
+  {
+   "t": "crop",
+   "k": "Zafferano",
+   "l": "Z1 zafferano (500 bulbi)",
+   "p": [
+    [
+     55.3,
+     87.3
+    ],
+    [
+     65.3,
+     87.3
+    ],
+    [
+     65.3,
+     88.3
+    ],
+    [
+     55.3,
+     88.3
+    ]
+   ],
+   "v": "1245",
+   "id": "ieqh524",
+   "sd": "2027-08-01",
+   "h1": "2027-10-05",
+   "h2": "2027-10-31",
+   "pr": [
+    {
+     "n": "Zafferano (boccette 0,5 g)",
+     "f": "",
+     "d": 4.4,
+     "u": "g",
+     "p": 27,
+     "m": "d"
+    }
+   ],
+   "co": [
+    {
+     "n": "Bulbi zafferano 1.050 (5% scorta)",
+     "v": 294
+    }
+   ],
+   "n": "500 bulbi, 5 file a 20 cm, bulbi a 10 cm sulla fila. Totali previsti di Z1+Z2 inseriti qui."
+  },
+  {
+   "t": "crop",
+   "k": "Zafferano",
+   "l": "Z2 zafferano (500 bulbi)",
+   "p": [
+    [
+     55.3,
+     89.3
+    ],
+    [
+     65.3,
+     89.3
+    ],
+    [
+     65.3,
+     90.3
+    ],
+    [
+     55.3,
+     90.3
+    ]
+   ],
+   "v": "1245",
+   "id": "yng5by1",
+   "sd": "2027-08-01",
+   "h1": "2027-10-05",
+   "h2": "2027-10-31",
+   "n": "500 bulbi, stessa disposizione di Z1."
+  },
+  {
+   "t": "crop",
+   "k": "Peperoncini",
+   "l": "Peperoncini speciali (12 piante)",
+   "p": [
+    [
+     55.3,
+     91.3
+    ],
+    [
+     58.3,
+     91.3
+    ],
+    [
+     58.3,
+     93.3
+    ],
+    [
+     55.3,
+     93.3
+    ]
+   ],
+   "v": "1245",
+   "id": "a2rogub",
+   "sd": "2027-02-01",
+   "h1": "2027-08-15",
+   "h2": "2027-10-15",
+   "hr": 18,
+   "pr": [
+    {
+     "n": "Peperoncini speciali secchi (10 g)",
+     "f": 3.6,
+     "d": 0.36,
+     "u": "kg",
+     "p": 550,
+     "m": "d"
+    }
+   ],
+   "co": [
+    {
+     "n": "Semi (3 bustine, 24 semi)",
+     "v": 40
+    }
+   ],
+   "n": "4 habanero, 4 Carolina Reaper, 4 Trinidad Scorpion (semina 8 per varietà, tieni le 4 migliori)."
+  },
+  {
+   "t": "crop",
+   "k": "Peperoncini",
+   "l": "Peperoncino comune (12 piante)",
+   "p": [
+    [
+     58.8,
+     91.3
+    ],
+    [
+     61.8,
+     91.3
+    ],
+    [
+     61.8,
+     93.3
+    ],
+    [
+     58.8,
+     93.3
+    ]
+   ],
+   "v": "1245",
+   "id": "bb8ayn1",
+   "sd": "2027-02-01",
+   "h1": "2027-08-15",
+   "h2": "2027-10-15",
+   "hr": 18,
+   "pr": [
+    {
+     "n": "Peperoncino comune in polvere/scaglie (20 g)",
+     "f": 7.2,
+     "d": 0.72,
+     "u": "kg",
+     "p": 225,
+     "m": "x"
+    }
+   ],
+   "co": [
+    {
+     "n": "Semi (2 bustine, 20 semi)",
+     "v": 40
+    }
+   ],
+   "n": "6 cayenna, 6 diavolicchio (semina 10 per varietà, tieni le 6 migliori)."
+  },
+  {
+   "t": "crop",
+   "k": "Aglio",
+   "l": "Aglio (100 spicchi)",
+   "p": [
+    [
+     62.3,
+     91.3
+    ],
+    [
+     64.3,
+     91.3
+    ],
+    [
+     64.3,
+     93.3
+    ],
+    [
+     62.3,
+     93.3
+    ]
+   ],
+   "v": "1245",
+   "id": "b7o259o",
+   "sd": "2027-11-15",
+   "h1": "2028-06-20",
+   "h2": "2028-07-15",
+   "pr": [
+    {
+     "n": "Aglio fresco",
+     "f": 2,
+     "d": "",
+     "u": "kg",
+     "p": 12,
+     "m": "f"
+    }
+   ],
+   "co": [
+    {
+     "n": "14 teste da seme",
+     "v": 20
+    }
+   ],
+   "n": "100 spicchi, 25/m², 20×20 cm."
+  },
+  {
+   "t": "crop",
+   "k": "Erbe aromatiche",
+   "l": "Erbe perenni (timo, origano, salvia, santoreggia, elicriso)",
+   "p": [
+    [
+     55.3,
+     94.3
+    ],
+    [
+     60.3,
+     94.3
+    ],
+    [
+     60.3,
+     96.3
+    ],
+    [
+     55.3,
+     96.3
+    ]
+   ],
+   "v": "1245",
+   "id": "woo3sb0",
+   "sd": "2027-02-15",
+   "h1": "2027-06-15",
+   "h2": "2027-08-31",
+   "hr": 30,
+   "pr": [
+    {
+     "n": "Erbe secche per mix",
+     "f": 1.6,
+     "d": 0.32,
+     "u": "kg",
+     "p": 175,
+     "m": "x"
+    }
+   ],
+   "co": [
+    {
+     "n": "Semi e piantine",
+     "v": 90
+    }
+   ],
+   "n": "16 timo, 14 origano, 6 salvia, 16 santoreggia, 8 elicriso. Aiuola permanente."
+  },
+  {
+   "t": "crop",
+   "k": "Erbe aromatiche",
+   "l": "Annuali per mix e tisane",
+   "p": [
+    [
+     61.3,
+     94.3
+    ],
+    [
+     64.3,
+     94.3
+    ],
+    [
+     64.3,
+     96.3
+    ],
+    [
+     61.3,
+     96.3
+    ]
+   ],
+   "v": "1245",
+   "id": "9glshv6",
+   "sd": "2027-03-15",
+   "h1": "2027-06-15",
+   "h2": "2027-09-15",
+   "hr": 18,
+   "pr": [
+    {
+     "n": "Fiori e annuali secchi",
+     "f": 0.6,
+     "d": 0.18,
+     "u": "kg",
+     "p": 175,
+     "m": "x"
+    }
+   ],
+   "co": [
+    {
+     "n": "6 bustine di semi",
+     "v": 20
+    }
+   ],
+   "n": "Shiso 16, coriandolo ~50, nigella ~50, cumino dei prati 12, calendula 16, fiordaliso ~40."
+  },
+  {
+   "t": "crop",
+   "k": "Altro",
+   "l": "Postazione di lavoro e spese comuni",
+   "p": [
+    [
+     55.3,
+     96.5
+    ],
+    [
+     57.8,
+     96.5
+    ],
+    [
+     57.8,
+     97.3
+    ],
+    [
+     55.3,
+     97.3
+    ]
+   ],
+   "v": "1245",
+   "id": "16mts56",
+   "co": [
+    {
+     "n": "Recinzione elettrica e irrigazione a goccia 100 m²",
+     "v": 750
+    },
+    {
+     "n": "Essiccatore e attrezzi",
+     "v": 400
+    },
+    {
+     "n": "Imballaggi ed etichette",
+     "v": 250
+    },
+    {
+     "n": "Notifica ATS, analisi, assicurazione",
+     "v": 120
+    },
+    {
+     "n": "Spedizioni",
+     "v": 100
+    }
+   ],
+   "n": "Raccoglie le spese comuni di avvio."
+  },
+  {
+   "t": "crop",
+   "k": "Funghi",
+   "l": "Tronchi funghi (100) + 2 colonne paglia",
+   "p": [
+    [
+     66.1,
+     88.1
+    ],
+    [
+     69.1,
+     88.1
+    ],
+    [
+     69.1,
+     89.3
+    ],
+    [
+     66.1,
+     89.3
+    ]
+   ],
+   "v": "1245",
+   "id": "zc4pz0l",
+   "sd": "2027-03-01",
+   "h1": "2027-09-15",
+   "hr": 120,
+   "pr": [
+    {
+     "n": "Funghi secchi (20 g)",
+     "f": 10,
+     "d": 0.77,
+     "u": "kg",
+     "p": 275,
+     "m": "d"
+    }
+   ],
+   "co": [
+    {
+     "n": "Plug ~2.250",
+     "v": 270
+    },
+    {
+     "n": "Paglia, semente, tubolari (2 colonne)",
+     "v": 50
+    },
+    {
+     "n": "Scaffali, igrostato, rete, cera, etichette",
+     "v": 60
+    }
+   ],
+   "n": "30 shiitake, 22 pioppino, 22 pleurotus, 12 hericium, 10 auricularia, 4 flammulina + 2 colonne di paglia. Posizione da correggere."
+  },
+  {
+   "t": "crop",
+   "k": "Api e miele",
+   "l": "3 arnie",
+   "p": [
+    [
+     66.1,
+     89.3
+    ],
+    [
+     69.1,
+     89.3
+    ],
+    [
+     69.1,
+     90.3
+    ],
+    [
+     66.1,
+     90.3
+    ]
+   ],
+   "v": "1245",
+   "id": "x9xf26g",
+   "hr": 36,
+   "pr": [
+    {
+     "n": "Miele (barattoli 250 g)",
+     "f": 18,
+     "d": "",
+     "u": "kg",
+     "p": 16,
+     "m": "f"
+    }
+   ],
+   "co": [
+    {
+     "n": "Cera, sciroppo, antivarroa",
+     "v": 40
+    }
+   ],
+   "n": "Posizione da correggere. Nuclei non inclusi nei costi."
+  }
+ ],
+ "cfg": {
+  "add": {
+   "crop": {
+    "Altro": "#8a8a8a"
+   },
+   "zone": {},
+   "line": {},
+   "pt": {}
+  },
+  "hide": {
+   "crop": [],
+   "zone": [],
+   "line": [],
+   "pt": []
+  }
+ }
+}

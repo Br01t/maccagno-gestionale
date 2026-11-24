@@ -14,7 +14,12 @@ if (cfg && cfg.projectId && M && btn) {
     auth = a.getAuth(ap);
     db = f.initializeFirestore(ap, { localCache: f.persistentLocalCache({ tabManager: f.persistentMultipleTabManager() }) });
   }
+  const owner = (cfg.ownerEmail || "").toLowerCase();
   function connect(user) {
+    if (!owner || (user.email || "").toLowerCase() !== owner) {
+      M.sy("⛔ Account non autorizzato: " + (user.email || ""), "err");
+      setFlag(false); au.signOut(auth); return;
+    }
     uid = user.uid;
     const d = fs.doc(db, "users", uid, "maps", "main");
     M.use({ set: x => fs.setDoc(d, x) }, "☁️ Firebase: " + (user.email || "collegato"));
