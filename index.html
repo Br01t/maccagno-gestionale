@@ -57,8 +57,54 @@ input[type=number]{font:inherit;color:var(--fg);background:var(--bg);border:1px 
 #cb{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:8;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;font-size:13px;box-shadow:0 4px 18px rgba(0,0,0,.25);max-width:min(440px,92%)}#cb[hidden]{display:none}#cb button{margin-top:6px}
 @media(max-width:760px){body{overflow:hidden}.body{grid-template-columns:1fr;grid-template-rows:minmax(190px,42dvh) minmax(0,1fr)}#map{order:-1}#sd{border-right:0;border-top:1px solid var(--ln)}#md{position:fixed;inset:0;width:100%;z-index:20;border-left:0;padding-top:max(12px,env(safe-area-inset-top,0px))}header{padding:4px 8px;gap:4px 8px}h1{font-size:14px}#tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px}#tabs button,#tabs label{flex:none;white-space:nowrap}#st-tabs button{flex:1 1 18%;font-size:12px;padding:6px 0}#pal{grid-template-columns:repeat(5,1fr)}.syn{margin-left:0;flex-basis:100%}#zc button{width:40px;padding:8px 0}}
 label.f{align-items:stretch}
-.lock{display:none;position:fixed;inset:0;z-index:100;background:var(--bg,#f4f3ee);align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:24px;font:16px system-ui,sans-serif;color:#24402f}html.locked .lock{display:flex}html.locked .app{visibility:hidden}.lock img{width:96px;height:96px;border-radius:22px}.lock button{font:inherit;padding:10px 18px;border-radius:10px;border:1px solid #2f6f4f;background:#2f6f4f;color:#fff}.lock button:disabled{opacity:.5}#lk-m{min-height:1.4em;font-size:14px;color:#6b6b6b;max-width:320px}
-</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v6</small></div><main class="app">
+.lock{display:none;position:fixed;inset:0;z-index:100;background:var(--bg,#f4f3ee);align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:24px;font:16px system-ui,sans-serif;color:var(--fg)}html.locked .lock{display:flex}html.locked .app{visibility:hidden}.lock img{width:96px;height:96px;border-radius:22px}.lock button{font:inherit;padding:10px 18px;border-radius:10px;border:1px solid #2f6f4f;background:#2f6f4f;color:#fff}.lock button:disabled{opacity:.5}#lk-m{min-height:1.4em;font-size:14px;color:#6b6b6b;max-width:320px}
+/* ===== Tema v7: chiaro, ordinato, leggibile su ogni schermo ===== */
+:root{--bg:#f3f4f0;--card:#fff;--fg:#1a1d1a;--mut:#575b55;--ln:#d9dcd3;--ac:#2a6b4a;--acd:#1f5238;--ring:#1a73e8;--r:12px;--sh:0 1px 2px rgba(20,30,20,.08),0 4px 14px rgba(20,30,20,.08)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141613;--card:#1d201c;--fg:#eceee8;--mut:#b0b4aa;--ln:#363a33;--ac:#6fc496;--acd:#8fd6ae}}
+body{font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+header{padding:8px 14px;gap:8px 16px;box-shadow:0 1px 0 var(--ln)}
+h1{font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center}
+button,select,input[type=text],input[type=date],input[type=number],textarea{border-radius:10px;padding:7px 11px;min-height:38px;box-sizing:border-box}
+button{font-weight:500;background:var(--card);transition:background .12s,border-color .12s,box-shadow .12s}
+button:hover{border-color:var(--ac)}button:active{transform:translateY(1px)}
+button.on,.chip.on{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+#tabs button{border-radius:999px;padding:5px 14px;min-height:34px}
+#tabs label{font-size:13px;padding:0 2px}
+#sd{padding:12px;gap:12px;background:var(--bg)}
+#st-tabs button{min-height:40px;font-size:13.5px;border-radius:10px}
+#pal{gap:8px}#pal button{padding:9px 2px;font-size:12.5px;min-height:62px;border-radius:12px;gap:3px}#pal button span{font-size:21px}
+#hint{border-radius:var(--r);padding:10px 12px;font-size:13.5px;line-height:1.45;background:var(--card);box-shadow:var(--sh);border:0}
+.chip{min-height:34px;padding:4px 12px;font-size:13.5px}
+details.sec{background:var(--card);border:1px solid var(--ln);border-radius:var(--r);padding:10px 12px}
+details.sec summary{font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.sec summary::-webkit-details-marker{display:none}details.sec summary::after{content:"▾";color:var(--mut)}details[open].sec summary::after{content:"▴"}
+.row2{gap:8px 10px;margin-top:8px}.row2 label,.f{font-size:13.5px}label{color:var(--fg)}
+.row2 input[type=checkbox],.ck input{width:18px;height:18px;accent-color:var(--ac);flex:none}
+#zc{left:12px;top:12px;gap:8px}#zc button{width:42px;height:42px;padding:0;font-size:20px;border-radius:12px;box-shadow:var(--sh);border:0;line-height:1}
+#w{background:#fbfaf6}
+#md{width:min(500px,100%);box-shadow:-10px 0 30px rgba(0,0,0,.18)}
+#md h4,h4{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:18px 0 6px}
+.mh b{font-size:16px}
+#cb,#rp{box-shadow:var(--sh);border-radius:var(--r)}
+.pc{border-radius:12px;padding:10px 12px 10px 24px;box-shadow:var(--sh);border:0;background:var(--card)}.pc>i{top:15px}
+.syn{font-size:13px}
+@media(max-width:760px){
+body{font-size:15.5px}
+.body{grid-template-rows:minmax(220px,46dvh) minmax(0,1fr)}
+header{padding:6px 10px}h1{font-size:15px}
+#sd{padding:10px}
+#st-tabs button{min-height:44px;font-size:12.5px}
+#pal{grid-template-columns:repeat(4,1fr)}
+button,select,input[type=text],input[type=date],input[type=number],textarea{font-size:16px;min-height:44px}
+.ck input[type=date]{font-size:14px}
+#zc button{width:46px;height:46px}
+.row2{grid-template-columns:1fr}
+.row2 label{min-height:34px}
+}
+@media(min-width:1500px){.body{grid-template-columns:380px minmax(0,1fr)}body{font-size:15.5px}}
+.lock{color:var(--fg)}.lock b{color:var(--fg)}#lk-m{color:var(--mut)}.lock button{background:var(--ac);border-color:var(--ac);font-weight:600;min-height:46px}
+</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v7</small></div><main class="app">
 <header><h1><img src="icons/icon.svg" alt="" width="26" height="26" style="vertical-align:-6px;margin-right:6px">Mappa dei terreni di Maccagno</h1><div id="tabs" class="bar"></div><button id="inst" hidden>⬇ Installa</button><span id="sy" class="syn"></span></header>
 <div class="body">
 <aside id="sd">
@@ -71,7 +117,7 @@ label.f{align-items:stretch}
 <div id="mg" hidden><b>Gestisci voci</b> <select id="mc"><option value="crop">Colture</option><option value="zone">Zone</option><option value="line">Linee</option><option value="pt">Punti</option></select>
 <div class="bar" style="margin-top:6px"><input type="text" id="mn" placeholder="Nome della nuova voce"><input type="color" id="mcol" value="#d9534f" title="Colore"><select id="mls"><option value="">continua</option><option value="1.2 .7">tratteggiata</option><option value=".5 .8">punteggiata</option></select><input type="text" id="mem" size="3" maxlength="4" value="📍" title="Simbolo (emoji)" style="flex:0 0 50px"><button id="ma">Aggiungi</button></div>
 <div id="ml"></div></div>
-<div class="row2"><label><input type="checkbox" id="gr" checked><span id="gl">Griglia</span></label><label><input type="checkbox" id="cx">Particelle vicine</label><label><input type="checkbox" id="sn" checked>Aggancio</label><label><input type="checkbox" id="ct">Dati catastali</label><label><input type="checkbox" id="dt">Date sulla mappa</label><label><input type="checkbox" id="dm" checked>Quote lati (m)</label></div>
+<details class="sec" open><summary>Vista mappa</summary><div class="row2"><label><input type="checkbox" id="gr" checked><span id="gl">Griglia</span></label><label><input type="checkbox" id="cx">Particelle vicine</label><label><input type="checkbox" id="sn" checked>Aggancio</label><label><input type="checkbox" id="ct">Dati catastali</label><label><input type="checkbox" id="dt">Date sulla mappa</label><label><input type="checkbox" id="dm" checked>Quote lati (m)</label><label><input type="checkbox" id="pn" checked>Numeri particelle</label></div></details>
 <button id="mgb">Gestisci voci (colture, zone, punti…)</button>
 </div>
 <div class="pane" id="p-prod" hidden><div id="prl"></div></div>
@@ -106,7 +152,8 @@ const CAL={};(()=>{for(const k in P){const q=P[k].p,a=Math.abs(q.reduce((s,r,i)=
 const mig=a=>{(a||[]).forEach(o=>{const m=CAL[o.v];if(m&&o.p)o.p=o.p.map(r=>[+(m.c[0]+(r[0]-m.c[0])*m.f).toFixed(3),+(m.c[1]+(r[1]-m.c[1])*m.f).toFixed(3)])});return a};
 const all=Object.values(P).flatMap(p=>p.p);
 const bx=[Math.min(...all.map(p=>p[0])),Math.max(...all.map(p=>p[0]))],by=[Math.min(...all.map(p=>p[1])),Math.max(...all.map(p=>p[1]))];
-function fit(r){const q=view==="all"?all:P[view].p,x0=Math.min(...q.map(p=>p[0])),x1=Math.max(...q.map(p=>p[0])),y0=Math.min(...q.map(p=>p[1])),y1=Math.max(...q.map(p=>p[1])),m=.08*Math.max(x1-x0,y1-y0)+3,w=x1-x0+m,h=y1-y0+m;r=r||svg.clientWidth/Math.max(svg.clientHeight,1)||1.2;let W=Math.max(w,h*r),H=W/r;vb={x:(x0+x1)/2-W/2,y:-(y0+y1)/2-H/2,w:W,h:H}}
+let FW=130;const ZMIN=6;
+function fit(r){const q=view==="all"?all:P[view].p,x0=Math.min(...q.map(p=>p[0])),x1=Math.max(...q.map(p=>p[0])),y0=Math.min(...q.map(p=>p[1])),y1=Math.max(...q.map(p=>p[1])),m=.08*Math.max(x1-x0,y1-y0)+3,w=x1-x0+m,h=y1-y0+m;r=r||svg.clientWidth/Math.max(svg.clientHeight,1)||1.2;let W=Math.max(w,h*r),H=W/r;vb={x:(x0+x1)/2-W/2,y:-(y0+y1)/2-H/2,w:W,h:H};FW=W}
 const ar=p=>Math.abs(p.reduce((s,q,i)=>{const n=p[(i+1)%p.length];return s+q[0]*n[1]-n[0]*q[1]},0)/2);
 const d=p=>"M"+p.map(q=>q[0].toFixed(1)+" "+(-q[1]).toFixed(1)).join("L");
 const len=p=>p.reduce((s,q,i)=>i?s+Math.hypot(q[0]-p[i-1][0],q[1]-p[i-1][1]):0,0);
@@ -117,16 +164,17 @@ let sel=null;const pnote=k=>it.find(o=>o.t==="pn"&&o.v===k)||{t:"pn",v:k,p:[],n:
 const hid={},LAY={crop:"Colture",zone:"Zone",line:"Linee",slope:"Pendenze",pt:"Punti",note:"Note"};
 const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const cen=p=>[p.reduce((s,q)=>s+q[0],0)/p.length,p.reduce((s,q)=>s+q[1],0)/p.length];
+function toSel(k){$("tool").value="info";fillKind();if(k!=null){sel=k;draw();panel()}}
 function fillKind(){const t=$("tool").value,k=$("kind");let h="";const op=a=>a.map(x=>`<option>${x}</option>`).join("");
 const vis=c=>Object.keys(TAB[c]).filter(n=>!cfg.hide[c].includes(n));
 if(t==="rect")h=op(vis("crop"));else if(t==="crop"||t==="zone"||t==="line")h=op(vis(t));
 if(t==="pt")h=ptg().map(([g,a])=>`<optgroup label="${g}">${op(a)}</optgroup>`).join("");
 if(h)h+='<option value="__new">➕ Aggiungi nuovo…</option>';
 k.innerHTML=h;k.style.display=h?"":"none";svg.className.baseVal=t==="pan"?"pan":t==="info"?"pan del":(t==="del"||t==="edit")?"del":"";cur=[];sel=null;draw();msg();panel();chips();pal()}
-function msg(){const t=$("tool").value,L=$("lab");$("hint").textContent={info:"Clicca una coltura, una zona o un punto sulla mappa per vederne i dettagli. Trascina per spostare la mappa.",crop:"1 · Scegli il tipo di coltura. 2 · Clicca sulla mappa i vertici dell’area. 3 · Premi “Fine disegno” (o doppio clic).",zone:"1 · Scegli il tipo di zona. 2 · Clicca i vertici dell’area. 3 · Premi “Fine disegno”.",line:"1 · Scegli il tipo di linea. 2 · Clicca i punti del percorso. 3 · Premi “Fine disegno”. La lunghezza compare in mappa.",pt:"Scegli il tipo e clicca sulla mappa dove metterlo.",slope:"Scrivi sotto la pendenza (15%) o il dislivello (3 m), poi clicca il punto alto e quello basso.",note:"Scrivi il testo sotto e clicca sulla mappa dove metterlo.",rect:"Scrivi in etichetta le misure reali: 4x3 (lunghezza x larghezza in metri), con rotazione opzionale 4x3@30 e un nome: 4x3 Peperoncini. Poi clicca dove va l’angolo in basso a sinistra.",meas:"Clicca più punti: vedi lunghezza e area. Non viene salvato nulla.",edit:"Scrivi la nuova etichetta e clicca l’elemento.",del:"Clicca un elemento per cancellarlo."}[t]||"";L.placeholder=t==="slope"?"Pendenza (es. 15%) o dislivello (es. 3 m)":t==="rect"?"Misure: 4x3 oppure 4x3@30 Nome":t==="note"?"Testo della nota":"Etichetta (facoltativa)";L.style.display=["info","meas","del","pan"].includes(t)?"none":""}
+function msg(){const t=$("tool").value,L=$("lab");$("hint").textContent={info:"Tocca una coltura, una zona o un punto per vederne i dettagli. Trascina per spostare la mappa.",crop:"1 · Scegli il tipo di coltura. 2 · Clicca sulla mappa i vertici dell’area. 3 · Premi “Fine disegno” (o doppio clic): poi torni alla selezione.",zone:"1 · Scegli il tipo di zona. 2 · Clicca i vertici dell’area. 3 · Premi “Fine disegno”.",line:"1 · Scegli il tipo di linea. 2 · Clicca i punti del percorso. 3 · Premi “Fine disegno”. La lunghezza compare in mappa.",pt:"Scegli il tipo e clicca sulla mappa dove metterlo.",slope:"Scrivi sotto la pendenza (15%) o il dislivello (3 m), poi clicca il punto alto e quello basso.",note:"Scrivi il testo sotto e clicca sulla mappa dove metterlo.",rect:"Scrivi in etichetta le misure reali: 4x3 (lunghezza x larghezza in metri), con rotazione opzionale 4x3@30 e un nome: 4x3 Peperoncini. Poi clicca dove va l’angolo in basso a sinistra.",meas:"Clicca più punti: vedi lunghezza e area. Non viene salvato nulla.",edit:"Scrivi la nuova etichetta e clicca l’elemento.",del:"Clicca un elemento per cancellarlo."}[t]||"";L.placeholder=t==="slope"?"Pendenza (es. 15%) o dislivello (es. 3 m)":t==="rect"?"Misure: 4x3 oppure 4x3@30 Nome":t==="note"?"Testo della nota":"Etichetta (facoltativa)";L.style.display=["info","meas","del","pan"].includes(t)?"none":""}
 function raw(e){const r=svg.getBoundingClientRect();return[vb.x+(e.clientX-r.left)/r.width*vb.w,-(vb.y+(e.clientY-r.top)/r.height*vb.h)]}
 function pos(e){const p=raw(e);if(!$("sn").checked)return p;let b=null,bd=vb.w*.015;for(const c of Object.values(P).flatMap(x=>x.p).concat(it.flatMap(o=>o.p))){const dd=Math.hypot(c[0]-p[0],c[1]-p[1]);if(dd<bd){bd=dd;b=c}}return b?[b[0],b[1]]:p}
-function fin(){const t=$("tool").value,k=$("kind").value,l=$("lab").value;let nw=0;if(cur.length){const v=vtag(cur[0]);if((t==="crop"||t==="zone")&&cur.length>2){it.push({t,k,l,p:cur,v,id:uid()});nw=t==="crop"}if(t==="line"&&cur.length>1)it.push({t:"line",k,l,p:cur,v})}cur=[];save();if(nw)sel=it.length-1;draw();if(nw)panel()}
+function fin(){const t=$("tool").value,k=$("kind").value,l=$("lab").value;let nw=0;const had=cur.length;if(cur.length){const v=vtag(cur[0]);if((t==="crop"||t==="zone")&&cur.length>2){it.push({t,k,l,p:cur,v,id:uid()});nw=t==="crop"}if(t==="line"&&cur.length>1)it.push({t:"line",k,l,p:cur,v})}cur=[];save();if(nw)sel=it.length-1;draw();if(nw)panel();if(had&&["crop","zone","line"].includes(t))toSel(nw?sel:null)}
 function desc(o){const w=o.v==="all"?"fuori dalle particelle":"particella "+o.v;return o.t==="crop"?`Coltura: ${o.l||o.k} (${o.k}) · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="zone"?`Zona: ${o.l||o.k} · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="line"?`${o.k}: ${Math.round(len(o.p))} m · ${w}`:o.t==="slope"?`Pendenza ${o.l} · ${w}`:o.t==="pt"?`${PTS[o.k]} ${o.k} · ${w}`:`Nota · ${w}`}
 const kg=(v,u)=>(+v||0)*(u==="g"?.001:1),nf=(x,d=1)=>x.toLocaleString("it-IT",{maximumFractionDigits:d}),fmtkg=x=>x>=1?nf(x,2)+" kg":nf(x*1000,0)+" g";
 function totals(o){const r=o.pr||[];return{f:r.reduce((s,x)=>s+kg(x.f,x.u),0),d:r.reduce((s,x)=>s+kg(x.d,x.u),0),a:ar(o.p),h:hrs(o)}}
@@ -255,25 +303,25 @@ const sw=n=>t==="pt"?PTS[n]:`<i style="background:${t==="line"?LINES[n][0]:t==="
 c.innerHTML=[...k.children].map(x=>x.tagName==="OPTGROUP"?`<span class="gl">${E(x.label)}</span>`+[...x.children].map(one).join(""):one(x)).join("")}
 function ui(){$("fin").hidden=!(cur.length>0&&["crop","zone","line"].includes($("tool").value))}
 
-function draw(out){const s=vb.w/60,gs=view==="all"?10:5,g=[`<rect x="${vb.x-999}" y="${vb.y-999}" width="3000" height="3000" fill="#faf9f4"/>`],T=[],bx=[],HL='paint-order="stroke" stroke="#faf9f4" stroke-linejoin="round"';
-const tx=(x,y,t,fs,fill,ex)=>{const w=String(t).length*fs*.55,l=x-w/2;let yy=y,k=0;while(k++<14&&bx.some(b=>l<b[1]&&l+w>b[0]&&yy-fs<b[3]&&yy+fs*.3>b[2]))yy+=fs*1.1;bx.push([l,l+w,yy-fs,yy+fs*.3]);T.push(`<text x="${x}" y="${yy}" font-size="${fs}" fill="${fill||"#222"}" text-anchor="middle" ${HL} stroke-width="${fs/3.2}" ${ex||""}>${E(t)}</text>`)};
+function draw(out){const pxu=vb.w/Math.max(svg.clientWidth,300),spx=Math.min(15,Math.max(12.5,svg.clientWidth/60)),s=spx*pxu,gs=view==="all"?10:5,g=[`<rect x="${vb.x-999}" y="${vb.y-999}" width="3000" height="3000" fill="#faf9f4"/>`],T=[],bx=[],HL='paint-order="stroke" stroke="#fffef8" stroke-opacity=".94" stroke-linejoin="round"';
+const tx=(x,y,t,fs,fill,ex)=>{const w=String(t).length*fs*.6,l=x-w/2;let yy=y,k=0;while(k++<14&&bx.some(b=>l<b[1]&&l+w>b[0]&&yy-fs<b[3]&&yy+fs*.3>b[2]))yy+=fs*1.1;bx.push([l,l+w,yy-fs,yy+fs*.3]);T.push(`<text x="${x}" y="${yy}" font-size="${fs}" fill="${fill||"#1b1b19"}" text-anchor="middle" ${HL} stroke-width="${fs/2.3}" ${ex||""} font-weight="600">${E(t)}</text>`)};
 const mk=(x,y,t,fs)=>T.push(`<text x="${x}" y="${y}" font-size="${fs}" text-anchor="middle" dominant-baseline="central">${t}</text>`);
 if($("gr").checked){const x0=Math.floor(vb.x/gs)*gs,y0=Math.floor(vb.y/gs)*gs;for(let x=x0;x<vb.x+vb.w;x+=gs)g.push(`<line x1="${x}" y1="${vb.y}" x2="${x}" y2="${vb.y+vb.h}" stroke="#e3e0d4" stroke-width="${s/14}"/>`);for(let y=y0;y<vb.y+vb.h;y+=gs)g.push(`<line x1="${vb.x}" y1="${y}" x2="${vb.x+vb.w}" y2="${y}" stroke="#e3e0d4" stroke-width="${s/14}"/>`)}
-if(view==="all"&&!out&&$("cx").checked)C.forEach(c=>{g.push(`<path d="${d(c.p)}Z" fill="#efede6" stroke="#b9b5a8" stroke-width="${s/10}"/>`);if(c.n){const m=cen(c.p);tx(m[0],-m[1],c.n,s*.9,"#8b887c")}});
-for(const k in P){if(view!=="all"&&k!==view)continue;const p=P[k],tp=p.p.reduce((a,b)=>b[1]>a[1]?b:a),ps=sel==="p:"+k&&!out;g.push(`<path data-p="${k}" d="${d(p.p)}Z" fill="${PC[k]}" stroke="${ps?"#1a73e8":"#2f6f4f"}" stroke-width="${ps?s/3:s/5}"/>`);tx(tp[0],-tp[1]-s*.7,k+(pnote(k).n?" 📝":""),s*1.3,"#24402f",'font-weight="700"');if($("ct").checked)tx(tp[0],-tp[1]-s*.7,p.q+" · "+p.a+" m²",s*.8,"#3b5a46")}
-if($("dm").checked){const edg=(q,fs)=>q.forEach((a,i)=>{const b=q[(i+1)%q.length],L=Math.hypot(b[0]-a[0],b[1]-a[1]);if(L>=1.5)tx((a[0]+b[0])/2,-(a[1]+b[1])/2,L.toFixed(1)+" m",fs,"#7a2d00")});for(const k in P)if(view==="all"||k===view)edg(P[k].p,s*.7);it.forEach(o=>{if((o.t==="crop"||o.t==="zone")&&!hid[o.t]&&(view==="all"||o.v===view))edg(o.p,s*.6)})}
+if(view==="all"&&!out&&$("cx").checked)C.forEach(c=>{g.push(`<path d="${d(c.p)}Z" fill="#efede6" stroke="#b9b5a8" stroke-width="${s/10}"/>`);if(c.n){const m=cen(c.p);tx(m[0],-m[1],c.n,s*.95,"#6f6c61")}});
+for(const k in P){if(view!=="all"&&k!==view)continue;const p=P[k],tp=p.p.reduce((a,b)=>b[1]>a[1]?b:a),ps=sel==="p:"+k&&!out;g.push(`<path data-p="${k}" d="${d(p.p)}Z" fill="${PC[k]}" stroke="${ps?"#1a73e8":"#2f6f4f"}" stroke-width="${ps?s/3:s/5}"/>`);{const lb=($("pn").checked?k:"")+(pnote(k).n?" 📝":"");if(lb.trim())tx(tp[0],-tp[1]-s*.7,lb.trim(),s*1.5,"#1c3a2a",'font-weight="800"')}if($("ct").checked)tx(tp[0],-tp[1]-s*.7,p.q+" · "+p.a+" m²",s*.95,"#2c4a38")}
+if($("dm").checked){const edg=(q,fs)=>q.forEach((a,i)=>{const b=q[(i+1)%q.length],L=Math.hypot(b[0]-a[0],b[1]-a[1]);if(L/pxu>=52)tx((a[0]+b[0])/2,-(a[1]+b[1])/2,L.toFixed(1)+" m",fs,"#7a2d00")});for(const k in P)if(view==="all"||k===view)edg(P[k].p,s*.85);it.forEach(o=>{if((o.t==="crop"||o.t==="zone")&&!hid[o.t]&&(view==="all"||o.v===view)){const xs=o.p.map(q=>q[0]),ys=o.p.map(q=>q[1]);if(Math.min(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))/pxu>=34)edg(o.p,s*.82)}})}
 it.forEach((o,i)=>{if(["pn","log","lot","hv"].includes(o.t)||hid[o.t]||(view!=="all"&&o.v!==view))return;const m=o.p.length?cen(o.p):[0,0],on=sel===i&&!out;let h="",hi="";
-if(o.t==="crop"||o.t==="zone"){const z=o.t==="zone",c=z?ZONES[o.k]:CROPS[o.k];h=`<path d="${d(o.p)}Z" fill="${c}" fill-opacity="${z?.3:.55}" stroke="${c}" stroke-width="${s/6}"${z?` stroke-dasharray="${s/2} ${s/4}"`:""}/>`;tx(m[0],-m[1],o.l||o.k,s*.85,"#222",z?'font-style="italic"':'font-weight="700"');tx(m[0],-m[1]+s*.95,Math.round(ar(o.p))+" m²",s*.75);if(!z&&$("dt").checked&&(o.sd||o.h1))tx(m[0],-m[1]+s*1.9,(o.sd?"sem. "+fd(o.sd):"")+(o.sd&&o.h1?" · ":"")+(o.h1?"racc. "+fd(o.h1)+(o.h2?"–"+fd(o.h2):""):""),s*.7)}
-else if(o.t==="line"){const[c,da]=LINES[o.k];h=`<path d="${d(o.p)}" fill="none" stroke="${c}" stroke-width="${s/5}" stroke-dasharray="${da}"/><path d="${d(o.p)}" fill="none" stroke="transparent" stroke-width="${s*1.2}"/>`;tx(m[0],-m[1]-s*.5,(o.l?o.l+" · ":"")+Math.round(len(o.p))+" m",s*.8,c)}
-else if(o.t==="slope"){const a=o.p[0],b=o.p[1],dx=b[0]-a[0],dy=-(b[1]-a[1]),L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;h=`<path d="${d(o.p)}" stroke="#e8710a" stroke-width="${s/5}" fill="none"/><path d="${d(o.p)}" stroke="transparent" stroke-width="${s*1.2}" fill="none"/><path d="M${b[0]} ${-b[1]}l${(-ux*s*.9-uy*s*.45).toFixed(2)} ${(-uy*s*.9+ux*s*.45).toFixed(2)}M${b[0]} ${-b[1]}l${(-ux*s*.9+uy*s*.45).toFixed(2)} ${(-uy*s*.9-ux*s*.45).toFixed(2)}" stroke="#e8710a" stroke-width="${s/5}" fill="none"/>`;tx((a[0]+b[0])/2,-(a[1]+b[1])/2-s*.4,o.l,s*.85,"#b85500",'font-weight="700"')}
-else if(o.t==="pt"){h=`<circle cx="${o.p[0][0]}" cy="${-o.p[0][1]}" r="${s*.9}" fill="#fff" fill-opacity=".8" stroke="#999" stroke-width="${s/10}"/>`;mk(o.p[0][0],-o.p[0][1],PTS[o.k],s*1.3);if(o.l)tx(o.p[0][0],-o.p[0][1]+s*1.9,o.l,s*.75)}
-else if(o.t==="note"){h=`<circle cx="${o.p[0][0]}" cy="${-o.p[0][1]}" r="${s*1.2}" fill="transparent"/>`;tx(o.p[0][0],-o.p[0][1],o.l,s*.9)}
+if(o.t==="crop"||o.t==="zone"){const z=o.t==="zone",c=z?ZONES[o.k]:CROPS[o.k];h=`<path d="${d(o.p)}Z" fill="${c}" fill-opacity="${z?.3:.55}" stroke="${c}" stroke-width="${s/6}"${z?` stroke-dasharray="${s/2} ${s/4}"`:""}/>`;const bw=(Math.max(...o.p.map(q=>q[0]))-Math.min(...o.p.map(q=>q[0])))/pxu;tx(m[0],-m[1],o.l||o.k,s*1,"#1b1b19",z?'font-style="italic"':'font-weight="700"');if(bw>=44){let dm="";if(o.p.length===4){const A=o.p,a=Math.hypot(A[1][0]-A[0][0],A[1][1]-A[0][1]),b2=Math.hypot(A[2][0]-A[1][0],A[2][1]-A[1][1]),dp=(A[1][0]-A[0][0])*(A[2][0]-A[1][0])+(A[1][1]-A[0][1])*(A[2][1]-A[1][1]);if(a>0&&b2>0&&Math.abs(dp)<.05*a*b2)dm=(+a.toFixed(1))+"×"+(+b2.toFixed(1))+" m · "}tx(m[0],-m[1]+s*1.15,dm+Math.round(ar(o.p))+" m²",s*.9,"#33332f")};if(!z&&$("dt").checked&&(o.sd||o.h1))tx(m[0],-m[1]+s*2.3,(o.sd?"sem. "+fd(o.sd):"")+(o.sd&&o.h1?" · ":"")+(o.h1?"racc. "+fd(o.h1)+(o.h2?"–"+fd(o.h2):""):""),s*.85)}
+else if(o.t==="line"){const[c,da]=LINES[o.k];h=`<path d="${d(o.p)}" fill="none" stroke="${c}" stroke-width="${s/5}" stroke-dasharray="${da}"/><path d="${d(o.p)}" fill="none" stroke="transparent" stroke-width="${s*1.2}"/>`;tx(m[0],-m[1]-s*.5,(o.l?o.l+" · ":"")+Math.round(len(o.p))+" m",s*.95,c)}
+else if(o.t==="slope"){const a=o.p[0],b=o.p[1],dx=b[0]-a[0],dy=-(b[1]-a[1]),L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;h=`<path d="${d(o.p)}" stroke="#e8710a" stroke-width="${s/5}" fill="none"/><path d="${d(o.p)}" stroke="transparent" stroke-width="${s*1.2}" fill="none"/><path d="M${b[0]} ${-b[1]}l${(-ux*s*.9-uy*s*.45).toFixed(2)} ${(-uy*s*.9+ux*s*.45).toFixed(2)}M${b[0]} ${-b[1]}l${(-ux*s*.9+uy*s*.45).toFixed(2)} ${(-uy*s*.9-ux*s*.45).toFixed(2)}" stroke="#e8710a" stroke-width="${s/5}" fill="none"/>`;tx((a[0]+b[0])/2,-(a[1]+b[1])/2-s*.4,o.l,s*.95,"#a34a00",'font-weight="700"')}
+else if(o.t==="pt"){h=`<circle cx="${o.p[0][0]}" cy="${-o.p[0][1]}" r="${s*.9}" fill="#fff" fill-opacity=".8" stroke="#999" stroke-width="${s/10}"/>`;mk(o.p[0][0],-o.p[0][1],PTS[o.k],s*1.3);if(o.l)tx(o.p[0][0],-o.p[0][1]+s*2.1,o.l,s*.9)}
+else if(o.t==="note"){h=`<circle cx="${o.p[0][0]}" cy="${-o.p[0][1]}" r="${s*1.2}" fill="transparent"/>`;tx(o.p[0][0],-o.p[0][1],o.l,s*1)}
 if(on)hi=o.t==="pt"||o.t==="note"?`<circle cx="${o.p[0][0]}" cy="${-o.p[0][1]}" r="${s*1.5}" fill="none" stroke="#1a73e8" stroke-width="${s/5}"/>`:`<path d="${d(o.p)}${o.t==="crop"||o.t==="zone"?"Z":""}" fill="none" stroke="#1a73e8" stroke-width="${s/3}" stroke-dasharray="${s/3} ${s/5}"/>`;
 if(o.n||o.irr||o.man){const q=o.t==="pt"||o.t==="note"?[o.p[0][0]+s*1.2,-o.p[0][1]-s*1.2]:[m[0]+s*2.5,-m[1]-s*1.4];mk(q[0],q[1],"📝",s*1.1)}
 g.push(`<g class="it" data-i="${i}"><title>${E(tip(o))}</title>${h}${hi}</g>`)});
 if(cur.length)g.push(`<path d="${d(cur)}" fill="none" stroke="#c00" stroke-width="${s/6}" stroke-dasharray="${s/3}"/>`+cur.map(q=>`<circle cx="${q[0]}" cy="${-q[1]}" r="${s/3}" fill="#c00"/>`).join(""));
 if($("tool").value==="meas"&&cur.length>1){const q=cur[cur.length-1];tx(q[0]+s*2,-q[1]-s*.8,len(cur).toFixed(1)+" m"+(cur.length>2?" · "+Math.round(ar(cur))+" m²":""),s*.9,"#c00",'font-weight="700"')}
-const L=vb.w>90?20:vb.w>45?10:5,b0=vb.x+vb.w*.03,b1=vb.y+vb.h*.95;g.push(`<path d="M${b0} ${b1}h${L}M${b0} ${b1-s/3}v${s*.6}M${b0+L} ${b1-s/3}v${s*.6}" stroke="#222" stroke-width="${s/6}"/>`);T.push(`<text x="${b0}" y="${b1-s*.5}" font-size="${s*.8}" fill="#222" ${HL} stroke-width="${s/4}">${L} m</text>`);
+const L=vb.w>90?20:vb.w>45?10:5,b0=vb.x+vb.w*.03,b1=vb.y+vb.h*.95;g.push(`<path d="M${b0} ${b1}h${L}M${b0} ${b1-s/3}v${s*.6}M${b0+L} ${b1-s/3}v${s*.6}" stroke="#222" stroke-width="${s/6}"/>`);T.push(`<text x="${b0}" y="${b1-s*.5}" font-size="${s*.95}" font-weight="700" fill="#222" ${HL} stroke-width="${s/3}">${L} m</text>`);
 const nx=vb.x+vb.w*.95,ny=vb.y+vb.h*.1;g.push(`<path d="M${nx} ${ny+s*1.6}V${ny-s*1.2}M${nx} ${ny-s*1.2}l-${s*.5} ${s}M${nx} ${ny-s*1.2}l${s*.5} ${s}" stroke="#222" stroke-width="${s/6}" fill="none"/>`);T.push(`<text x="${nx}" y="${ny-s*1.6}" font-size="${s}" font-weight="700" text-anchor="middle" fill="#222">N</text>`);
 g.push(...T);if(out)return g.join("");
 svg.setAttribute("viewBox",`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);svg.innerHTML=g.join("");ui();
@@ -282,26 +330,31 @@ $("lg").innerHTML="<span><i style='background:#cfe3c2;border:1px solid #2f6f4f'>
 function save(){try{localStorage.setItem(KEY,JSON.stringify(it))}catch(e){}if(!adopting)touch();prodList();refresh()}
 function load(){try{const x=localStorage.getItem(KEY);if(x){it=JSON.parse(x);if(localStorage.getItem(KEY+"-geo")!=="2"){localStorage.setItem(KEY+"-backup-geo1",x);mig(it);localStorage.setItem(KEY,JSON.stringify(it))}}localStorage.setItem(KEY+"-geo","2")}catch(e){}}
 svg.addEventListener("click",e=>{if(mv){mv=0;return}const t=$("tool").value,g=e.target.closest("[data-i]");if(t==="info"){const q=e.target.closest("[data-p]");sel=g?+g.dataset.i:q?"p:"+q.dataset.p:null;draw();panel();return}
-if(t==="del"){if(g){sel=null;it.splice(+g.dataset.i,1);save();draw();panel()}return}
-if(t==="edit"){if(g){it[+g.dataset.i].l=$("lab").value;save();draw()}return}
+if(t==="del"){if(g){sel=null;it.splice(+g.dataset.i,1);save();draw();panel();toSel()}return}
+if(t==="edit"){if(g){it[+g.dataset.i].l=$("lab").value;save();draw();toSel()}return}
 if(t==="pan")return;const p=pos(e),k=$("kind").value,l=$("lab").value,v=vtag(p);
 if(t==="crop"||t==="zone"||t==="line"||t==="meas"){cur.push(p);draw()}
-else if(t==="slope"){cur.push(p);if(cur.length===2){let L=l||"?%";const m=l.match(/^(\d+(?:[.,]\d+)?)\s*m$/),ln=len(cur);if(m&&ln>0)L=(+m[1].replace(",",".")/ln*100).toFixed(0)+"% ("+m[1]+" m su "+ln.toFixed(0)+" m)";it.push({t:"slope",l:L,p:cur,v:vtag(cur[0])});cur=[];save()}draw()}
-else if(t==="rect"){const m=l.match(/^\s*(\d+(?:[.,]\d+)?)\s*[x×*]\s*(\d+(?:[.,]\d+)?)(?:\s*@\s*(-?\d+(?:[.,]\d+)?))?\s*(.*)$/i);if(!m){$("st").textContent="Scrivi in etichetta le misure, es. 4x3 oppure 4x3@30 Peperoncini.";return}const n=x=>+x.replace(",","."),L=n(m[1]),W=n(m[2]),a=(m[3]?n(m[3]):0)*Math.PI/180,u=[Math.cos(a),Math.sin(a)],w=[-u[1],u[0]],r=x=>+x.toFixed(2),pp=[p,[p[0]+L*u[0],p[1]+L*u[1]],[p[0]+L*u[0]+W*w[0],p[1]+L*u[1]+W*w[1]],[p[0]+W*w[0],p[1]+W*w[1]]].map(q=>[r(q[0]),r(q[1])]);$("st").textContent="";it.push({t:"crop",k,l:m[4].trim(),p:pp,v,id:uid()});sel=it.length-1;save();draw();panel()}
-else if(t==="pt"){it.push({t:"pt",k,l:l||(k==="Campione suolo"?"S"+(it.filter(o=>o.k===k).length+1):""),p:[p],v});save();draw()}
-else if(t==="note"&&l){it.push({t:"note",l,p:[p],v});save();draw()}});
+else if(t==="slope"){cur.push(p);if(cur.length===2){let L=l||"?%";const m=l.match(/^(\d+(?:[.,]\d+)?)\s*m$/),ln=len(cur);if(m&&ln>0)L=(+m[1].replace(",",".")/ln*100).toFixed(0)+"% ("+m[1]+" m su "+ln.toFixed(0)+" m)";it.push({t:"slope",l:L,p:cur,v:vtag(cur[0])});cur=[];save();draw();toSel();return}draw()}
+else if(t==="rect"){const m=l.match(/^\s*(\d+(?:[.,]\d+)?)\s*[x×*]\s*(\d+(?:[.,]\d+)?)(?:\s*@\s*(-?\d+(?:[.,]\d+)?))?\s*(.*)$/i);if(!m){$("st").textContent="Scrivi in etichetta le misure, es. 4x3 oppure 4x3@30 Peperoncini.";return}const n=x=>+x.replace(",","."),L=n(m[1]),W=n(m[2]),a=(m[3]?n(m[3]):0)*Math.PI/180,u=[Math.cos(a),Math.sin(a)],w=[-u[1],u[0]],r=x=>+x.toFixed(2),pp=[p,[p[0]+L*u[0],p[1]+L*u[1]],[p[0]+L*u[0]+W*w[0],p[1]+L*u[1]+W*w[1]],[p[0]+W*w[0],p[1]+W*w[1]]].map(q=>[r(q[0]),r(q[1])]);$("st").textContent="";it.push({t:"crop",k,l:m[4].trim(),p:pp,v,id:uid()});save();toSel(it.length-1)}
+else if(t==="pt"){it.push({t:"pt",k,l:l||(k==="Campione suolo"?"S"+(it.filter(o=>o.k===k).length+1):""),p:[p],v});save();toSel()}
+else if(t==="note"&&l){it.push({t:"note",l,p:[p],v});save();toSel()}});
 svg.addEventListener("dblclick",()=>{const t=$("tool").value;if(t==="crop"||t==="zone"||t==="line"){cur.pop();fin()}});
 let dr=null,mv=0,pin=null;const ptr=new Map();
-svg.addEventListener("pointerdown",e=>{ptr.set(e.pointerId,[e.clientX,e.clientY]);if(ptr.size===2){dr=null;const p=[...ptr.values()];pin={d:Math.hypot(p[0][0]-p[1][0],p[0][1]-p[1][1])||1,c:[(p[0][0]+p[1][0])/2,(p[0][1]+p[1][1])/2],v:{...vb}};mv=1;return}mv=0;if(["pan","info"].includes($("tool").value)||e.shiftKey||e.button===1)dr={x:e.clientX,y:e.clientY,v:{...vb},m:0}});
+svg.addEventListener("pointerdown",e=>{ptr.set(e.pointerId,[e.clientX,e.clientY]);if(ptr.size===2){dr=null;const p=[...ptr.values()];pin={d:Math.hypot(p[0][0]-p[1][0],p[0][1]-p[1][1])||1,c:[(p[0][0]+p[1][0])/2,(p[0][1]+p[1][1])/2],v:{...vb}};mv=1;return}mv=0;dr={x:e.clientX,y:e.clientY,v:{...vb},m:0}});
 svg.addEventListener("pointermove",e=>{if(ptr.has(e.pointerId))ptr.set(e.pointerId,[e.clientX,e.clientY]);const r=svg.getBoundingClientRect();
-if(pin&&ptr.size>=2){const p=[...ptr.values()],d=Math.hypot(p[0][0]-p[1][0],p[0][1]-p[1][1])||1,c=[(p[0][0]+p[1][0])/2,(p[0][1]+p[1][1])/2],f=pin.d/d,W=pin.v.w*f,H=pin.v.h*f,wx=pin.v.x+(pin.c[0]-r.left)/r.width*pin.v.w,wy=pin.v.y+(pin.c[1]-r.top)/r.height*pin.v.h;vb={w:W,h:H,x:wx-(c[0]-r.left)/r.width*W,y:wy-(c[1]-r.top)/r.height*H};draw();return}
-if(!dr)return;const a=e.clientX-dr.x,b=e.clientY-dr.y;if(Math.hypot(a,b)>5)dr.m=1;if(!dr.m)return;vb.x=dr.v.x-a/r.width*vb.w;vb.y=dr.v.y-b/r.height*vb.h;draw()});
+if(pin&&ptr.size>=2){const p=[...ptr.values()],d=Math.hypot(p[0][0]-p[1][0],p[0][1]-p[1][1])||1,c=[(p[0][0]+p[1][0])/2,(p[0][1]+p[1][1])/2],f=pin.d/d,W=pin.v.w*f,H=pin.v.h*f,wx=pin.v.x+(pin.c[0]-r.left)/r.width*pin.v.w,wy=pin.v.y+(pin.c[1]-r.top)/r.height*pin.v.h;{const w2=Math.min(Math.max(W,ZMIN),FW*1.5),k2=w2/W;vb={w:w2,h:H*k2,x:wx-(c[0]-r.left)/r.width*w2,y:wy-(c[1]-r.top)/r.height*H*k2};sched();return}}
+if(!dr)return;const a=e.clientX-dr.x,b=e.clientY-dr.y;if(Math.hypot(a,b)>5)dr.m=1;if(!dr.m)return;vb.x=dr.v.x-a/r.width*vb.w;vb.y=dr.v.y-b/r.height*vb.h;sched()});
 const pend=e=>{ptr.delete(e.pointerId);const was=!!pin;if(ptr.size<2)pin=null;mv=(was||(dr&&dr.m))?1:0;dr=null};
 addEventListener("pointerup",pend);addEventListener("pointercancel",pend);
-function zoom(f,e){const p=e?raw(e):[vb.x+vb.w/2,-(vb.y+vb.h/2)];const cx=p[0],cy=-p[1];vb={x:cx-(cx-vb.x)*f,y:cy-(cy-vb.y)*f,w:vb.w*f,h:vb.h*f};draw()}
-svg.addEventListener("wheel",e=>{e.preventDefault();zoom(e.deltaY>0?1.15:.87,e)},{passive:false});
+let rq=0,za=0;const sched=()=>{if(!rq)rq=requestAnimationFrame(()=>{rq=0;draw()})};
+function zoom(f,e,anim){const p=e?raw(e):[vb.x+vb.w/2,-(vb.y+vb.h/2)],cx=p[0],cy=-p[1],w=Math.min(Math.max(vb.w*f,ZMIN),FW*1.5),k=w/vb.w;if(Math.abs(k-1)<1e-3)return;const to={x:cx-(cx-vb.x)*k,y:cy-(cy-vb.y)*k,w,h:vb.h*k};
+if(!anim){vb=to;sched();return}cancelAnimationFrame(za);const from={...vb},t0=performance.now(),D=170,st=n=>{const q=Math.min(1,(n-t0)/D),z=1-Math.pow(1-q,3);vb={x:from.x+(to.x-from.x)*z,y:from.y+(to.y-from.y)*z,w:from.w+(to.w-from.w)*z,h:from.h+(to.h-from.h)*z};draw();if(q<1)za=requestAnimationFrame(st)};za=requestAnimationFrame(st)}
+svg.addEventListener("wheel",e=>{e.preventDefault();const dy=e.deltaMode===1?e.deltaY*30:e.deltaY;
+if(e.ctrlKey){zoom(Math.exp(Math.max(-40,Math.min(40,dy))*.011),e);return}
+if(Math.abs(dy)>=50&&!e.deltaX){zoom(Math.exp(Math.max(-100,Math.min(100,dy))*.0015),e);return}
+const r=svg.getBoundingClientRect();vb.x+=e.deltaX/r.width*vb.w;vb.y+=dy/r.height*vb.h;sched()},{passive:false});
 $("tool").onchange=fillKind;$("fin").onclick=fin;$("un").onclick=()=>{if(cur.length)cur.pop();else{let i=it.length;while(i--&&["pn","log","lot"].includes(it[i].t));if(i>=0)it.splice(i,1);sel=null}save();draw()};
-$("gr").onchange=$("cx").onchange=()=>draw();$("zi").onclick=()=>zoom(.8);$("zo").onclick=()=>zoom(1.25);$("zr").onclick=()=>{fit();draw()};
+$("gr").onchange=$("cx").onchange=()=>draw();$("zi").onclick=()=>zoom(1/1.3,null,1);$("zo").onclick=()=>zoom(1.3,null,1);$("zr").onclick=()=>{fit();draw()};
 function dl(n,t,m){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:m}));a.download=n;a.click()}
 const expJ=()=>JSON.stringify({v:2,geo:2,ts:+lsg(KEY+"-ts")||Date.now(),items:it,cfg});
 $("ex").onclick=()=>dl("mappa-maccagno.json",expJ(),"application/json");
@@ -311,13 +364,13 @@ $("imb").onclick=()=>$("im").click();
 $("im").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;f.text().then(x=>{try{let j=JSON.parse(x),ts=0;if(j&&j.j){ts=j.ts||0;j=JSON.parse(j.j)}else ts=(j&&j.ts)||0;const lt=+lsg(KEY+"-ts")||0;if(ts&&lt&&ts<lt&&!confirm("Il file è più vecchio dei dati su questo dispositivo ("+new Date(ts).toLocaleString("it-IT")+" contro "+new Date(lt).toLocaleString("it-IT")+"). Sostituirli comunque?"))return;if(Array.isArray(j)){it=mig(j)}else{it=j.items||[];if(j.geo!==2)mig(it);if(j.cfg){for(const c in cfg.add)Object.assign(cfg.add[c],(j.cfg.add||{})[c]||{});cfgApply();cfgSave();fillKind()}}sel=null;fix();save();fit();draw();panel();sy("📥 File importato","ok")}catch(_){sy("⚠️ File non valido","err")}})};
 $("sv").onclick=()=>dl("mappa-maccagno.svg",new XMLSerializer().serializeToString(svg),"image/svg+xml");
 $("pr").onclick=()=>window.print();$("cl").onclick=()=>{if(confirm("Cancellare tutto quello che hai disegnato?")){it=[];save();draw()}};
-addEventListener("keydown",e=>{if(e.key==="Enter")fin();if(e.key==="Escape"){cur=[];if(!$("md").hidden){sel=null;panel()}draw()}if((e.key==="Delete"||e.key==="Backspace")&&typeof sel==="number"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){it.splice(sel,1);sel=null;save();draw();panel()}});
+addEventListener("keydown",e=>{if(e.key==="Enter")fin();if(e.key==="Escape"){cur=[];if(!$("md").hidden){sel=null;panel()}if($("tool").value!=="info")toSel();else draw()}if((e.key==="Delete"||e.key==="Backspace")&&typeof sel==="number"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){it.splice(sel,1);sel=null;save();draw();panel()}});
 addEventListener("resize",()=>{fit();draw()});
 function tabs(){$("tabs").innerHTML=[["all","Tutti e 3"],...Object.keys(P).map(k=>[k,"Particella "+k])].map(([v,n])=>`<button data-v="${v}" class="${v===view?"on":""}">${n}</button>`).join("")+Object.entries(LAY).map(([k,n])=>`<label><input type="checkbox" data-l="${k}" ${hid[k]?"":"checked"}>${n}</label>`).join("");$("gl").textContent="Griglia "+(view==="all"?10:5)+" m"}
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;view=b.dataset.v;cur=[];fit();tabs();draw()};
-$("pa2").onclick=()=>{const sv=view,sb={...vb},c=cur;cur=[];let h="";for(const v of["all",...Object.keys(P)]){view=v;fit(1.4);const s=vb.w/60;h+=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}">${draw(true)}<text x="${vb.x+vb.w*.03}" y="${vb.y+vb.h*.07}" font-size="${s*1.6}" font-weight="700" fill="#222">${v==="all"?"Tutti e 3 i terreni":"Particella "+v}</text></svg>`}view=sv;vb=sb;cur=c;$("pa").innerHTML=h;$("pa").className="on";document.body.classList.add("pa");window.print();setTimeout(()=>{$("pa").innerHTML="";$("pa").className="";document.body.classList.remove("pa");draw()},600)};
+$("pa2").onclick=()=>{const sv=view,sb={...vb},fw0=FW,c=cur;cur=[];let h="";for(const v of["all",...Object.keys(P)]){view=v;fit(1.4);const s=vb.w/60;h+=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}">${draw(true)}<text x="${vb.x+vb.w*.03}" y="${vb.y+vb.h*.07}" font-size="${s*1.6}" font-weight="700" fill="#222">${v==="all"?"Tutti e 3 i terreni":"Particella "+v}</text></svg>`}view=sv;vb=sb;FW=fw0;cur=c;$("pa").innerHTML=h;$("pa").className="on";document.body.classList.add("pa");window.print();setTimeout(()=>{$("pa").innerHTML="";$("pa").className="";document.body.classList.remove("pa");draw()},600)};
 $("tabs").onchange=e=>{const l=e.target.dataset.l;if(l){hid[l]=!e.target.checked;draw()}};
-$("ct").onchange=$("sn").onchange=$("dt").onchange=$("dm").onchange=()=>draw();
+$("ct").onchange=$("sn").onchange=$("dt").onchange=$("dm").onchange=$("pn").onchange=()=>draw();
 $("fn").onclick=()=>{if(view==="all"){$("st").textContent="Apri prima la scheda di una particella.";return}it.push({t:"line",k:"Recinzione",l:"Perimetro",p:[...P[view].p,P[view].p[0]],v:view});save();draw()};
 function summ(){const A={};it.forEach(o=>{const v=o.v==="all"?"Fuori dalle particelle":"Particella "+o.v;let k,u,x;if(o.t==="crop"||o.t==="zone"){k=(o.t==="crop"?"Coltura: ":"Zona: ")+(o.l||o.k)+" ("+o.k+")";u="m²";x=ar(o.p)}else if(o.t==="line"){k="Linea: "+o.k;u="m";x=len(o.p)}else if(o.t==="pt"){k="Punto: "+o.k;u="n";x=1}else if(o.t==="slope"){k="Pendenze";u="n";x=1}else return;const K=[v,k,u].join("|");A[K]=(A[K]||0)+x});return Object.entries(A).map(([k,x])=>k.split("|").concat([Math.round(x)])).sort()}
 $("sm").onclick=()=>{const r=$("rp");if(r.innerHTML){r.innerHTML="";return}const R=summ();r.innerHTML=R.length?"<table><tr><th>Dove</th><th>Voce</th><th>Unità</th><th>Valore</th></tr>"+R.map(x=>"<tr>"+x.map(c=>`<td>${E(c)}</td>`).join("")+"</tr>").join("")+"</table><button id=\"csv\">Scarica CSV</button>":"Nessun elemento ancora.";const c=$("csv");if(c)c.onclick=()=>dl("riepilogo-maccagno.csv","Dove;Voce;Unità;Valore\n"+R.map(x=>x.join(";")).join("\n"),"text/csv")};
@@ -364,11 +417,11 @@ window.MAPSYNC={use:(r,m)=>{ref=r;sy(m,"ok")},drop:m=>{ref=null;sy(m,"")},remote
 $("fl-x").onclick=async()=>{fh=null;ref=null;try{await idb("del")}catch(e){}$("fl-x").hidden=true;sy("💾 Solo su questo dispositivo","")};
 document.addEventListener("visibilitychange",()=>{if(document.hidden&&dirty&&ref)push()});
 $("st-tabs").onclick=e=>{const b=e.target.closest("button");if(b)side(b.dataset.s)};
-$("pal").onclick=e=>{const b=e.target.closest("button");if(!b)return;$("tool").value=b.dataset.t;side("draw");fillKind()};
+$("pal").onclick=e=>{const b=e.target.closest("button");if(!b)return;if($("tool").value===b.dataset.t&&b.dataset.t!=="info"){toSel();return}$("tool").value=b.dataset.t;side("draw");fillKind()};
 $("kinds").onclick=e=>{const b=e.target.closest("button");if(!b)return;const n=b.dataset.k;if(n==="__new")openMg($("tool").value==="rect"?"crop":$("tool").value);else{$("kind").value=n;chips()}};
 $("prl").onclick=e=>{if(e.target.id==="prcsv"){prCsv();return}const b=e.target.closest("[data-i]");if(!b)return;const i=+b.dataset.i,o=it[i];if(view!=="all"&&o.v!==view){view=o.v;fit();tabs()}sel=i;draw();panel()};
 load();panel();fix();fit();fillKind();tabs();draw();prodList();side("draw");initCloud();
 let ip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();ip=e;$("inst").hidden=false});$("inst").onclick=async()=>{if(!ip)return;ip.prompt();try{await ip.userChoice}catch(_){}ip=null;$("inst").hidden=true};addEventListener("appinstalled",()=>{$("inst").hidden=true});
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=6"></script></body></html>
+<script type="module" src="firebase-sync.js?v=7"></script></body></html>
