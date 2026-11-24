@@ -53,7 +53,7 @@ input[type=number]{font:inherit;color:var(--fg);background:var(--bg);border:1px 
 .cr{display:grid;grid-template-columns:1fr 64px 64px 24px;gap:4px;margin-bottom:4px}.cr input{min-width:0;width:100%;box-sizing:border-box}.cr button{border:0;background:none;padding:0;font-size:16px}
 .pr1{display:grid;grid-template-columns:1fr 24px;gap:4px}.pr2{display:grid;grid-template-columns:1fr 1fr 54px 1fr 1.25fr;gap:4px;margin:3px 0 8px}
 .ck input[type=date]{width:118px;font-size:12px;padding:2px 4px}
-.syt{font-size:13px;line-height:1.5}.syt div{margin-bottom:2px}.syn{margin-left:auto;font-size:12px;color:var(--mut)}.syn.ok{color:var(--ac)}.syn.err{color:#c0392b}
+.syt{font-size:13px;line-height:1.5}.syt div{margin-bottom:2px}
 #cb{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:8;background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;font-size:13px;box-shadow:0 4px 18px rgba(0,0,0,.25);max-width:min(440px,92%)}#cb[hidden]{display:none}#cb button{margin-top:6px}
 @media(max-width:760px){body{overflow:hidden}.body{grid-template-columns:1fr;grid-template-rows:minmax(190px,42dvh) minmax(0,1fr)}#map{order:-1}#sd{border-right:0;border-top:1px solid var(--ln)}#md{position:fixed;inset:0;width:100%;z-index:20;border-left:0;padding-top:max(12px,env(safe-area-inset-top,0px))}header{padding:4px 8px;gap:4px 8px}h1{font-size:14px}#tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px}#tabs button,#tabs label{flex:none;white-space:nowrap}#st-tabs button{flex:1 1 18%;font-size:12px;padding:6px 0}#pal{grid-template-columns:repeat(5,1fr)}.syn{margin-left:0;flex-basis:100%}#zc button{width:40px;padding:8px 0}}
 label.f{align-items:stretch}
@@ -88,7 +88,6 @@ details.sec summary::-webkit-details-marker{display:none}details.sec summary::af
 .mh b{font-size:16px}
 #cb,#rp{box-shadow:var(--sh);border-radius:var(--r)}
 .pc{border-radius:12px;padding:10px 12px 10px 24px;box-shadow:var(--sh);border:0;background:var(--card)}.pc>i{top:15px}
-.syn{font-size:13px}
 @media(max-width:760px){
 body{font-size:15.5px}
 .body{grid-template-rows:minmax(220px,46dvh) minmax(0,1fr)}
@@ -105,8 +104,9 @@ button,select,input[type=text],input[type=date],input[type=number],textarea{font
 @media(min-width:1500px){.body{grid-template-columns:380px minmax(0,1fr)}body{font-size:15.5px}}
 .lock{color:var(--fg)}.lock b{color:var(--fg)}#lk-m{color:var(--mut)}.lock button{background:var(--ac);border-color:var(--ac);font-weight:600;min-height:46px}
 /* ===== v8: scheda rapida, badge sync, barra comprimibile ===== */
-.syn{position:absolute;right:12px;bottom:12px;z-index:5;margin:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;background:var(--card);box-shadow:var(--sh);color:var(--mut)}
-.syn:empty{display:none}.syn.ok{color:var(--ac)}.syn.err{color:#c0392b}
+.syn{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:500;color:var(--mut);white-space:nowrap}
+.syn::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--mut);opacity:.55;flex:none}
+.syn.ok::before{background:var(--ac);opacity:1}.syn.err{color:#c0392b}.syn.err::before{background:#c0392b;opacity:1}.syn:empty{display:none}
 #zn{padding:0;display:flex;align-items:center;justify-content:center}
 @media(hover:none){.dk{display:none}}
 #qm{position:absolute;z-index:7;right:12px;top:12px;width:min(340px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.22);padding:14px}
@@ -117,7 +117,7 @@ button,select,input[type=text],input[type=date],input[type=number],textarea{font
 .qn{font-size:13.5px;background:var(--bg);border-radius:10px;padding:8px 10px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .qb{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.qb button{flex:1 1 auto}.qb .pri{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600;flex-basis:100%}
 @media(max-width:760px){
-header h1,header .syn{display:none}
+header h1{display:none}
 header{padding:6px 8px}
 #tabs{width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}
 #sdh{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;min-height:34px;border:0;border-radius:0;background:var(--card);font-size:12.5px;color:var(--mut);padding:6px 0 4px;margin:-10px -0px 0;position:sticky;top:-10px;z-index:3;box-shadow:0 1px 0 var(--ln)}
@@ -207,12 +207,31 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 #plc{position:absolute;top:8px;left:56px;right:8px;z-index:9;background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:8px 10px;font-size:13px;box-shadow:0 4px 18px rgba(0,0,0,.25);display:flex;gap:6px;align-items:center;flex-wrap:wrap}#plc[hidden]{display:none}#plc span{flex:1 1 160px}#plc button{width:auto;padding:5px 10px}
 .ck1{display:flex;align-items:center;gap:8px;font-size:13px}
 .tbd.pos{color:var(--ac);border-color:var(--ac)}
+
+/* ===== v25: barra laterale senza scorrimento (PC) ===== */
+#sdc,#sdx,.xp{display:contents}#sdf{display:none}
+#sd:not([data-p="draw"]) .xp[data-x="vista"],#sd:not([data-p="draw"]) #sdf [data-x="vista"]{display:none}
+@media(min-width:761px){
+#sd{position:relative;overflow:hidden;padding:0;gap:0}
+#sdh{position:static;flex:none;padding:8px 14px}#sdt{flex:1;text-align:left}
+#st-tabs{flex:none;padding:10px 12px 8px;background:var(--bg)}
+#sdc{display:block;flex:1;min-height:0;overflow:auto;padding:4px 12px 12px}
+#sdc>.pane:not([hidden]){display:flex;flex-direction:column;gap:10px}
+#sdx{display:block}.xp{display:none}
+#sd[data-x="vista"] .xp[data-x="vista"],#sd[data-x="dati"] .xp[data-x="dati"],#sd[data-x="leg"] .xp[data-x="leg"],#sd[data-x="guida"] .xp[data-x="guida"],#sd[data-x="info"] .xp[data-x="info"]{display:block;position:absolute;left:10px;right:10px;bottom:58px;max-height:calc(100% - 120px);overflow:auto;z-index:8;background:var(--card);border:1px solid var(--ln);border-radius:14px;box-shadow:0 10px 32px rgba(0,0,0,.22);padding:6px 12px 12px}
+.xp>details.sec{border:0;background:transparent;padding:0;margin:0}.xp>details.sec+details.sec{border-top:1px solid var(--ln);margin-top:8px;padding-top:8px}
+.xp>details.sec>summary{pointer-events:none;font-weight:600;padding:6px 0}.xp>details.sec>summary::after{display:none}
+#sdf{display:flex;flex:none;gap:6px;padding:8px 12px;border-top:1px solid var(--ln);background:var(--card)}
+#sdf button{flex:1;min-height:34px;padding:4px 2px;font-size:13px;border-radius:10px}
+.body.col #sd>*:not(#sdh){display:none}.body.col #sdh .syn{display:none}
+}
+@media(max-width:760px){#sdh .syn{position:absolute;right:12px;top:8px}}
 </style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v18</small></div><main class="app">
 <header><h1><img src="icons/icon.svg" alt="" width="26" height="26" style="vertical-align:-6px;margin-right:6px">Mappa dei terreni di Maccagno</h1><div id="tabs" class="bar"></div></header>
 <div class="body">
-<aside id="sd"><button id="sdh" aria-expanded="true"><span class="grip"></span><span id="sdt">Nascondi strumenti</span></button>
+<aside id="sd"><button id="sdh" aria-expanded="true"><span class="grip"></span><span id="sdt">Nascondi strumenti</span><span id="sy" class="syn" title=""></span></button>
 <nav id="st-tabs"><button data-s="oggi" class="on">Oggi</button><button data-s="draw">Disegna</button><button data-s="prod">Colture</button><button data-s="ag">Agenda</button><button data-s="di">Diario</button><button data-s="st">Magazzino</button></nav>
-<div class="pane" id="p-oggi"><div id="og"></div></div>
+<div id="sdc"><div class="pane" id="p-oggi"><div id="og"></div></div>
 <div class="pane" id="p-draw" hidden>
 <div id="pal"></div><div id="hint"></div><div id="kinds"></div>
 <input type="text" id="lab" placeholder="Etichetta (facoltativa)">
@@ -221,7 +240,7 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 <div id="mg" hidden><b>Gestisci voci</b> <select id="mc"><option value="crop">Colture</option><option value="zone">Zone</option><option value="line">Linee</option><option value="pt">Punti</option></select>
 <div class="bar" style="margin-top:6px"><input type="text" id="mn" placeholder="Nome della nuova voce"><input type="color" id="mcol" value="#d9534f" title="Colore"><select id="mls"><option value="">continua</option><option value="1.2 .7">tratteggiata</option><option value=".5 .8">punteggiata</option></select><input type="text" id="mem" size="3" maxlength="4" value="" placeholder="Sigla" title="Sigla del punto (2–3 lettere)" style="flex:0 0 50px"><button id="ma">Aggiungi</button></div>
 <div id="ml"></div></div>
-<details class="sec" open><summary>Vista mappa</summary><div class="row2"><label><input type="checkbox" id="gr" checked><span id="gl">Griglia</span></label><label><input type="checkbox" id="cx">Particelle vicine</label><label><input type="checkbox" id="sn" checked>Aggancio</label><label><input type="checkbox" id="ct">Dati catastali</label><label><input type="checkbox" id="dt">Date sulla mappa</label><label><input type="checkbox" id="dm" checked>Quote lati (m)</label><label><input type="checkbox" id="pn" checked>Numeri particelle</label></div><div class="mut" style="margin-top:10px">Livelli</div><div id="lay" class="row2"></div><div class="mut" style="margin-top:10px">Orientamento e nord</div><div class="row" style="margin-top:4px;align-items:center"><label style="gap:8px">Correzione dati (°) <input type="number" id="tilt" step="0.5" style="width:84px"></label><button id="nn">Allinea al nord</button></div><p class="mut" style="margin:6px 0 0">La freccia N indica il nord vero solo se la mappa catastale tracciata ha il nord in alto, cosa non verificata. Controlla con la vista satellitare: se i terreni risultano ruotati, inserisci i gradi (positivi = in senso orario) per correggerli. Con due dita puoi ruotare la vista, il tasto bussola la riporta con il nord in alto.</p></details>
+
 </div>
 <div class="pane" id="p-prod" hidden><div id="prl"></div></div>
 <div class="pane" id="p-ag" hidden><div class="row" style="justify-content:space-between;align-items:center"><button id="a-p">◀</button><b id="a-t"></b><button id="a-n">▶</button></div><div id="a-l"></div><button id="a-i">Scarica calendario (.ics)</button></div>
@@ -229,15 +248,15 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 <div class="pane" id="p-st" hidden><div class="f" style="margin-top:0"><b>Nuovo lotto</b><select id="l-c"></select><input type="text" id="l-p" list="prods" placeholder="Prodotto (es. zafferano, shiitake secchi)"><div class="row"><input type="number" id="l-q" step="any" min="0" placeholder="Quantità" style="flex:1;min-width:70px"><select id="l-u" style="width:auto"><option>kg</option><option>g</option><option>vasetti</option><option>pezzi</option></select><select id="l-f" style="width:auto"><option>fresco</option><option selected>essiccato</option><option>trasformato</option></select></div><div class="row"><label>Prodotto il <input type="date" id="l-d" style="width:128px"></label><label>Scadenza <input type="date" id="l-x" style="width:128px"></label></div><input type="text" id="l-k" placeholder="Codice lotto (se vuoto: automatico)"><button id="l-b">Registra lotto</button></div><div id="l-l"></div></div>
 
 
-<details class="sec"><summary>Dati e stampa</summary>
+</div><div id="sdx"><div class="xp" data-x="vista"><details class="sec" open><summary>Vista mappa</summary><div class="row2"><label><input type="checkbox" id="gr" checked><span id="gl">Griglia</span></label><label><input type="checkbox" id="cx">Particelle vicine</label><label><input type="checkbox" id="sn" checked>Aggancio</label><label><input type="checkbox" id="ct">Dati catastali</label><label><input type="checkbox" id="dt">Date sulla mappa</label><label><input type="checkbox" id="dm" checked>Quote lati (m)</label><label><input type="checkbox" id="pn" checked>Numeri particelle</label></div><div class="mut" style="margin-top:10px">Livelli</div><div id="lay" class="row2"></div></details></div><div class="xp" data-x="dati"><details class="sec"><summary>Dati e stampa</summary>
 <div class="fs"><b>Dati</b><div class="row"><button id="ex">Scarica backup</button><button id="imb">Importa da file</button><button id="snb">Punti di ripristino</button><input type="file" id="im" accept=".json,application/json" hidden></div><p class="mut">Con l’accesso attivo i dati si sincronizzano da soli. «Punti di ripristino» elenca le copie automatiche di questo dispositivo; «Scarica backup» crea un file da conservare.</p></div>
 <div class="fs"><b>Sincronizzazione</b><div id="sy-t" class="syt mut"></div><div class="row"><button id="sy-n">Sincronizza ora</button></div><div class="row"><button id="sy-u">Invia i dati di questo dispositivo</button><button id="sy-d">Scarica dal cloud</button></div></div>
 <div class="fs"><b>Stampa</b><div class="row"><button id="pr">Stampa vista</button><button id="pa2">Stampa tutte le mappe</button></div></div>
 <div class="fs"><b>Account</b><div class="row"><button id="fb-b" hidden>Esci</button></div></div>
 <div class="fs"><button id="cl" class="danger">Cancella tutti i dati</button></div>
 <div hidden><button id="sh"></button><button id="fl-c"></button><button id="fl-o"></button><button id="fl-x" hidden></button><button id="sv"></button><button id="sm"></button></div></details>
-<details class="sec"><summary>Legenda</summary><div id="lg"></div></details>
-<details class="sec" id="gdsec"><summary>Guida alle sezioni</summary><div class="gd">
+</div><div class="xp" data-x="leg"><details class="sec"><summary>Legenda</summary><div id="lg"></div></details>
+</div><div class="xp" data-x="guida"><details class="sec" id="gdsec"><summary>Guida alle sezioni</summary><div class="gd">
 <p class="mut">Come usare le sezioni dell'app. Tutto parte dalla mappa: le sezioni leggono le colture che disegni e le riassumono.</p>
 <details open><summary>Oggi</summary><p>È la schermata di apertura: cosa è in ritardo, cosa scade nei prossimi 14 giorni, le colture in corso, i tronchi pronti, i lotti in scadenza e le colture ancora da pianificare. Spunta le attività direttamente da qui; tocca una riga per aprire la coltura.</p></details>
 <details><summary>Come si lavora, in breve</summary><ol>
@@ -271,14 +290,14 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 <details><summary>Scheda completa di una coltura</summary><p>Dalla scheda rapida apri «Scheda tecnica» (promemoria agronomico), «Checklist» (lavori da fare) o «Dettagli e modifica» (dati). Nella scheda completa le tre parti sono schede separate. In «Dati» inserisci i dati che le sezioni usano: <b>Scheda tecnica</b> (informazioni agronomiche precompilate dal tipo di coltura, che puoi modificare, aggiungere o eliminare), <b>Calendario</b> (semina e periodo di raccolta), <b>Checklist</b> con scadenze, <b>Costi</b> previsti e reali, <b>Lavoro</b>, <b>Prodotti, rese e prezzi</b> (per il ricavo previsto), <b>Raccolti e lavorazione</b> (dati reali), irrigazione, manutenzione e note tecniche. Tutto è modificabile ed eliminabile.</p></details>
 <details><summary>Dati e sicurezza</summary><p>I dati restano sul dispositivo e, se hai attivato l'accesso, si sincronizzano con il tuo database personale: puoi entrare solo con il tuo account. Da «Dati e stampa» trovi «Punti di ripristino»: copie automatiche (una al mese e prima di cancellazioni, importazioni o sincronizzazioni) da cui puoi ripristinare i dati; sono salvate su questo dispositivo. Inoltre esporti un backup, importi un file o stampi la mappa. Il segno di spunta sulla mappa indica che il salvataggio è completato.</p></details>
 </div></details>
-<details class="sec" id="insec"><summary>Installa come app</summary><button id="inst" hidden style="margin-top:8px">Installa l’app</button><p>Android (Chrome): menu ⋮ › Installa app. iPhone/iPad (Safari): Condividi › Aggiungi a schermata Home. Computer (Chrome o Edge): icona di installazione nella barra degli indirizzi. Serve aprire la pagina da un indirizzo https (hosting statico), non dal file locale.</p></details>
-<details class="sec"><summary>Informazioni</summary><p>Particelle 1245, 1241 e 1246 (foglio 9), tracciate dalla mappa catastale: i confini sono indicativi, verificali con un rilievo GPS. Muovi la mappa trascinando; con due dita la zoomi e la ruoti (il tasto bussola rimette il nord in alto). Sul computer: rotella per lo zoom, Alt+rotella o i tasti ↺ ↻ per ruotare. I dati restano nel browser di questo dispositivo e non vengono inviati a nessun server. Per usare più computer puoi collegare un file di sincronizzazione in una tua cartella (Dropbox, iCloud Drive, OneDrive…) da Chrome o Edge; altrove usa “Scarica JSON” e “Carica JSON”.</p></details>
+</div><div class="xp" data-x="info"><details class="sec" id="insec"><summary>Installa come app</summary><button id="inst" hidden style="margin-top:8px">Installa l’app</button><p>Android (Chrome): menu ⋮ › Installa app. iPhone/iPad (Safari): Condividi › Aggiungi a schermata Home. Computer (Chrome o Edge): icona di installazione nella barra degli indirizzi. Serve aprire la pagina da un indirizzo https (hosting statico), non dal file locale.</p></details>
+<details class="sec"><summary>Informazioni</summary><p>Particelle 1245, 1241 e 1246 (foglio 9), tracciate dalla mappa catastale: i confini sono indicativi, verificali con un rilievo GPS. Muovi la mappa trascinando; con due dita la zoomi e la ruoti (il tasto bussola rimette il nord in alto). Sul computer: rotella per lo zoom, Alt+rotella o i tasti ↺ ↻ per ruotare. I dati restano nel browser di questo dispositivo e non vengono inviati a nessun server. Per usare più computer puoi collegare un file di sincronizzazione in una tua cartella (Dropbox, iCloud Drive, OneDrive…) da Chrome o Edge; altrove usa “Scarica JSON” e “Carica JSON”.</p></details></div></div><div id="sdf"><button data-x="vista">Vista</button><button data-x="dati">Dati</button><button data-x="leg">Legenda</button><button data-x="guida">Guida</button><button data-x="info">Info</button></div>
 
 <datalist id="act"><option value="Preparazione terreno"><option value="Semina"><option value="Trapianto"><option value="Irrigazione"><option value="Diserbo"><option value="Concimazione"><option value="Potatura"><option value="Raccolta"><option value="Essiccazione"><option value="Confezionamento"><option value="Manutenzione"><option value="Recinzione"></datalist><datalist id="prods"></datalist>
 </aside>
 <div id="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dl-t" hidden><div class="dl-c"><h3 class="dl-t" id="dl-t"></h3><p class="dl-p"></p><div class="dl-b"><button class="dl-no" type="button">Annulla</button><button class="dl-ok" type="button">Conferma</button></div></div></div>
 <div id="snm" hidden role="dialog" aria-modal="true" aria-labelledby="sn-t"><div class="dl-c"><h3 class="dl-t" id="sn-t">Punti di ripristino</h3><p class="dl-p">Copie dei dati salvate su questo dispositivo. Per tenerne una al sicuro usa «Scarica backup».</p><div id="snl"></div><div class="dl-b"><button id="sn-n" type="button">Crea ora</button><button id="sn-x" class="dl-ok" type="button">Chiudi</button></div></div></div>
-<section id="map"><div id="w"><svg id="m" xmlns="http://www.w3.org/2000/svg"></svg></div><div id="zc"><button id="zi">+</button><button id="zo">−</button><button id="zr" title="Reimposta vista">⤢</button><button id="zn" title="Allinea al nord" aria-label="Allinea al nord"><svg viewBox="0 0 24 24" width="24" height="24"><g id="zna" style="transform-origin:12px 12px"><path d="M12 2l5 11H7z" fill="#c0392b"/><path d="M12 22l-5-9h10z" fill="#8a8f86"/></g></svg></button><button id="rl" class="dk" title="Ruota a sinistra (Alt+rotella)">↺</button><button id="rr" class="dk" title="Ruota a destra">↻</button></div><div id="plc" hidden></div><div id="cb" hidden></div><div id="rp"></div><div id="md" hidden><div id="ip"></div></div><div id="qm" hidden></div><span id="sy" class="syn" title=""></span></section>
+<section id="map"><div id="w"><svg id="m" xmlns="http://www.w3.org/2000/svg"></svg></div><div id="zc"><button id="zi">+</button><button id="zo">−</button><button id="zr" title="Reimposta vista">⤢</button><button id="zn" title="Allinea al nord" aria-label="Allinea al nord"><svg viewBox="0 0 24 24" width="24" height="24"><g id="zna" style="transform-origin:12px 12px"><path d="M12 2l5 11H7z" fill="#c0392b"/><path d="M12 22l-5-9h10z" fill="#8a8f86"/></g></svg></button><button id="rl" class="dk" title="Ruota a sinistra (Alt+rotella)">↺</button><button id="rr" class="dk" title="Ruota a destra">↻</button></div><div id="plc" hidden></div><div id="cb" hidden></div><div id="rp"></div><div id="md" hidden><div id="ip"></div></div><div id="qm" hidden></div></section>
 </div></main><div id="pa"></div>
 <script src="firebase-config.js"></script>
 <script>if(window.FIREBASE_CONFIG&&FIREBASE_CONFIG.projectId)document.documentElement.classList.add("locked")</script>
@@ -547,7 +566,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("snm").hidden&&$
 $("sn-n").onclick=()=>{snap("Manuale",1);snList();sy("Punto di ripristino creato","ok")};
 $("snl").onclick=e=>{const r=e.target.closest("[data-r]"),x=e.target.closest("[data-x]");if(r){const i=+r.dataset.r,q=snaps()[i];if(!q)return;askConfirm("Ripristinare questa copia?","Dati del "+fdt(q.ts)+" ("+q.c+" colture). I dati attuali vengono salvati prima in un nuovo punto di ripristino.",{ok:"Ripristina",danger:1}).then(y=>{if(y){restoreSnap(i);snList();snClose()}})}else if(x){const a=snaps();a.splice(+x.dataset.x,1);snapPut(a);snList()}};
 const PANES=["oggi","draw","prod","ag","di","st"];
-function side(s){for(const k of PANES){$("p-"+k).hidden=k!==s;document.querySelector('#st-tabs [data-s="'+k+'"]').classList.toggle("on",k===s)}if(s==="oggi")oggi();if(s==="prod")prodList();if(s==="ag")agenda();if(s==="di")diario();if(s==="st")magazzino()}
+$("sdf").onclick=e=>{const b=e.target.closest("button[data-x]");if(!b)return;const sd=$("sd"),x=sd.dataset.x===b.dataset.x?"":b.dataset.x;sd.dataset.x=x;sdf_mark()};
+function sdf_mark(){const x=$("sd").dataset.x;document.querySelectorAll("#sdf button").forEach(b=>b.classList.toggle("on",b.dataset.x===x));document.querySelectorAll("#sdx .xp[data-x=\""+x+"\"] details.sec").forEach(d=>d.open=true)}
+function side(s){$("sd").dataset.p=s;$("sd").dataset.x="";for(const k of PANES){$("p-"+k).hidden=k!==s;document.querySelector('#st-tabs [data-s="'+k+'"]').classList.toggle("on",k===s)}if(s==="oggi")oggi();if(s==="prod")prodList();if(s==="ag")agenda();if(s==="di")diario();if(s==="st")magazzino()}
 function refresh(){if(!$("p-oggi").hidden)oggi();if(!$("p-ag").hidden)agenda();if(!$("p-di").hidden)diario();if(!$("p-st").hidden)magazzino()}
 const csv=(n,R)=>dl(n,"\ufeff"+R.map(r=>r.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(";")).join("\n"),"text/csv");
 $("a-p").onclick=()=>{agM=new Date(agM.getFullYear(),agM.getMonth()-1,1);agenda()};$("a-n").onclick=()=>{agM=new Date(agM.getFullYear(),agM.getMonth()+1,1);agenda()};$("a-i").onclick=ics;
@@ -684,11 +705,11 @@ $("sv").onclick=()=>dl("mappa-maccagno.svg",new XMLSerializer().serializeToStrin
 $("pr").onclick=()=>window.print();$("cl").onclick=()=>{askConfirm("Cancellare tutto il disegno?","Tutti gli elementi disegnati su questo dispositivo verranno eliminati. Se vuoi conservarli, esporta prima un backup.",{ok:"Cancella tutto",danger:1}).then(y=>{if(y){snap("Prima di cancellare tutto",1);it=[];sel=null;save();draw();panel()}})};
 addEventListener("keydown",e=>{if(e.key==="Enter")fin();if(e.key==="Escape"){cur=[];if(sel!=null){sel=null;panel()}if($("tool").value!=="info")toSel();else draw()}if((e.key==="Delete"||e.key==="Backspace")&&typeof sel==="number"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){it.splice(sel,1);sel=null;save();draw();panel()}});
 addEventListener("resize",()=>{fit();draw()});
-function tabs(){$("tabs").innerHTML=[["all","Tutti e 3"],...Object.keys(P).map(k=>[k,"Particella "+k])].map(([v,n])=>`<button data-v="${v}" class="${v===view?"on":""}">${n}</button>`).join("");$("lay").innerHTML=Object.entries(LAY).map(([k,n])=>`<label><input type="checkbox" data-l="${k}" ${hid[k]?"":"checked"}>${n}</label>`).join("");$("tilt").value=cfg.tilt||"";$("gl").textContent="Griglia "+(view==="all"?10:5)+" m"}
+function tabs(){$("tabs").innerHTML=[["all","Tutti e 3"],...Object.keys(P).map(k=>[k,"Particella "+k])].map(([v,n])=>`<button data-v="${v}" class="${v===view?"on":""}">${n}</button>`).join("");$("lay").innerHTML=Object.entries(LAY).map(([k,n])=>`<label><input type="checkbox" data-l="${k}" ${hid[k]?"":"checked"}>${n}</label>`).join("");$("gl").textContent="Griglia "+(view==="all"?10:5)+" m"}
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;view=b.dataset.v;cur=[];fit();tabs();draw()};
 $("pa2").onclick=()=>{const sv=view,sb={...vb},fw0=FW,c=cur,rot0=rot;rot=0;cur=[];let h="";for(const v of["all",...Object.keys(P)]){view=v;fit(1.4);const s=vb.w/60;h+=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}">${draw(true)}<text x="${vb.x+vb.w*.03}" y="${vb.y+vb.h*.07}" font-size="${s*1.6}" font-weight="700" fill="#222">${v==="all"?"Tutti e 3 i terreni":"Particella "+v}</text></svg>`}view=sv;vb=sb;FW=fw0;cur=c;rot=rot0;$("pa").innerHTML=h;$("pa").className="on";document.body.classList.add("pa");window.print();setTimeout(()=>{$("pa").innerHTML="";$("pa").className="";document.body.classList.remove("pa");draw()},600)};
 
-$("tilt").onchange=()=>{cfg.tilt=+$("tilt").value||0;cfgSave();fit();draw()};$("nn").onclick=()=>rotAnim(Math.round(rot/360)*360);$("lay").onchange=e=>{const l=e.target.dataset.l;if(l){hid[l]=!e.target.checked;draw()}};$("ct").onchange=$("sn").onchange=$("dt").onchange=$("dm").onchange=$("pn").onchange=()=>draw();
+$("lay").onchange=e=>{const l=e.target.dataset.l;if(l){hid[l]=!e.target.checked;draw()}};$("ct").onchange=$("sn").onchange=$("dt").onchange=$("dm").onchange=$("pn").onchange=()=>draw();
 function fence(o,k){const pts=o?o.p:P[k].p,v=o?o.v:k,l="Recinzione "+(o?(o.l||o.k):"particella "+k);if(it.some(x=>x.t==="line"&&x.k==="Recinzione"&&x.l===l))return false;it.push({t:"line",k:"Recinzione",l,p:[...pts,pts[0]],v});save();draw();return true}
 function summ(){const A={};it.forEach(o=>{const v=o.v==="all"?"Fuori dalle particelle":"Particella "+o.v;let k,u,x;if(o.t==="crop"||o.t==="zone"){k=(o.t==="crop"?"Coltura: ":"Zona: ")+(o.l||o.k)+" ("+o.k+")";u="m²";x=ar(o.p)}else if(o.t==="line"){k="Linea: "+o.k;u="m";x=len(o.p)}else if(o.t==="pt"){k="Punto: "+o.k;u="n";x=1}else if(o.t==="slope"){k="Pendenze";u="n";x=1}else return;const K=[v,k,u].join("|");A[K]=(A[K]||0)+x});return Object.entries(A).map(([k,x])=>k.split("|").concat([Math.round(x)])).sort()}
 $("sm").onclick=()=>{const r=$("rp");if(r.innerHTML){r.innerHTML="";return}const R=summ();r.innerHTML=R.length?"<table><tr><th>Dove</th><th>Voce</th><th>Unità</th><th>Valore</th></tr>"+R.map(x=>"<tr>"+x.map(c=>`<td>${E(c)}</td>`).join("")+"</tr>").join("")+"</table><button id=\"csv\">Scarica CSV</button>":"Nessun elemento ancora.";const c=$("csv");if(c)c.onclick=()=>dl("riepilogo-maccagno.csv","Dove;Voce;Unità;Valore\n"+R.map(x=>x.join(";")).join("\n"),"text/csv")};
@@ -709,8 +730,8 @@ $("ma").onclick=()=>{const c=$("mc").value,n=$("mn").value.trim();if(!n)return;c
 $("ml").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.r)rm($("mc").value,b.dataset.r);else if(b.id==="mrs"){cfg.hide[$("mc").value]=[];cfgSave();mgList();fillKind()}};
 cfgLoad();
 const lsg=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lss=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
-const APPV="v24",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
-const sy=(t,c)=>{const e=$("sy");e.textContent=c==="ok"?(SS.mode==="cloud"?"✓ Cloud":"✓ Salvato"):c==="err"?(SS.mode==="cloud"?"⚠ Cloud: problema":"⚠ Errore"):(SS.mode==="cloud"?"↻ Salvataggio…":"Solo su questo dispositivo");e.title=t||"";e.className="syn "+(c||"");try{syncUI()}catch(_){}};
+const APPV="v25",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
+const sy=(t,c)=>{const e=$("sy");e.textContent=c==="ok"?(SS.mode==="cloud"?"Sincronizzato":"Salvato"):c==="err"?(SS.mode==="cloud"?"Errore sync":"Errore"):(SS.mode==="cloud"?"Sincronizzo…":"Solo locale");e.title=t||"";e.className="syn "+(c||"");try{syncUI()}catch(_){}};
 const DEV=uid();let adopting=false,liveOK=true,ref=null,pushing=false,tm=null,remRev=0,crev=+(lsg(KEY+"-rev")||0),dirty=!!lsg(KEY+"-dirty");
 const snapJ=()=>JSON.stringify({geo:2,items:it,cfg});
 function touch(){lss(KEY+"-ts",Date.now());dirty=true;lss(KEY+"-dirty","1");if(ref){sy("Salvataggio…");clearTimeout(tm);tm=setTimeout(push,4000)}}
@@ -759,4 +780,4 @@ const isApp=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(d
 if(seedAll())save();side("oggi");
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=24"></script></body></html>
+<script type="module" src="firebase-sync.js?v=25"></script></body></html>
