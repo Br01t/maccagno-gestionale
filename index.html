@@ -156,11 +156,20 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 @keyframes dlf{from{opacity:0}}@keyframes dlp{from{transform:translateY(8px);opacity:0}}
 @media(prefers-reduced-motion:reduce){#dlg,.dl-c{animation:none}}
 #un[hidden],#fin[hidden]{display:none!important}
-</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v12</small></div><main class="app">
+
+.gd{display:flex;flex-direction:column;gap:6px}.gd>p{margin:0 0 4px}
+.gd details{border:1px solid var(--ln);border-radius:10px;background:var(--card);padding:0 12px}
+.gd summary{cursor:pointer;font-weight:600;padding:11px 0;min-height:20px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.gd summary::-webkit-details-marker{display:none}.gd summary::after{content:"\203A";font-size:20px;color:var(--mut);transition:transform .15s}
+.gd details[open] summary::after{transform:rotate(90deg)}
+.gd details[open] summary{border-bottom:1px solid var(--ln);margin-bottom:8px}
+.gd p,.gd li{font-size:13.5px;line-height:1.5;margin:0 0 8px}.gd ul,.gd ol{margin:0 0 8px;padding-left:20px}.gd li{margin-bottom:4px}
+@media(max-width:760px){#st-tabs{display:grid;grid-template-columns:repeat(3,1fr)}#st-tabs button{flex:none}}
+</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v13</small></div><main class="app">
 <header><h1><img src="icons/icon.svg" alt="" width="26" height="26" style="vertical-align:-6px;margin-right:6px">Mappa dei terreni di Maccagno</h1><div id="tabs" class="bar"></div></header>
 <div class="body">
 <aside id="sd"><button id="sdh" aria-expanded="true"><span class="grip"></span><span id="sdt">Nascondi strumenti</span></button>
-<nav id="st-tabs"><button data-s="draw" class="on">Disegna</button><button data-s="prod">Produzioni</button><button data-s="ag">Agenda</button><button data-s="di">Diario</button><button data-s="st">Magazzino</button></nav>
+<nav id="st-tabs"><button data-s="draw" class="on">Disegna</button><button data-s="prod">Produzioni</button><button data-s="ag">Agenda</button><button data-s="di">Diario</button><button data-s="st">Magazzino</button><button data-s="gd">Guida</button></nav>
 <div class="pane" id="p-draw">
 <div id="pal"></div><div id="hint"></div><div id="kinds"></div>
 <input type="text" id="lab" placeholder="Etichetta (facoltativa)">
@@ -174,6 +183,38 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 <div class="pane" id="p-prod" hidden><div id="prl"></div></div>
 <div class="pane" id="p-ag" hidden><div class="row" style="justify-content:space-between;align-items:center"><button id="a-p">◀</button><b id="a-t"></b><button id="a-n">▶</button></div><div id="a-l"></div><button id="a-i">Scarica calendario (.ics)</button></div>
 <div class="pane" id="p-di" hidden><div class="f" style="margin-top:0"><b>Registra lavoro</b><select id="d-c"></select><div class="row"><input type="date" id="d-d" style="width:128px"><input type="number" id="d-h" step="0.25" min="0" placeholder="ore" style="width:64px"><input type="text" id="d-a" list="act" placeholder="Attività" style="flex:1;min-width:80px"></div><input type="text" id="d-n" placeholder="Note (facoltative)"><button id="d-b">Aggiungi al diario</button></div><div id="d-l"></div></div>
+<div class="pane" id="p-gd" hidden><div class="gd">
+<p class="mut">Come usare le sezioni dell'app. Tutto parte dalla mappa: le sezioni leggono le colture che disegni e le riassumono.</p>
+<details open><summary>Come si lavora, in breve</summary><ol>
+<li><b>Disegna</b> una coltura sulla mappa (strumento Coltura o Rettangolo).</li>
+<li>Toccala per aprire la scheda rapida, poi <b>Dettagli e modifica</b> per compilare date, checklist, costi, ore e raccolti.</li>
+<li>Durante la stagione registra lavori nel <b>Diario</b> e i prodotti finiti nel <b>Magazzino</b>.</li>
+<li>Controlla l'andamento in <b>Produzioni</b> e le scadenze in <b>Agenda</b>.</li></ol></details>
+<details><summary>Disegna</summary><p>Qui costruisci la mappa: colture, zone, linee, punti, pendenze, note e misure. Ogni elemento ha un tipo che puoi cambiare, creare o eliminare dalla sua scheda. Dopo ogni inserimento si torna alla selezione, così muoverti sulla mappa non aggiunge elementi per sbaglio. «Annulla» compare solo quando c'è qualcosa da annullare.</p></details>
+<details><summary>Produzioni</summary><p>È il quadro generale, calcolato da solo a partire dalle colture disegnate: non si compila qui.</p><ul>
+<li><b>Riepilogo:</b> numero di produzioni e loro stato, ore totali, quantità raccolte (fresco ed essiccato), costi, ricavo previsto, incassato e margine previsto.</li>
+<li><b>Prossime scadenze:</b> le prossime semine e inizi raccolta.</li>
+<li><b>Per particella:</b> una scheda per coltura con stato, superficie, date, ore, rese e avanzamento della checklist. Toccala per aprire la scheda completa.</li>
+<li><b>Superficie per coltura</b> e pulsante per scaricare tutto in CSV.</li></ul>
+<p>Lo stato dipende dalle date: <i>Da pianificare</i> (nessuna data), <i>Programmata</i> (prima della semina), <i>In crescita</i>, <i>In raccolta</i> (dentro il periodo di raccolta), <i>Raccolta conclusa</i>.</p></details>
+<details><summary>Agenda</summary><p>Il calendario delle scadenze, mese per mese, con le frecce per spostarti. Si alimenta dalla scheda di ogni coltura (calendario e checklist con scadenza), non ha dati propri.</p><ul>
+<li><b>In ritardo:</b> attività della checklist con scadenza passata e non spuntate.</li>
+<li><b>Periodi di raccolto</b> e <b>Scadenze del mese.</b></li>
+<li>Spunta una voce per segnarla come fatta; toccala per aprire la coltura.</li>
+<li>Le attività senza scadenza vengono contate in fondo: aggiungi la data dalla scheda della coltura.</li>
+<li><b>Scarica calendario (.ics)</b> esporta le scadenze verso Google Calendar, Apple Calendar o Outlook.</li></ul></details>
+<details><summary>Diario</summary><p>Il registro del lavoro svolto. Scegli la coltura (o «Generale»), la data, le ore e l'attività (Semina, Irrigazione, Raccolta…), con note facoltative, poi <b>Aggiungi al diario</b>.</p><ul>
+<li>In alto vedi il totale delle registrazioni e delle ore, con un grafico delle ore per coltura.</li>
+<li>L'elenco mostra le ultime 40 voci; con × elimini una registrazione.</li>
+<li>Le ore del diario confluiscono nei totali di Produzioni. «Altre ore (stima)» nella scheda coltura serve per ore non registrate qui.</li>
+<li>Puoi scaricare il diario in CSV.</li></ul></details>
+<details><summary>Magazzino</summary><p>Il prodotto finito, per lotto. Un lotto è una quantità di un prodotto ottenuta da una coltura: scegli coltura, prodotto, quantità e unità (kg, g, vasetti, pezzi), stato (fresco, essiccato, trasformato), data di produzione ed eventuale scadenza. Il codice lotto è automatico se lo lasci vuoto.</p><ul>
+<li><b>Giacenza:</b> quanto resta del lotto dopo le vendite.</li>
+<li><b>Vendite:</b> per ogni lotto registra data, quantità, prezzo unitario e cliente; l'app calcola l'incassato.</li>
+<li>I lotti in scadenza entro 60 giorni sono segnalati; quelli scaduti hanno l'etichetta «scaduto».</li></ul></details>
+<details><summary>Scheda completa di una coltura</summary><p>Si apre da «Dettagli e modifica». È dove inserisci i dati che le sezioni usano: <b>Calendario</b> (semina e periodo di raccolta), <b>Checklist</b> con scadenze, <b>Costi</b> previsti e reali, <b>Lavoro</b>, <b>Prodotti, rese e prezzi</b> (per il ricavo previsto), <b>Raccolti e lavorazione</b> (dati reali), irrigazione, manutenzione e note tecniche. Tutto è modificabile ed eliminabile.</p></details>
+<details><summary>Dati e sicurezza</summary><p>I dati restano sul dispositivo e, se hai attivato l'accesso, si sincronizzano con il tuo database personale: puoi entrare solo con il tuo account. Da «Dati e stampa» esporti un backup, importi un file o stampi la mappa. Il segno di spunta sulla mappa indica che il salvataggio è completato.</p></details>
+</div></div>
 <div class="pane" id="p-st" hidden><div class="f" style="margin-top:0"><b>Nuovo lotto</b><select id="l-c"></select><input type="text" id="l-p" list="prods" placeholder="Prodotto (es. zafferano, shiitake secchi)"><div class="row"><input type="number" id="l-q" step="any" min="0" placeholder="Quantità" style="flex:1;min-width:70px"><select id="l-u" style="width:auto"><option>kg</option><option>g</option><option>vasetti</option><option>pezzi</option></select><select id="l-f" style="width:auto"><option>fresco</option><option selected>essiccato</option><option>trasformato</option></select></div><div class="row"><label>Prodotto il <input type="date" id="l-d" style="width:128px"></label><label>Scadenza <input type="date" id="l-x" style="width:128px"></label></div><input type="text" id="l-k" placeholder="Codice lotto (se vuoto: automatico)"><button id="l-b">Registra lotto</button></div><div id="l-l"></div></div>
 
 
@@ -352,7 +393,7 @@ $("prods").innerHTML=[...new Set(crops().flatMap(o=>[cname(o),...(o.pr||[]).map(
 const Ls=it.filter(x=>x.t==="lot").sort((a,b)=>a.d<b.d?1:-1);LS=Ls;const td=today(),i60=new Date(Date.now()+60*864e5).toISOString().slice(0,10),sc=Ls.filter(l=>l.x&&l.x<=i60).length;
 $("l-l").innerHTML=`<div class="sum">${Ls.length} lotti · incassato ${eur(Ls.reduce((s,l)=>s+rev(l),0))}${sc?" · "+sc+" in scadenza entro 60 giorni":""}</div>`+Ls.map((l,i)=>{const s=sld(l),st=(+l.q||0)-s,pct=l.q?Math.max(0,st/l.q*100):0,ex=l.x?(l.x<td?'<span class="badge late">scaduto</span>':l.x<=i60?'<span class="badge">scade '+fd(l.x)+'</span>':"scade "+fd(l.x)):"";
 return`<div class="lt"><b>${E(l.k||"")}</b> · ${E(l.np||"")} <span class="mut">(${E(l.cn||"")})</span><br>${nf(+l.q||0,2)} ${l.u} · ${l.f} · ${fd(l.d)}${ex?" · "+ex:""}<div class="bs" style="grid-template-columns:70px 1fr auto"><span>Giacenza</span><div><u style="width:${pct}%;background:var(--ac)"></u></div><b>${nf(st,2)} ${l.u}</b></div><span class="mut">Venduto ${nf(s,2)} ${l.u} · incassato ${eur(rev(l))}</span>`+(l.sa||[]).map((x,j)=>`<div class="ev2"><span>${fd(x.d)} · ${nf(+x.q||0,2)} ${l.u} × ${nf(+x.p||0,2)} € = <b>${eur((+x.q||0)*(+x.p||0))}</b>${x.c?" · "+E(x.c):""}</span><button data-r="${i}.${j}">×</button></div>`).join("")+`<div class="sf"><input type="date" data-s="d" value="${td}" style="width:120px"><input type="number" step="any" data-s="q" placeholder="Qtà ${l.u}" style="width:72px"><input type="number" step="any" data-s="p" placeholder="€/${l.u}" style="width:72px"><input type="text" data-s="c" placeholder="Canale / cliente" style="flex:1;min-width:90px"><button data-a="${i}">+ Vendita</button></div><button data-d="${i}" class="mut" style="margin-top:6px">Elimina lotto</button></div>`}).join("")+(Ls.length?'<button id="l-csv">Scarica magazzino (CSV)</button>':"")}
-const PANES=["draw","prod","ag","di","st"];
+const PANES=["draw","prod","ag","di","st","gd"];
 function side(s){for(const k of PANES){$("p-"+k).hidden=k!==s;document.querySelector('#st-tabs [data-s="'+k+'"]').classList.toggle("on",k===s)}if(s==="prod")prodList();if(s==="ag")agenda();if(s==="di")diario();if(s==="st")magazzino()}
 function refresh(){if(!$("p-ag").hidden)agenda();if(!$("p-di").hidden)diario();if(!$("p-st").hidden)magazzino()}
 const csv=(n,R)=>dl(n,"\ufeff"+R.map(r=>r.map(v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"').join(";")).join("\n"),"text/csv");
@@ -393,7 +434,7 @@ return`<button class="pc" data-i="${i}"><i style="background:${CROPS[o.k]}"></i>
 h+="<h4>Superficie per coltura</h4>"+Object.entries(tot).sort((a,b)=>b[1]-a[1]).map(([k,a])=>`<div class="bs"><span>${E(k)}</span><div><u style="width:${a/mx*100}%;background:${CROPS[k]}"></u></div><b>${Math.round(a)} m²</b></div>`).join("");
 h+='<button id="prcsv" style="margin-top:10px">Scarica produzioni (CSV)</button>';el.innerHTML=h}
 
-const ICN={"info": "<path d=\"M5 3l14 7-6 2-2 6z\"/>", "crop": "<path d=\"M4 9l8-5 8 5-3 10H7z\"/><path d=\"M12 9v7M9.5 12.5L12 14l2.5-1.5\"/>", "rect": "<rect x=\"3.5\" y=\"7\" width=\"17\" height=\"10\" rx=\"1\"/>", "zone": "<path d=\"M4 8l8-4 8 5-3 10H7z\" stroke-dasharray=\"3 2.2\"/>", "line": "<path d=\"M3 17c3-9 6 2 9-4s5-5 9-8\"/>", "pt": "<circle cx=\"12\" cy=\"10\" r=\"2.6\"/><path d=\"M12 21c-4-5-6-8-6-11a6 6 0 0112 0c0 3-2 6-6 11z\"/>", "slope": "<path d=\"M5 6l14 12\"/><path d=\"M19 18h-6M19 18v-6\"/>", "note": "<path d=\"M4 5h16v12H10l-5 4v-4H4z\"/>", "meas": "<path d=\"M3.5 15.5L15.5 3.5l5 5-12 12z\"/><path d=\"M7 12l2 2M10 9l2 2M13 6l2 2\"/>", "del": "<path d=\"M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13M10 11v6M14 11v6\"/>"};function pal(){$("pal").innerHTML=[["info","Seleziona"],["crop","Coltura"],["rect","Rettangolo"],["zone","Zona"],["line","Linea"],["pt","Punto"],["slope","Pendenza"],["note","Nota"],["meas","Misura"]].map(([v,n])=>`<button data-t="${v}" class="${v===$("tool").value?"on":""}"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICN[v]}</svg></span>${n}</button>`).join("")}
+const ICN={"info": "<path d=\"M5 3l14 7-6 2-2 6z\"/>", "crop": "<path d=\"M4 9l8-5 8 5-3 10H7z\"/><path d=\"M12 9v7M9.5 12.5L12 14l2.5-1.5\"/>", "rect": "<rect x=\"3.5\" y=\"7\" width=\"17\" height=\"10\" rx=\"1\"/>", "zone": "<path d=\"M4 8l8-4 8 5-3 10H7z\" stroke-dasharray=\"3 2.2\"/>", "line": "<path d=\"M3 17c3-9 6 2 9-4s5-5 9-8\"/>", "pt": "<circle cx=\"12\" cy=\"10\" r=\"2.6\"/><path d=\"M12 21c-4-5-6-8-6-11a6 6 0 0112 0c0 3-2 6-6 11z\"/>", "slope": "<path d=\"M5 6l14 12\"/><path d=\"M19 18h-6M19 18v-6\"/>", "note": "<path d=\"M4 5h16v13H10l-5 4v-4H4z\"/>", "meas": "<path d=\"M3.5 15.5L15.5 3.5l5 5-12 12z\"/><path d=\"M7 12l2 2M10 9l2 2M13 6l2 2\"/>", "del": "<path d=\"M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13M10 11v6M14 11v6\"/>"};function pal(){$("pal").innerHTML=[["info","Seleziona"],["crop","Coltura"],["rect","Rettangolo"],["zone","Zona"],["line","Linea"],["pt","Punto"],["slope","Pendenza"],["note","Nota"],["meas","Misura"]].map(([v,n])=>`<button data-t="${v}" class="${v===$("tool").value?"on":""}"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ICN[v]}</svg></span>${n}</button>`).join("")}
 function chips(){const t=$("tool").value,k=$("kind"),c=$("kinds");if(!k.options.length){c.innerHTML="";return}
 const sw=n=>t==="pt"?`<i style="background:${ptcol(n)}"></i>`:`<i style="background:${t==="line"?LINES[n][0]:t==="zone"?ZONES[n]:CROPS[n]}"></i>`,one=o=>o.value==="__new"?'<button class="chip" data-k="__new">+ Nuova voce</button>':`<button class="chip ${k.value===o.value?"on":""}" data-k="${E(o.value)}">${sw(o.value)} ${E(o.value)}</button>`;
 c.innerHTML=[...k.children].map(x=>x.tagName==="OPTGROUP"?`<span class="gl">${E(x.label)}</span>`+[...x.children].map(one).join(""):one(x)).join("")}
@@ -534,4 +575,4 @@ load();panel();fix();fit();fillKind();tabs();draw();prodList();side("draw");init
 let ip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();ip=e;$("inst").hidden=false});$("inst").onclick=async()=>{if(!ip)return;ip.prompt();try{await ip.userChoice}catch(_){}ip=null;$("inst").hidden=true};addEventListener("appinstalled",()=>{$("inst").hidden=true});
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=12"></script></body></html>
+<script type="module" src="firebase-sync.js?v=13"></script></body></html>
