@@ -58,7 +58,7 @@ input[type=number]{font:inherit;color:var(--fg);background:var(--bg);border:1px 
 @media(max-width:760px){body{overflow:hidden}.body{grid-template-columns:1fr;grid-template-rows:minmax(190px,42dvh) minmax(0,1fr)}#map{order:-1}#sd{border-right:0;border-top:1px solid var(--ln)}#md{position:fixed;inset:0;width:100%;z-index:20;border-left:0;padding-top:max(12px,env(safe-area-inset-top,0px))}header{padding:4px 8px;gap:4px 8px}h1{font-size:14px}#tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px}#tabs button,#tabs label{flex:none;white-space:nowrap}#st-tabs button{flex:1 1 18%;font-size:12px;padding:6px 0}#pal{grid-template-columns:repeat(5,1fr)}.syn{margin-left:0;flex-basis:100%}#zc button{width:40px;padding:8px 0}}
 label.f{align-items:stretch}
 .lock{display:none;position:fixed;inset:0;z-index:100;background:var(--bg,#f4f3ee);align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:24px;font:16px system-ui,sans-serif;color:#24402f}html.locked .lock{display:flex}html.locked .app{visibility:hidden}.lock img{width:96px;height:96px;border-radius:22px}.lock button{font:inherit;padding:10px 18px;border-radius:10px;border:1px solid #2f6f4f;background:#2f6f4f;color:#fff}.lock button:disabled{opacity:.5}#lk-m{min-height:1.4em;font-size:14px;color:#6b6b6b;max-width:320px}
-</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div></div><main class="app">
+</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v6</small></div><main class="app">
 <header><h1><img src="icons/icon.svg" alt="" width="26" height="26" style="vertical-align:-6px;margin-right:6px">Mappa dei terreni di Maccagno</h1><div id="tabs" class="bar"></div><button id="inst" hidden>⬇ Installa</button><span id="sy" class="syn"></span></header>
 <div class="body">
 <aside id="sd">
@@ -371,4 +371,4 @@ load();panel();fix();fit();fillKind();tabs();draw();prodList();side("draw");init
 let ip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();ip=e;$("inst").hidden=false});$("inst").onclick=async()=>{if(!ip)return;ip.prompt();try{await ip.userChoice}catch(_){}ip=null;$("inst").hidden=true};addEventListener("appinstalled",()=>{$("inst").hidden=true});
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js"></script></body></html>
+<script type="module" src="firebase-sync.js?v=6"></script></body></html>

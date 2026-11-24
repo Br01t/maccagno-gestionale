@@ -8,7 +8,7 @@ const get = () => { try { return localStorage.getItem(OK) === "1"; } catch (e) {
 const set = v => { try { v ? localStorage.setItem(OK, "1") : localStorage.removeItem(OK); } catch (e) {} };
 if (cfg && cfg.projectId && M) {
   const owner = (cfg.ownerEmail || "").toLowerCase();
-  let auth, db, fs, au, unsub = null;
+  let auth, db, fs, au, unsub = null, settled = false;
   const say = (m, b) => { lkm.textContent = m; lkb.disabled = !b; };
   const unlock = () => root.classList.remove("locked");
   const lock = m => { root.classList.add("locked"); say(m || "Accesso riservato.", true); };
@@ -20,6 +20,8 @@ if (cfg && cfg.projectId && M) {
     unsub = fs.onSnapshot(d, s => M.remote({ exists: s.exists(), data: () => s.data() }),
       () => M.sy("⚠️ Offline: i dati restano sul dispositivo e si sincronizzano al ritorno della rete", "err"));
   }
+  lkb.onclick = () => location.reload();
+  setTimeout(() => { if (!settled) lock("Il controllo accesso non risponde" + (window.__fbErr ? ": " + window.__fbErr : "") + ". Premi per ricaricare."); }, 8000);
   async function init() {
     const [app, a, f] = await Promise.all([import(B + "firebase-app.js"), import(B + "firebase-auth.js"), import(B + "firebase-firestore.js")]);
     au = a; fs = f;
@@ -27,6 +29,7 @@ if (cfg && cfg.projectId && M) {
     auth = a.getAuth(ap);
     db = f.initializeFirestore(ap, { localCache: f.persistentLocalCache({ tabManager: f.persistentMultipleTabManager() }) });
     au.onAuthStateChanged(auth, async u => {
+      settled = true;
       if (!u) { disconnect(); set(false); return lock("Accesso riservato."); }
       if (!owner || (u.email || "").toLowerCase() !== owner) {
         disconnect(); set(false); await au.signOut(auth);
@@ -41,7 +44,9 @@ if (cfg && cfg.projectId && M) {
     };
     out.onclick = () => au.signOut(auth);
   }
-  init().catch(() => {
+  init().catch(e => {
+    window.__fbErr = e && (e.code || e.message);
+    console.error("Firebase init", e);
     // SDK non raggiungibile (offline al primo avvio): se questo dispositivo era già autorizzato, usa i dati locali.
     if (get()) { unlock(); M.sy("📴 Offline: dati locali, la sincronizzazione riprende al ritorno della rete", "err"); }
     else lock("Serve la connessione per il primo accesso.");
