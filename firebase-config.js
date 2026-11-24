@@ -1,12 +1,7 @@
-// Incolla qui la configurazione del TUO progetto Firebase (vedi README, sezione "Database Firebase").
-// Finché resta null, l'app funziona solo in locale e il pulsante Firebase resta nascosto.
-// Questi valori NON sono segreti: la sicurezza è data dalle regole in firestore.rules + login Google.
-window.FIREBASE_CONFIG = null;
-/* Esempio:
+// Generato da setup-firebase.sh (valori non segreti)
 window.FIREBASE_CONFIG = {
-  apiKey: "AIza...",
-  authDomain: "il-tuo-progetto.firebaseapp.com",
-  projectId: "il-tuo-progetto",
-  appId: "1:123:web:abc"
+  "apiKey": "AIzaSyDy1OHO1z_PfouLMPr9qBN4wPlnKzXWvn4",
+  "authDomain": "maccagno-1462.firebaseapp.com",
+  "projectId": "maccagno-1462",
+  "appId": "1:449582743752:web:ddf66e7df0270b2db4a5fd"
 };
-*/
