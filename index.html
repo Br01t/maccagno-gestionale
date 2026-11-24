@@ -137,7 +137,23 @@ svg text{pointer-events:none;user-select:none;-webkit-user-select:none}
 button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:100%}
 #lg{margin-top:6px;display:flex;flex-direction:column}.lgh{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:12px 0 4px}.lgi{display:flex;align-items:center;gap:10px;font-size:13.5px;padding:3px 0}.lgi span:not(.lgn){flex:1}.lgi em{font-style:normal;color:var(--mut);font-size:12.5px}.lgi.off{opacity:.55}
 .lgs{width:16px;height:16px;border-radius:4px;flex:none;border:1px solid rgba(0,0,0,.18)}.lgs.z{opacity:.6;border-style:dashed}.lgl{width:28px;height:10px;flex:none}.lgp{width:22px;height:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font:700 10px/1 system-ui,sans-serif}.lgd{width:10px;height:10px;border-radius:50%;background:#d98b00;margin:0 9px;flex:none}.lgn{width:28px;text-align:center;font-weight:700;color:#c0392b}
-</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v10</small></div><main class="app">
+
+#dlg{position:fixed;inset:0;z-index:200;background:rgba(15,20,15,.5);display:flex;align-items:center;justify-content:center;padding:16px;animation:dlf .12s ease-out}
+#dlg[hidden]{display:none}
+.dl-c{background:var(--card);color:var(--fg);border:1px solid var(--ln);border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,.35);width:min(400px,100%);padding:20px;animation:dlp .14s ease-out}
+.dl-t{margin:0 0 6px;font-size:17px;line-height:1.3}
+.dl-p{margin:0;color:var(--mut);font-size:14px;line-height:1.45}
+.dl-b{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.dl-b button{min-height:40px;padding:8px 16px;border-radius:10px;width:auto}
+.dl-ok{background:var(--ac);border-color:var(--ac);color:#fff}
+:root[data-theme="dark"] .dl-ok{color:#0e1a12}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .dl-ok{color:#0e1a12}}
+.dl-ok.dl-danger{background:#c0392b;border-color:#c0392b;color:#fff}
+.dl-b button:focus-visible{outline:2px solid var(--ring,#1a73e8);outline-offset:2px}
+@media(max-width:520px){#dlg{align-items:flex-end}.dl-b{flex-direction:column-reverse}.dl-b button{width:100%}}
+@keyframes dlf{from{opacity:0}}@keyframes dlp{from{transform:translateY(8px);opacity:0}}
+@media(prefers-reduced-motion:reduce){#dlg,.dl-c{animation:none}}
+</style></head><body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v11</small></div><main class="app">
 <header><h1><img src="icons/icon.svg" alt="" width="26" height="26" style="vertical-align:-6px;margin-right:6px">Mappa dei terreni di Maccagno</h1><div id="tabs" class="bar"></div></header>
 <div class="body">
 <aside id="sd"><button id="sdh" aria-expanded="true"><span class="grip"></span><span id="sdt">Nascondi strumenti</span></button>
@@ -170,6 +186,7 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 
 <datalist id="act"><option value="Preparazione terreno"><option value="Semina"><option value="Trapianto"><option value="Irrigazione"><option value="Diserbo"><option value="Concimazione"><option value="Potatura"><option value="Raccolta"><option value="Essiccazione"><option value="Confezionamento"><option value="Manutenzione"><option value="Recinzione"></datalist><datalist id="prods"></datalist>
 </aside>
+<div id="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dl-t" hidden><div class="dl-c"><h3 class="dl-t" id="dl-t"></h3><p class="dl-p"></p><div class="dl-b"><button class="dl-no" type="button">Annulla</button><button class="dl-ok" type="button">Conferma</button></div></div></div>
 <section id="map"><div id="w"><svg id="m" xmlns="http://www.w3.org/2000/svg"></svg></div><div id="zc"><button id="zi">+</button><button id="zo">−</button><button id="zr" title="Reimposta vista">⤢</button><button id="zn" title="Allinea al nord" aria-label="Allinea al nord"><svg viewBox="0 0 24 24" width="24" height="24"><g id="zna" style="transform-origin:12px 12px"><path d="M12 2l5 11H7z" fill="#c0392b"/><path d="M12 22l-5-9h10z" fill="#8a8f86"/></g></svg></button><button id="rl" class="dk" title="Ruota a sinistra (Alt+rotella)">↺</button><button id="rr" class="dk" title="Ruota a destra">↻</button></div><div id="cb" hidden></div><div id="rp"></div><div id="md" hidden><div id="ip"></div></div><div id="qm" hidden></div><span id="sy" class="syn" title=""></span></section>
 </div></main><div id="pa"></div>
 <script src="firebase-config.js"></script>
@@ -184,6 +201,13 @@ let ZONES={"Sole pieno":"#f2c94c","Mezz’ombra":"#8fbf7a",Ombra:"#5c7a8c","Rist
 const dflt=(o,f)=>new Proxy(o,{get:(q,k)=>k in q?q[k]:f});CROPS=dflt(CROPS,"#8a8a8a");LINES=dflt(LINES,["#555",""]);ZONES=dflt(ZONES,"#999");PTS=dflt(PTS,"•");
 const PC={"1245":"#cfe3c2","1241":"#efe0b5","1246":"#e1dcab"};
 const $=i=>document.getElementById(i),svg=$("m"),KEY="maccagno-map-v1";
+const askConfirm=(title,text,o)=>new Promise(res=>{o=o||{};const d=$("dlg"),last=document.activeElement;
+d.querySelector(".dl-t").textContent=title;d.querySelector(".dl-p").textContent=text||"";d.querySelector(".dl-p").hidden=!text;
+const ok=d.querySelector(".dl-ok"),no=d.querySelector(".dl-no");ok.textContent=o.ok||"Conferma";no.textContent=o.cancel||"Annulla";ok.className="dl-ok"+(o.danger?" dl-danger":"");
+d.hidden=false;document.documentElement.classList.add("dlg-open");(o.danger?no:ok).focus();
+const end=v=>{d.hidden=true;document.documentElement.classList.remove("dlg-open");d.onclick=null;document.removeEventListener("keydown",kd,true);try{last&&last.focus&&last.focus()}catch(_){}res(v)};
+const kd=e=>{if(e.key==="Escape"){e.preventDefault();e.stopPropagation();end(false)}else if(e.key==="Tab"){const f=[no,ok];const i=f.indexOf(document.activeElement);e.preventDefault();f[(i+(e.shiftKey?-1:1)+2)%2].focus()}};
+document.addEventListener("keydown",kd,true);ok.onclick=()=>end(true);no.onclick=()=>end(false);d.onclick=e=>{if(e.target===d)end(false)}});
 let it=[],cur=[],vb={x:0,y:0,w:130,h:150},view="all";
 const CAL={};(()=>{for(const k in P){const q=P[k].p,a=Math.abs(q.reduce((s,r,i)=>{const n=q[(i+1)%q.length];return s+r[0]*n[1]-n[0]*r[1]},0)/2),c=[q.reduce((s,r)=>s+r[0],0)/q.length,q.reduce((s,r)=>s+r[1],0)/q.length],f=Math.sqrt(P[k].a/a);CAL[k]={c,f};P[k].p=q.map(r=>[+(c[0]+(r[0]-c[0])*f).toFixed(3),+(c[1]+(r[1]-c[1])*f).toFixed(3)])}})();
 const mig=a=>{(a||[]).forEach(o=>{const m=CAL[o.v];if(m&&o.p)o.p=o.p.map(r=>[+(m.c[0]+(r[0]-m.c[0])*m.f).toFixed(3),+(m.c[1]+(r[1]-m.c[1])*m.f).toFixed(3)])});return a};
@@ -227,7 +251,7 @@ else if(o.t==="line")fx("Lunghezza",nf(len(o.p),1)+" m");
 if(cr){if(o.sd)fx("Semina",fd(o.sd));if(o.h1)fx("Raccolto",fd(o.h1)+(o.h2?" – "+fd(o.h2):""));const tt=totals(o);if(tt.h)fx("Ore",nf(tt.h,1)+" h");const op=(o.ck||[]).filter(x=>!x.done).length;if(op)fx("Da fare",op+" attività")}}
 const L=cr?ind(o).slice(0,3):[],nt=(o.n||"").trim();
 q.innerHTML=`<div class="qh"><i style="background:${col}"></i><div><b>${E(title)}</b><small>${E(sub)}</small></div><button data-a="x" title="Chiudi" aria-label="Chiudi">✕</button></div><div class="qf">${F.join("")}</div>${typeBox(o)}${L.length?`<div class="ind">${L.map(x=>"• "+E(x)).join("<br>")}</div>`:""}${nt?`<div class="qn">${E(nt)}</div>`:""}<div class="qb"><button class="pri" data-a="f">Dettagli e modifica</button>${pc?"":`<button data-a="d">Elimina</button>`}</div>`;q.hidden=false;bindTypeBox(q,o,()=>panel());
-q.onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;if(a==="x"){sel=null;draw();panel()}else if(a==="f"){full=true;panel()}else if(a==="r"){b.textContent=fence(pc?null:o,k)?"Recintato":"Già recintato"}else if(a==="d"){if(confirm("Eliminare questo elemento?")){it.splice(sel,1);sel=null;save();draw();panel()}}}}
+q.onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;if(a==="x"){sel=null;draw();panel()}else if(a==="f"){full=true;panel()}else if(a==="r"){b.textContent=fence(pc?null:o,k)?"Recintato":"Già recintato"}else if(a==="d"){const k=sel;askConfirm("Eliminare questo elemento?","L'operazione non può essere annullata.",{ok:"Elimina",danger:1}).then(y=>{if(y&&sel===k){it.splice(sel,1);sel=null;save();draw();panel()}})}}}
 const TC=o=>["crop","zone","line","pt"].includes(o.t)?o.t:null,hx6=x=>/^#[0-9a-f]{6}$/i.test(x)?x:/^#[0-9a-f]{3}$/i.test(x)?"#"+x.slice(1).replace(/./g,m=>m+m):"#888888";
 function typeBox(o){const c=TC(o);if(!c)return"";const ks=Object.keys(TAB[c]).filter(n=>!cfg.hide[c].includes(n)||n===o.k);return`<div class="tb"><div class="tb-r"><span>Tipo</span><select class="tb-k">${ks.map(n=>`<option${n===o.k?" selected":""}>${E(n)}</option>`).join("")}</select><button class="tb-e">Modifica</button><button class="tb-n">Nuovo</button></div><div class="tb-f" hidden></div></div>`}
 function bindTypeBox(root,o,done){const c=TC(o);if(!c)return;const sel=root.querySelector(".tb-k"),f=root.querySelector(".tb-f");sel.onchange=()=>{o.k=sel.value;save();draw();done()};
@@ -239,7 +263,7 @@ if(nw){if(n in TAB[c]&&!cfg.hide[c].includes(n)){msg("Esiste già un tipo con qu
 else if(n===K){cfg.add[c][K]=val;TAB[c][K]=val}
 else{if(n in TAB[c]&&!cfg.hide[c].includes(n)){msg("Esiste già un tipo con questo nome.");return}cfg.add[c][n]=val;TAB[c][n]=val;cfg.hide[c]=cfg.hide[c].filter(x=>x!==n);it.forEach(x=>{if(x.t===c&&x.k===K)x.k=n});delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K)}
 cfgSave();save();draw();done()};
-const dl=f.querySelector(".tf-x");if(dl)dl.onclick=()=>{const rest=Object.keys(TAB[c]).filter(n=>n!==K&&!cfg.hide[c].includes(n)),used=it.filter(x=>x.t===c&&x.k===K).length;if(!rest.length){msg("Serve almeno un altro tipo.");return}if(!confirm("Eliminare il tipo «"+K+"»?"+(used?" I "+used+" elementi che lo usano passeranno a «"+rest[0]+"».":"")))return;it.forEach(x=>{if(x.t===c&&x.k===K)x.k=rest[0]});delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K);cfgSave();save();draw();done()}};
+const dl=f.querySelector(".tf-x");if(dl)dl.onclick=()=>{const rest=Object.keys(TAB[c]).filter(n=>n!==K&&!cfg.hide[c].includes(n)),used=it.filter(x=>x.t===c&&x.k===K).length;if(!rest.length){msg("Serve almeno un altro tipo.");return}askConfirm("Eliminare il tipo «"+K+"»?",used?used+" elementi che lo usano passeranno a «"+rest[0]+"».":"",{ok:"Elimina tipo",danger:1}).then(y=>{if(!y)return;it.forEach(x=>{if(x.t===c&&x.k===K)x.k=rest[0]});delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K);cfgSave();save();draw();done()})}};
 root.querySelector(".tb-e").onclick=()=>open(false);root.querySelector(".tb-n").onclick=()=>open(true)}
 function desc(o){const w=o.v==="all"?"fuori dalle particelle":"particella "+o.v;return o.t==="crop"?`Coltura: ${o.l||o.k} (${o.k}) · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="zone"?`Zona: ${o.l||o.k} · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="line"?`${o.k}: ${Math.round(len(o.p))} m · ${w}`:o.t==="slope"?`Pendenza ${o.l} · ${w}`:o.t==="pt"?`Punto ${o.k} · ${w}`:`Nota · ${w}`}
 const kg=(v,u)=>(+v||0)*(u==="g"?.001:1),nf=(x,d=1)=>x.toLocaleString("it-IT",{maximumFractionDigits:d}),fmtkg=x=>x>=1?nf(x,2)+" kg":nf(x*1000,0)+" g";
@@ -288,7 +312,7 @@ $("ckl").onclick=e=>{const b=e.target.closest("button");if(b){o.ck.splice(+b.dat
 const add=()=>{const v=$("ck-n").value.trim();if(!v)return;(o.ck=o.ck||[]).push({t:v,d:false,dt:$("ck-d").value||""});$("ck-n").value=$("ck-d").value="";T();ckr()};
 $("ck-a").onclick=add;$("ck-n").onkeydown=e=>{if(e.key==="Enter"){e.stopPropagation();add()}};
 if($("ck-s"))$("ck-s").onclick=()=>{o.ck=o.ck||[];(G.ck||DEF).forEach(t=>{if(!o.ck.some(x=>x.t===t))o.ck.push({t,d:false})});T();ckr()};
-if($("f-d"))$("f-d").onclick=()=>{it.splice(sel,1);sel=null;save();draw();panel()};
+if($("f-d"))$("f-d").onclick=()=>{const k=sel;askConfirm("Eliminare questo elemento?","L'operazione non può essere annullata.",{ok:"Elimina",danger:1}).then(y=>{if(y&&sel===k){it.splice(sel,1);sel=null;save();draw();panel()}})};
 $("f-b").onclick=$("f-x").onclick=()=>{sel=null;draw();panel()};{const fb=$("f-fn");if(fb)fb.onclick=()=>{fb.textContent=fence(pc?null:o,k)?"Recintato":"Già recintato"}}}
 
 const uid=()=>Math.random().toString(36).slice(2,9),today=()=>new Date().toISOString().slice(0,10),eur=x=>x.toLocaleString("it-IT",{style:"currency",currency:"EUR",maximumFractionDigits:0});
@@ -443,9 +467,9 @@ $("ex").onclick=()=>dl("mappa-maccagno.json",expJ(),"application/json");
 $("sh").onclick=async()=>{const f=new File([expJ()],"mappa-maccagno.json",{type:"application/json"});try{if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f],title:"Mappa Maccagno"});else dl("mappa-maccagno.json",expJ(),"application/json")}catch(e){}};
 if(!navigator.share)$("sh").hidden=true;
 $("imb").onclick=()=>$("im").click();
-$("im").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;f.text().then(x=>{try{let j=JSON.parse(x),ts=0;if(j&&j.j){ts=j.ts||0;j=JSON.parse(j.j)}else ts=(j&&j.ts)||0;const lt=+lsg(KEY+"-ts")||0;if(ts&&lt&&ts<lt&&!confirm("Il file è più vecchio dei dati su questo dispositivo ("+new Date(ts).toLocaleString("it-IT")+" contro "+new Date(lt).toLocaleString("it-IT")+"). Sostituirli comunque?"))return;if(Array.isArray(j)){it=mig(j)}else{it=j.items||[];if(j.geo!==2)mig(it);if(j.cfg){for(const c in cfg.add)Object.assign(cfg.add[c],(j.cfg.add||{})[c]||{});cfgApply();cfgSave();fillKind()}}sel=null;fix();save();fit();draw();panel();sy("File importato","ok")}catch(_){sy("File non valido","err")}})};
+$("im").onchange=e=>{const f=e.target.files[0];e.target.value="";if(!f)return;f.text().then(x=>{try{let j=JSON.parse(x),ts=0;if(j&&j.j){ts=j.ts||0;j=JSON.parse(j.j)}else ts=(j&&j.ts)||0;const lt=+lsg(KEY+"-ts")||0;const go=()=>{try{if(Array.isArray(j)){it=mig(j)}else{it=j.items||[];if(j.geo!==2)mig(it);if(j.cfg){for(const c in cfg.add)Object.assign(cfg.add[c],(j.cfg.add||{})[c]||{});cfgApply();cfgSave();fillKind()}}sel=null;fix();save();fit();draw();panel();sy("File importato","ok")}catch(_){sy("File non valido","err")}};if(ts&&lt&&ts<lt){askConfirm("Sostituire i dati di questo dispositivo?","Il file è più vecchio dei dati su questo dispositivo ("+new Date(ts).toLocaleString("it-IT")+" contro "+new Date(lt).toLocaleString("it-IT")+").",{ok:"Sostituisci",danger:1}).then(y=>{if(y)go()})}else go()}catch(_){sy("File non valido","err")}})};
 $("sv").onclick=()=>dl("mappa-maccagno.svg",new XMLSerializer().serializeToString(svg),"image/svg+xml");
-$("pr").onclick=()=>window.print();$("cl").onclick=()=>{if(confirm("Cancellare tutto quello che hai disegnato?")){it=[];save();draw()}};
+$("pr").onclick=()=>window.print();$("cl").onclick=()=>{askConfirm("Cancellare tutto il disegno?","Tutti gli elementi disegnati su questo dispositivo verranno eliminati. Se vuoi conservarli, esporta prima un backup.",{ok:"Cancella tutto",danger:1}).then(y=>{if(y){it=[];sel=null;save();draw();panel()}})};
 addEventListener("keydown",e=>{if(e.key==="Enter")fin();if(e.key==="Escape"){cur=[];if(sel!=null){sel=null;panel()}if($("tool").value!=="info")toSel();else draw()}if((e.key==="Delete"||e.key==="Backspace")&&typeof sel==="number"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){it.splice(sel,1);sel=null;save();draw();panel()}});
 addEventListener("resize",()=>{fit();draw()});
 function tabs(){$("tabs").innerHTML=[["all","Tutti e 3"],...Object.keys(P).map(k=>[k,"Particella "+k])].map(([v,n])=>`<button data-v="${v}" class="${v===view?"on":""}">${n}</button>`).join("");$("lay").innerHTML=Object.entries(LAY).map(([k,n])=>`<label><input type="checkbox" data-l="${k}" ${hid[k]?"":"checked"}>${n}</label>`).join("");$("tilt").value=cfg.tilt||"";$("gl").textContent="Griglia "+(view==="all"?10:5)+" m"}
@@ -506,4 +530,4 @@ load();panel();fix();fit();fillKind();tabs();draw();prodList();side("draw");init
 let ip=null;addEventListener("beforeinstallprompt",e=>{e.preventDefault();ip=e;$("inst").hidden=false});$("inst").onclick=async()=>{if(!ip)return;ip.prompt();try{await ip.userChoice}catch(_){}ip=null;$("inst").hidden=true};addEventListener("appinstalled",()=>{$("inst").hidden=true});
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=10"></script></body></html>
+<script type="module" src="firebase-sync.js?v=11"></script></body></html>
