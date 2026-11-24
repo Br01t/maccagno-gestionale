@@ -1,11 +1,36 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Ogni utente legge e scrive solo i propri dati.
-    match /users/{uid}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == uid
+
+    // Solo il proprietario: stesso uid del percorso, account Google con email verificata.
+    function isOwner(uid) {
+      return request.auth != null
+        && request.auth.uid == uid
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
         && request.auth.token.email == "giacomo.piccinini1@gmail.com"
         && request.auth.token.email_verified == true;
+    }
+
+    // L'unico documento usato dall'app. Scrittura solo con i campi attesi, dimensione limitata e
+    // controllo di versione: si scrive solo sopra la revisione che si è letta (niente sovrascritture alla cieca).
+    match /users/{uid}/maps/main {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['j', 'rev', 'prev', 'dev', 'ts'])
+        && request.resource.data.j is string
+        && request.resource.data.j.size() < 1000000;
+      allow update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['j', 'rev', 'prev', 'dev', 'ts'])
+        && request.resource.data.j is string
+        && request.resource.data.j.size() < 1000000
+        && request.resource.data.rev > resource.data.rev
+        && request.resource.data.prev == resource.data.rev;
+      allow delete: if false;
+    }
+
+    // Tutto il resto è chiuso.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

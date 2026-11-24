@@ -15,13 +15,17 @@ if (cfg && cfg.projectId && M) {
   function disconnect() { if (unsub) unsub(); unsub = null; out.hidden = true; M.drop("Solo su questo dispositivo"); }
   function connect(user) {
     const d = fs.doc(db, "users", user.uid, "maps", "main");
-    M.use({ set: x => fs.setDoc(d, x) }, "Sincronizzato: " + user.email);
+    M.use({ set: x => fs.setDoc(d, x), get: async () => { const s = await fs.getDocFromServer(d); return { exists: s.exists(), data: () => s.data() }; } }, "Sincronizzato: " + user.email, user.email);
     out.hidden = false;
-    unsub = fs.onSnapshot(d, s => M.remote({ exists: s.exists(), data: () => s.data() }),
-      () => M.sy("Offline: i dati restano sul dispositivo e si sincronizzano al ritorno della rete", "err"));
+    unsub = fs.onSnapshot(d, { includeMetadataChanges: true }, s => {
+      // prima si applica ciò che arriva dal cloud, solo dopo si sbloccano gli invii (evita di sovrascrivere dati più nuovi)
+      if (!s.metadata.fromCache || s.exists()) M.remote({ exists: s.exists(), data: () => s.data() });
+      M.setLive(!s.metadata.fromCache);
+    }, e => { M.setLive(false); M.err(e); });
   }
   lkb.onclick = () => location.reload();
   setTimeout(() => { if (!settled) lock("Il controllo accesso non risponde" + (window.__fbErr ? ": " + window.__fbErr : "") + ". Premi per ricaricare."); }, 8000);
+  if (get()) unlock(); // avvio rapido: dispositivo già autorizzato, il controllo accesso conferma o richiude subito
   async function init() {
     const [app, a, f] = await Promise.all([import(B + "firebase-app.js"), import(B + "firebase-auth.js"), import(B + "firebase-firestore.js")]);
     au = a; fs = f;
@@ -52,3 +56,4 @@ if (cfg && cfg.projectId && M) {
     else lock("Serve la connessione per il primo accesso.");
   });
 }
+else if (M) M.state("nocfg", "");
