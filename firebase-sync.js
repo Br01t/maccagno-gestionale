@@ -12,13 +12,13 @@ if (cfg && cfg.projectId && M) {
   const say = (m, b) => { lkm.textContent = m; lkb.disabled = !b; };
   const unlock = () => root.classList.remove("locked");
   const lock = m => { root.classList.add("locked"); say(m || "Accesso riservato.", true); };
-  function disconnect() { if (unsub) unsub(); unsub = null; out.hidden = true; M.drop("💾 Solo su questo dispositivo"); }
+  function disconnect() { if (unsub) unsub(); unsub = null; out.hidden = true; M.drop("Solo su questo dispositivo"); }
   function connect(user) {
     const d = fs.doc(db, "users", user.uid, "maps", "main");
-    M.use({ set: x => fs.setDoc(d, x) }, "☁️ Sincronizzato: " + user.email);
+    M.use({ set: x => fs.setDoc(d, x) }, "Sincronizzato: " + user.email);
     out.hidden = false;
     unsub = fs.onSnapshot(d, s => M.remote({ exists: s.exists(), data: () => s.data() }),
-      () => M.sy("⚠️ Offline: i dati restano sul dispositivo e si sincronizzano al ritorno della rete", "err"));
+      () => M.sy("Offline: i dati restano sul dispositivo e si sincronizzano al ritorno della rete", "err"));
   }
   lkb.onclick = () => location.reload();
   setTimeout(() => { if (!settled) lock("Il controllo accesso non risponde" + (window.__fbErr ? ": " + window.__fbErr : "") + ". Premi per ricaricare."); }, 8000);
@@ -48,7 +48,7 @@ if (cfg && cfg.projectId && M) {
     window.__fbErr = e && (e.code || e.message);
     console.error("Firebase init", e);
     // SDK non raggiungibile (offline al primo avvio): se questo dispositivo era già autorizzato, usa i dati locali.
-    if (get()) { unlock(); M.sy("📴 Offline: dati locali, la sincronizzazione riprende al ritorno della rete", "err"); }
+    if (get()) { unlock(); M.sy("Offline: dati locali, la sincronizzazione riprende al ritorno della rete", "err"); }
     else lock("Serve la connessione per il primo accesso.");
   });
 }
