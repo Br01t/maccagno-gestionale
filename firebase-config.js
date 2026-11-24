@@ -5,3 +5,4 @@ window.FIREBASE_CONFIG = {
   "projectId": "maccagno-1462",
   "appId": "1:449582743752:web:ddf66e7df0270b2db4a5fd"
 };
+window.FIREBASE_CONFIG.ownerEmail = "giacomo.piccinini1@gmail.com";

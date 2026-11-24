@@ -4,7 +4,7 @@ service cloud.firestore {
     // Ogni utente legge e scrive solo i propri dati.
     match /users/{uid}/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == uid
-        && request.auth.token.email == "CAMBIA@example.com"
+        && request.auth.token.email == "giacomo.piccinini1@gmail.com"
         && request.auth.token.email_verified == true;
     }
   }
