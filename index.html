@@ -104,9 +104,8 @@ button,select,input[type=text],input[type=date],input[type=number],textarea{font
 @media(min-width:1500px){.body{grid-template-columns:380px minmax(0,1fr)}body{font-size:15.5px}}
 .lock{color:var(--fg)}.lock b{color:var(--fg)}#lk-m{color:var(--mut)}.lock button{background:var(--ac);border-color:var(--ac);font-weight:600;min-height:46px}
 /* ===== v8: scheda rapida, badge sync, barra comprimibile ===== */
-.syn{display:inline-flex;align-items:center;gap:6px;margin:0;font-size:12px;font-weight:500;color:var(--mut);white-space:nowrap}
-.syn::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--mut);opacity:.55;flex:none}
-.syn.ok::before{background:var(--ac);opacity:1}.syn.err{color:#c0392b}.syn.err::before{background:#c0392b;opacity:1}.syn:empty{display:none}
+.syn{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;font-size:0;line-height:0;overflow:hidden;background:var(--mut);opacity:.28;flex:none}
+.syn.ok{background:var(--ac);opacity:.45}.syn.err{background:#c0392b;opacity:1}
 #zn{padding:0;display:flex;align-items:center;justify-content:center}
 @media(hover:none){.dk{display:none}}
 #qm{position:absolute;z-index:7;right:12px;top:12px;width:min(340px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.22);padding:14px}
@@ -225,7 +224,7 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 #sdf button{flex:1;min-height:34px;padding:4px 2px;font-size:13px;border-radius:10px}
 .body.col #sd>*:not(#sdh){display:none}.body.col #sdh .syn{display:none}
 }
-@media(max-width:760px){#sdh .syn{position:absolute;right:12px;top:8px}}
+@media(max-width:760px){#sdh .syn{position:absolute;right:14px;top:10px}}
 .spc{border:1px solid var(--ln);border-radius:10px;padding:8px 10px;margin:8px 0;background:var(--bg);font-size:12.5px}.spc>b{font-size:13.5px}.spc>span{color:var(--mut)}.spc table{width:100%;border-collapse:collapse;margin-top:4px}.spc th{text-align:left;vertical-align:top;color:var(--mut);font-weight:500;padding:2px 8px 2px 0;white-space:nowrap}.spc td{padding:2px 0;line-height:1.4}
 
 /* ===== v28: vivaio ===== */
@@ -531,12 +530,13 @@ const rk=Object.values(R);if(rk.length){any=true;h+="<h4>Tronchi pronti</h4>"+rk
 const lx=V.filter(x=>x.t==="Scadenza lotto"&&x.d<=addD(td,60));if(lx.length){any=true;const ex=lx.filter(x=>x.d<td).length;h+=`<h4>Magazzino</h4><button class="ev" data-go="st"><span>${ex?ex+" lotti scaduti · ":""}${lx.length-ex} in scadenza entro 60 giorni</span></button>`}
 const un=cr.filter(o=>!o.sd&&!o.h1);if(un.length){any=true;h+="<h4>Da pianificare</h4>"+un.slice(0,4).map(o=>`<button class="ev" data-c="${it.indexOf(o)}"><span><b>${E(cname(o))}</b> · imposta semina e raccolto</span></button>`).join("")+(un.length>4?`<p class="mut">e altre ${un.length-4}.</p>`:"")}
 const rw=cr.flatMap(o=>rotWarn(o).map(w=>({o,w})));if(rw.length){any=true;h+="<h4>Rotazione</h4>"+rw.map(r=>`<button class="ev" data-c="${it.indexOf(r.o)}"><span><b>${E(cname(r.o))}</b> · stesso punto del ${r.w.y}</span></button>`).join("")}
+const vv=nvAct().filter(x=>x.st==="Pronta"||(x.dt&&x.dt<=lim));if(vv.length){any=true;h+="<h4>Vivaio</h4>"+`<button class="ev" data-go="viv"><span>${vv.map(x=>E(x.sp)+" ×"+x.q+(x.st==="Pronta"?" (pronta)":" · "+fd(x.dt))).join(" · ")}</span></button>`}
 if(!any)h+=`<p class="mut">Niente in scadenza nei prossimi 14 giorni. Registra il lavoro svolto nel Diario o aggiungi scadenze alle checklist delle colture.</p>`;
 h+=`<div class="og-a"><button data-go="di">Registra lavoro</button><button data-go="st">Nuovo lotto</button><button data-go="draw">Disegna</button></div>`;
 el.innerHTML=h}
 $("og").onchange=e=>{const i=e.target.dataset.a;if(i!=null){const x=OG[+i];x.o.ck[x.ck].d=e.target.checked;save()}};
 $("og").onclick=e=>{if(e.target.closest("[data-go]"))return;const sp=e.target.closest("[data-o]");if(sp){const x=OG[+sp.dataset.o];if(x.viv){openViv();return}if(x.o.t==="crop")goCrop(x.o,"data");else{sel="p:"+x.o.v;full=true;ptab="data";draw();panel()}return}const c=e.target.closest("[data-c]");if(c){const o=it[+c.dataset.c];if(o)goCrop(o,c.dataset.pt||"data")}};
-document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b)side(b.dataset.go)});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b){if(b.dataset.go==="viv")openViv();else side(b.dataset.go)}});
 
 /* ===== v18: punti di ripristino, tronchi sulla mappa ===== */
 let trOpen=null,trHi=null,placing=null;
@@ -831,12 +831,12 @@ $("ma").onclick=()=>{const c=$("mc").value,n=$("mn").value.trim();if(!n)return;c
 $("ml").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.r)rm($("mc").value,b.dataset.r);else if(b.id==="mrs"){cfg.hide[$("mc").value]=[];cfgSave();mgList();fillKind()}};
 cfgLoad();
 const lsg=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lss=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
-const APPV="v28",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
+const APPV="v29",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
 const sy=(t,c)=>{const e=$("sy");e.textContent=c==="ok"?(SS.mode==="cloud"?"Sincronizzato":"Salvato"):c==="err"?(SS.mode==="cloud"?"Errore sync":"Errore"):(SS.mode==="cloud"?"Sincronizzo…":"Solo locale");e.title=t||"";e.className="syn "+(c||"");try{syncUI()}catch(_){}};
 const DEV=uid();let adopting=false,liveOK=true,ref=null,pushing=false,tm=null,remRev=0,crev=+(lsg(KEY+"-rev")||0),dirty=!!lsg(KEY+"-dirty");
 const snapJ=()=>JSON.stringify({geo:2,items:it,cfg});
 function touch(){lss(KEY+"-ts",Date.now());dirty=true;lss(KEY+"-dirty","1");if(ref){sy("Salvataggio…");clearTimeout(tm);tm=setTimeout(push,4000)}}
-let crev0=0;async function push(){if(!ref||pushing||!liveOK)return;pushing=true;try{while(dirty){dirty=false;const j=snapJ();if(j===lsg(KEY+"-base"))break;const prev=remRev;crev0=crev;crev=Math.max(crev,remRev)+1;lss(KEY+"-rev",crev);await ref.set({j,rev:crev,prev,dev:DEV,ts:Date.now()});remRev=crev;SS.lastUp=Date.now();SS.size=j.length;SS.err="";lss(KEY+"-base",j);lss(KEY+"-dirty","")}sy("Sincronizzato","ok")}catch(e){dirty=true;crev=crev0;lss(KEY+"-rev",crev);const code=(e&&(e.code||e.message))||"errore";SS.err=code;let w=8000;if(code==="permission-denied"&&ref&&ref.get){w=400;try{const s=await ref.get();SS.err="";onRemote(s)}catch(_){SS.err=code}}if(SS.err)sy("Sincronizzazione non riuscita ("+SS.err+"), riprovo…","err");setTimeout(touch,w)}pushing=false}
+let crev0=0;async function push(){if(!ref||pushing||!liveOK)return;pushing=true;try{while(dirty){dirty=false;const j=snapJ();if(j===lsg(KEY+"-base"))break;const wd=new Date().toISOString().slice(0,10),wr=(lsg("maccagno-wr")||"").split("|"),wn=wr[0]===wd?+wr[1]||0:0;if(wn>=1500){dirty=true;SS.err="limite scritture giornaliero";sy("Limite giornaliero di scritture raggiunto: riprende domani","err");pushing=false;return}lss("maccagno-wr",wd+"|"+(wn+1));const prev=remRev;crev0=crev;crev=Math.max(crev,remRev)+1;lss(KEY+"-rev",crev);await ref.set({j,rev:crev,prev,dev:DEV,ts:Date.now()});remRev=crev;SS.lastUp=Date.now();SS.size=j.length;SS.err="";lss(KEY+"-base",j);lss(KEY+"-dirty","")}sy("Sincronizzato","ok")}catch(e){dirty=true;crev=crev0;lss(KEY+"-rev",crev);const code=(e&&(e.code||e.message))||"errore";SS.err=code;let w=8000;if(code==="permission-denied"&&ref&&ref.get){w=400;try{const s=await ref.get();SS.err="";onRemote(s)}catch(_){SS.err=code}}if(SS.err)sy("Sincronizzazione non riuscita ("+SS.err+"), riprovo…","err");setTimeout(touch,w)}pushing=false}
 function adopt(d){let x;try{x=JSON.parse(d.j)}catch(e){return}adopting=true;snap("Prima della sincronizzazione",1);lss(KEY+"-backup",JSON.stringify(it));it=x.items||[];if(x.geo!==2)mig(it);if(x.cfg){cfg.tilt=+x.cfg.tilt||0;for(const c in cfg.add){Object.assign(cfg.add[c],(x.cfg.add||{})[c]||{});cfg.hide[c]=(x.cfg.hide||{})[c]||[]}cfgApply();lss(KEY+"-cfg",JSON.stringify(cfg))}fix();crev=d.rev||0;lss(KEY+"-base",d.j);SS.lastDown=Date.now();SS.size=(d.j||"").length;lss(KEY+"-rev",crev);dirty=false;lss(KEY+"-dirty","");lss(KEY,JSON.stringify(it));sel=null;adopting=false;fillKind();panel();fit();draw();prodList();refresh();sy(SS.mode==="cloud"?"Aggiornato dal cloud":"Aggiornato dal file","ok")}
 const ikey=o=>o.id?"#"+o.id:JSON.stringify(o),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 function mergeItems(base,mine,theirs,preferMine){const mp=a=>{const m=new Map();a.forEach(o=>m.set(ikey(o),o));return m},B=mp(base),A=mp(mine),T=mp(theirs),out=[];new Set([...T.keys(),...A.keys(),...B.keys()]).forEach(k=>{const b=B.get(k),a=A.get(k),t=T.get(k);if(b){if(a&&t){if(same(a,t))out.push(t);else if(same(a,b))out.push(t);else if(same(t,b))out.push(a);else out.push(preferMine?a:t)}else if(a&&!same(a,b))out.push(a);else if(t&&!same(t,b))out.push(t)}else if(a||t)out.push(a&&t?(preferMine?a:t):a||t)});return out}
@@ -881,4 +881,4 @@ const isApp=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(d
 if(seedAll())save();side("oggi");
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=28"></script></body></html>
+<script type="module" src="firebase-sync.js?v=29"></script></body></html>
