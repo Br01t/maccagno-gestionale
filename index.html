@@ -222,9 +222,10 @@ button.danger{color:#c0392b;border-color:#e0b4ae;background:transparent;width:10
 .xp>details.sec>summary{pointer-events:none;font-weight:600;padding:6px 0}.xp>details.sec>summary::after{display:none}
 #sdf{display:flex;flex:none;gap:6px;padding:8px 12px;border-top:1px solid var(--ln);background:var(--card)}
 #sdf button{flex:1;min-height:34px;padding:4px 2px;font-size:13px;border-radius:10px}
-.body.col #sd>*:not(#sdh){display:none}.body.col #sdh .syn{display:none}
+.body.col #sd>*:not(#sdh){display:none}
 }
 @media(max-width:760px){#sdh .syn{position:absolute;right:14px;top:10px}}
+.body.col #sdh{position:relative}.body.col #sdh .syn{display:none}
 .spc{border:1px solid var(--ln);border-radius:10px;padding:8px 10px;margin:8px 0;background:var(--bg);font-size:12.5px}.spc>b{font-size:13.5px}.spc>span{color:var(--mut)}.spc table{width:100%;border-collapse:collapse;margin-top:4px}.spc th{text-align:left;vertical-align:top;color:var(--mut);font-weight:500;padding:2px 8px 2px 0;white-space:nowrap}.spc td{padding:2px 0;line-height:1.4}
 
 /* ===== v28: vivaio ===== */
@@ -902,7 +903,7 @@ const ptg=()=>{const o=Object.entries(PG).map(([g,v])=>[g,Object.keys(v).filter(
 $("kind").onchange=()=>{if($("kind").value==="__new"){openMg($("tool").value);$("kind").selectedIndex=0}};
 cfgLoad();
 const lsg=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lss=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
-const APPV="v30",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
+const APPV="v31",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
 const sy=(t,c)=>{const e=$("sy");e.textContent=c==="ok"?(SS.mode==="cloud"?"Sincronizzato":"Salvato"):c==="err"?(SS.mode==="cloud"?"Errore sync":"Errore"):(SS.mode==="cloud"?"Sincronizzo…":"Solo locale");e.title=t||"";e.className="syn "+(c||"");try{syncUI()}catch(_){}};
 const DEV=uid();let adopting=false,liveOK=true,ref=null,pushing=false,tm=null,remRev=0,crev=+(lsg(KEY+"-rev")||0),dirty=!!lsg(KEY+"-dirty");
 const snapJ=()=>JSON.stringify({geo:2,items:it,cfg});
@@ -952,4 +953,4 @@ const isApp=()=>matchMedia("(display-mode: standalone)").matches||matchMedia("(d
 if(seedAll())save();side("oggi");
 if("serviceWorker"in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
-<script type="module" src="firebase-sync.js?v=30"></script></body></html>
+<script type="module" src="firebase-sync.js?v=31"></script></body></html>
