@@ -9,10 +9,17 @@ if(D.lsa){const l=it.find(x=>x.t==="lot"&&x.k===D.lsa),f=b.parentElement,g=k=>f.
 if(D.lsr){const[k,j]=D.lsr.split("|"),l=it.find(x=>x.t==="lot"&&x.k===k);if(l&&l.sa){l.sa.splice(+j,1);save()}return}
 if(D.lsl){LB.k="lot";const L=lbList("lot");lbOpen("lot",L.findIndex(x=>x.o&&x.o.k===D.lsl));return}
 if(b.id==="ng-a"){const n=$("ng-n").value.trim();if(!n)return;if(macsAll().some(g=>nrm(g.n)===nrm(n))){colMsg="Esiste già un gruppo con questo nome.";prodList(true);return}colMsg="";macEdit(M=>M.push({n,c:"#6b8f71",ks:[],sk:[],p:[],h:[]}));colOpen.add("g:"+n);prodList(true);return}
-if(D.reg!=null){const r=b.closest(".rg"),q=f=>{const x=r.querySelector('[data-f="'+f+'"]');return x?x.value:""},e1={t:"pe",id:uid(),v:"all",p:[],k:r.dataset.g,n:(r.dataset.p||q("n")||"").trim(),d:q("d")||today(),h:q("h"),f:q("f"),s:q("s"),u:q("u")||"kg",c:q("c"),r:q("r"),a:q("a").trim()};if(!(+e1.h||+e1.f||+e1.s||+e1.c||+e1.r||e1.a)){colMsg="Inserisci almeno ore, resa, costo, incasso o una nota.";prodList(true);return}colMsg="";
-let lk=q("lk");if(lk==="__new"){const g0=macsAll().find(x=>x.n===e1.k),qn=+e1.s||+e1.f;if(!g0||!qn){colMsg="Per creare un nuovo lotto serve una resa (fresca o lavorata).";prodList(true);return}lk=lotNew(g0,e1.n,e1.d,qn,e1.u,+e1.s?"essiccato":"fresco")}
-if(lk){e1.lk=lk;const l0=it.find(x=>x.t==="lot"&&x.k===lk),v0=it.find(x=>x.t==="nv"&&x.lc===lk);if(l0&&!e1.n&&l0.pn)e1.n=l0.pn;if(v0&&!e1.n)e1.n=spKey(v0.sp)||v0.sp}
-it.push(e1);colOpen.add("g:"+e1.k);if(e1.n)colOpen.add("p:"+e1.k+"|"+e1.n);save();return}
+if(D.reg!=null){const r=b.closest(".rg"),q=f=>{const x=r.querySelector('[data-f="'+f+'"]');return x?x.value:""},g0=macsAll().find(x=>x.n===r.dataset.g),o=crops().find(x=>x.id===q("cid"));
+if(!o){colMsg="Scegli la coltura a cui appartiene la registrazione.";prodList(true);return}
+const d=q("d")||today(),h=+q("h")||0,f=q("f"),s=q("s"),u=q("u")||"kg",c=+q("c")||0,a=q("a").trim();let pn=(r.dataset.p||q("n")||"").trim();
+if(!(h||+f||+s||c||a)){colMsg="Inserisci almeno ore, resa, costo o una nota.";prodList(true);return}colMsg="";
+let lk=q("lk");if(lk==="__new"){const qn=+s||+f;if(!g0||!qn){colMsg="Per creare un nuovo lotto serve una resa (fresca o lavorata).";prodList(true);return}lk=lotNew(g0,pn,d,qn,u,+s?"essiccato":"fresco");const nl=it.find(x=>x.t==="lot"&&x.k===lk);if(nl){nl.cid=o.id;nl.cn=cname(o)}}
+if(lk){const l0=it.find(x=>x.t==="lot"&&x.k===lk),v0=it.find(x=>x.t==="nv"&&x.lc===lk);if(l0&&!pn&&l0.pn)pn=l0.pn;if(v0&&!pn)pn=spKey(v0.sp)||v0.sp}
+const lg=h>0||(a&&!(+f||+s||c));if(lg)it.push({t:"log",cid:o.id,cn:cname(o),d,h,tp:"Lavoro",pn,lk:lk||"",a,n:"",nx:"",v:"all",p:[]});
+if(+f||+s)it.push({t:"hv",id:uid(),cid:o.id,d,f:f||"",s:s||"",u,n:lg?"":a,pn,lk:lk||""});
+if(c)(o.co=o.co||[]).push({n:a||"Costo",v:"",e:c,pn,d});
+colOpen.add("g:"+r.dataset.g);if(pn)colOpen.add("p:"+r.dataset.g+"|"+pn);save();return}
+if(D.dreg){const p=D.dreg.split(":"),k=p[0];if(k==="co"){const o=it[+p[1]];if(o&&o.co&&o.co[+p[2]]){o.co.splice(+p[2],1);save()}}else{const i=+p[1];if(it[i]&&it[i].t===k){it.splice(i,1);save()}}return}
 if(D.dpe){const x=it.find(q=>q.id===D.dpe);if(x){it.splice(it.indexOf(x),1);save()}return}
 if(D.addp!=null){const i=b.parentNode.querySelector(".np"),n=i.value.trim();if(!n)return;const g=macs().find(x=>x.n===D.addp)?D.addp:null;macEdit(M=>{let G=M.find(x=>x.n===D.addp);if(!G){G={n:D.addp,c:"#8a8a8a",ks:[],sk:[],p:[],h:[]};M.push(G)}if(!macProds0(G).some(x=>nrm(x)===nrm(n)))G.p.push(n);G.h=G.h.filter(x=>nrm(x)!==nrm(n))});colOpen.add("g:"+D.addp);colOpen.add("p:"+D.addp+"|"+n);prodList(true);return}
 if(D.hidep!=null){macEdit(M=>{const G=M.find(x=>x.n===D.g);if(G&&!G.h.includes(D.hidep))G.h.push(D.hidep)});return}
@@ -24,3 +31,8 @@ $("prl").onchange=$("prl-map").onchange=e=>{if(e.target.id==="ss"||e.target.id==
 $("prl").onclick=$("prl-map").onclick=prClk;
 $("pr-sw").onclick=e=>{const b=e.target.closest("button");if(!b)return;prMode=b.dataset.m;try{localStorage.setItem("maccagno-prm",prMode)}catch(_){}rcEd=rcPr=null;prodList(true)};
 $("ip").addEventListener("click",e=>{const b=e.target.closest("[data-gogrp]");if(!b)return;const n=b.dataset.gogrp;colOpen.add("g:"+n);colEmpty=false;prMode="mac";try{localStorage.setItem("maccagno-prm","mac")}catch(_){}go("prod");setTimeout(()=>{const d=[...document.querySelectorAll("#prl details.mc")].find(x=>x.dataset.key==="g:"+n);if(d)d.scrollIntoView({block:"start"})},80)});
+onMac("change",e=>{const t=e.target;if(t.dataset.asg==null||!t.value)return;const x=it[+t.dataset.asg],o=crops().find(c=>c.id===t.value);if(!x||x.t!=="pe"||!o)return;const h=+x.h||0,pn=x.n||"";
+if(h||(x.a&&!(+x.f||+x.s||+x.c)))it.push({t:"log",cid:o.id,cn:cname(o),d:x.d,h,tp:"Lavoro",pn,lk:x.lk||"",a:x.a||"",n:"",nx:"",v:"all",p:[]});
+if(+x.f||+x.s)it.push({t:"hv",id:uid(),cid:o.id,d:x.d,f:x.f||"",s:x.s||"",u:x.u||"kg",n:h?"":(x.a||""),pn,lk:x.lk||""});
+if(+x.c)(o.co=o.co||[]).push({n:x.a||"Costo",v:"",e:+x.c,pn,d:x.d});
+if(+x.r){x.h=x.f=x.s=x.c="";x.a=""}else it.splice(it.indexOf(x),1);save()});
