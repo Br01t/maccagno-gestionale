@@ -6,7 +6,7 @@ await ev(()=>{const c=cen(P["1241"].p),sq=(x,y)=>[[c[0]+x,c[1]+y],[c[0]+x+5,c[1]
 it=it.filter(x=>x.t!=="crop");it.push({t:"crop",id:"cZ",k:"Zafferano",l:"Zaff",p:sq(0,7),v:"1241",y:String(YEAR()),pl:[],tr:[],ck:[]});setSeason(String(YEAR()));save()});
 await ev(()=>setMode("gest","sp"));await p.waitForTimeout(200);
 const s0=await ev(()=>({l:slLists().length,i:slItems("seed-sl-2027").length,seed:cfg.x.seedSl}));
-chk('lista di partenza creata',s0.l===1&&s0.i>=60&&s0.seed===4,s0);
+chk('lista di partenza creata',s0.l===1&&s0.i>=60&&s0.seed===5,s0);
 await p.reload();await p.waitForTimeout(500);
 chk('seed non duplicato dopo ricarica',await ev(()=>slLists().length===1&&slItems("seed-sl-2027").length>=60),0);
 // spunta bulbi (coltura zafferano assegnata) → costo sulla coltura
@@ -15,7 +15,7 @@ const id=await ev(()=>it.find(x=>x.t==="si"&&x.n.startsWith("Bulbi")).id);
 await ev(i=>{it.find(x=>x.id===i).cid="cZ"},id);
 await p.check(`[data-ck="${id}"]`);await p.waitForTimeout(200);
 let c=await ev(()=>({co:it.find(x=>x.id==="cZ").co,T:macTot(String(YEAR()))}));
-chk('spunta → costo 441€ sulla coltura',c.co&&c.co.length===1&&c.co[0].e===441&&c.T.c===441,c);
+chk('spunta → costo 220,5€ sulla coltura',c.co&&c.co.length===1&&c.co[0].e===220.5&&c.T.c===220.5,c);
 await p.fill(`[data-ac="${id}"]`,'160');await p.dispatchEvent(`[data-ac="${id}"]`,'change');await p.waitForTimeout(200);
 c=await ev(()=>({co:it.find(x=>x.id==="cZ")&&it.find(x=>x.id==="cZ").co,n:it.filter(x=>x.t==="crop").length,ac:it.find(x=>x.t==="si"&&x.n.startsWith("Bulbi")).ac}));console.log(JSON.stringify(c));chk('importo pagato modificato → 160',c.co&&c.co.length===1&&c.co[0].e===160,c);
 await p.uncheck(`[data-ck="${id}"]`);await p.waitForTimeout(200);
@@ -43,6 +43,6 @@ const m=await ev(()=>{const T=macTot(String(YEAR()));return[T.h,T.w]});chk('cost
 await ev(()=>{setMode("gest","prod");prodList(true)});await p.waitForTimeout(200);
 chk('KPI margine con lavoro',(await p.textContent('#prl .kp'))?.includes('lavoro'),0);
 await ev(()=>{cfg.x.hr=0;cfgSave()});
-const mg=await ev(()=>{it=it.filter(x=>!(x.t==="sl"||x.t==="si"));it.push({t:"sl",id:"seed-sl-test",n:"vecchia",v:"all",p:[]},{t:"si",id:"seed-si-1",l:"seed-sl-test",n:"x",q:1,u:"pz",up:1,ck:false,v:"all",p:[]});cfg.x.seedSl=3;seedSpesa();return[slLists().map(x=>x.id),it.filter(x=>x.t==="si").length]});
+const mg=await ev(()=>{it=it.filter(x=>!(x.t==="sl"||x.t==="si"));it.push({t:"sl",id:"seed-sl-test",n:"vecchia",v:"all",p:[]},{t:"si",id:"seed-si-1",l:"seed-sl-test",n:"x",q:1,u:"pz",up:1,ck:false,v:"all",p:[]});cfg.x.seedSl=4;seedSpesa();return[slLists().map(x=>x.id),it.filter(x=>x.t==="si").length]});
 chk('migrazione: vecchia lista non toccata sostituita dalla nuova',mg[0].length===1&&mg[0][0]==="seed-sl-2027"&&mg[1]>=60,mg);
 console.log(R.join('\n'));console.log('errs',JSON.stringify(errs));await b.close()})();

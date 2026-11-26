@@ -3,8 +3,8 @@
 const SPCATS=["Semi e bulbi","Piante","Funghi","Materiali","Lavorazione e conservazione","Protezione","Attrezzi","Altro"];
 const SPUNITS=["pz","kg","g","m","m²","L","confezioni","sacchi","balle"];
 /* [categoria, nome, quantità, unità, prezzo unitario stimato €, nota, tipo di coltura] */
-const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 30 tronchi",note:"Parte L della Guida e Piano numerico (test 2027), con funghi ridotti a 100 plug per specie e senza attrezzi e materiale per le api che hai già: zafferano 1.050 bulbi, peperoncini, aglio, erbe e annuali, 30 tronchi con 600 plug (100 per specie) e 2 colonne di paglia, 3 nuclei di api. Prezzi di listino trovati a novembre 2026 per bulbi, plug, nuclei ed essiccatore. Controlla l'etichetta «prezzo da confermare» e chiedi preventivi per le quantità grandi.",items:[
-["Semi e bulbi", "Bulbi di zafferano, calibro 10+", 1050, "pz", 0.42, "1.000 da piantare in 2 bancali da 10 × 1 m (5 file, 100 bulbi per fila a 10 cm, 10–15 cm di profondità) + 50 in vaso di scorta. Pianta da luglio a settembre, soprattutto agosto (Regione Marche); al Nord entro fine settembre (Ingegnoli). Densità del piano 50/m²: nell'intervallo 10–60 indicato dalla Regione Marche. Prezzo di riferimento: 100 bulbi calibro 10–11 a 41,64 € + IVA (venditabulbizafferano.com, al momento esaurito); Floriana Bulbose 100 bulbi a 64,80 €. Per 1.050 bulbi chiedi un preventivo: gli sconti per quantità non sono pubblicati. Resa verificata: prova di 6 anni su corms >2,5 cm, 0,48 g/m² nel 1° anno, 1,05 g/m² nel 3°, picco al 4° anno.", "Zafferano"],
+const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 30 tronchi",note:"Parte L della Guida e Piano numerico (test 2027), con funghi ridotti a 100 plug per specie e senza attrezzi e materiale per le api che hai già: zafferano 525 bulbi (1 bancale), peperoncini, aglio, erbe e annuali, 30 tronchi con 600 plug (100 per specie) e 2 colonne di paglia, 3 nuclei di api. Prezzi di listino trovati a novembre 2026 per bulbi, plug, nuclei ed essiccatore. Controlla l'etichetta «prezzo da confermare» e chiedi preventivi per le quantità grandi.",items:[
+["Semi e bulbi", "Bulbi di zafferano, calibro 10+", 525, "pz", 0.42, "500 da piantare in 1 bancale da 10 × 1 m (5 file, 100 bulbi per fila a 10 cm, 10–15 cm di profondità) + 25 in vaso di scorta. Resa attesa circa metà del piano (2–3 g di stimmi). L'altro bancale si può aggiungere in seguito con i bulbi che si moltiplicano. Pianta da luglio a settembre, soprattutto agosto (Regione Marche); al Nord entro fine settembre (Ingegnoli). Densità del piano 50/m²: nell'intervallo 10–60 indicato dalla Regione Marche. Prezzo di riferimento: 100 bulbi calibro 10–11 a 41,64 € + IVA (venditabulbizafferano.com, al momento esaurito); Floriana Bulbose 100 bulbi a 64,80 €. Per 525 bulbi chiedi un preventivo: gli sconti per quantità non sono pubblicati. Resa verificata: prova di 6 anni su corms >2,5 cm, 0,48 g/m² nel 1° anno, 1,05 g/m² nel 3°, picco al 4° anno.", "Zafferano"],
 ["Semi e bulbi", "Semi peperoncini speciali: habanero, Carolina Reaper, Trinidad Scorpion", 3, "confezioni", 4.5, "24 semi in tutto (8 per varietà). Semina fine gennaio a 26–28 °C; in campo 4 piante per varietà.", "Peperoncini"],
 ["Semi e bulbi", "Semi peperoncino comune: cayenna, diavolicchio calabrese", 2, "confezioni", 4, "20 semi in tutto (10 per varietà); in campo 6 piante per varietà.", "Peperoncini"],
 ["Semi e bulbi", "Teste di aglio da seme", 14, "pz", 1.4, "Circa 8 spicchi l'una (112): ne pianti 100 a dicembre, 20 × 20 cm, 5–6 cm di profondità, punta in su, in 4 m².", "Aglio"],
@@ -49,18 +49,17 @@ const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 30 tronchi",note:"Parte L
 ["Materiali", "Tutori da 90 cm", 24, "pz", 0.6, "Uno per ogni pianta di peperoncino in campo.", "Peperoncini"],
 ["Materiali", "Telo pacciamante per 30 m²", 1, "pz", 25, "Pacciamatura dei peperoncini (12 m²) e delle aiuole.", ""],
 ["Materiali", "Paglia per pacciamare l'aglio", 1, "balle", 8, "Una balla piccola.", "Aglio"],
-["Materiali", "Rete antitopo per 20 m²", 20, "m²", 1.5, "Da stendere sui bancali dello zafferano.", "Zafferano"],
+["Materiali", "Rete antitopo per 10 m²", 10, "m²", 1.5, "Da stendere sul bancale dello zafferano (10 m²).", "Zafferano"],
 ["Materiali", "Irrigazione a goccia per 100 m²", 1, "pz", 300, "Già predisposta su tutto il recinto, anche per il raddoppio.", ""],
 ["Protezione", "Recinzione elettrica per il recinto di 100 m²", 1, "pz", 450, "Circa 40 m di perimetro, 3–4 fili (160 m di filo) e 12 pali. Misura il recinto prima di comprare.", ""],
 ["Lavorazione e conservazione", "Essiccatore a 6–10 ripiani con termostato", 1, "pz", 253, "Riferimento: Biosec Domus B10 (Tauro), 10 ripiani, 480 W, 253 € scontato da 275 € (macrolibrarsi.it).", ""],
 ["Lavorazione e conservazione", "Macinino per spezie", 1, "pz", 25, "", ""],
 ["Lavorazione e conservazione", "Bilancia al decimo di grammo", 1, "pz", 20, "", ""],
-["Lavorazione e conservazione", "Vasetti da 50–100 ml", 150, "pz", 0.6, "", ""],
-["Lavorazione e conservazione", "Barattoli da 250 g per il miele", 60, "pz", 0.8, "", ""],
+["Lavorazione e conservazione", "Vasetti da 50–100 ml", 60, "pz", 0.6, "", ""],
+["Lavorazione e conservazione", "Barattoli da 250 g per il miele", 24, "pz", 0.8, "", ""],
 ["Lavorazione e conservazione", "Boccette per lo zafferano", 10, "pz", 1, "", "Zafferano"],
-["Lavorazione e conservazione", "Sacchetti barriera", 100, "pz", 0.25, "", ""],
-["Lavorazione e conservazione", "Etichette per i prodotti", 300, "pz", 0.05, "", ""],
-["Lavorazione e conservazione", "Scatole e imballaggi per la vendita", 1, "pz", 62, "", ""],
+["Lavorazione e conservazione", "Sacchetti barriera", 30, "pz", 0.25, "", ""],
+["Lavorazione e conservazione", "Etichette per i prodotti", 100, "pz", 0.05, "", ""],
 ["Altro", "Nuclei di api per 3 arnie", 3, "pz", 115, "Hai già arnie e materiale: compri solo le api. Riferimento: 115 € + IVA a nucleo su 5 telaini con regina dell'anno precedente, consegna aprile, cassa a perdere 5 € (apicolturalaterza.it, Puglia: chiedi anche a un apicoltore lombardo per evitare la spedizione).", "Api e miele"],
 ["Altro", "Notifica ATS, analisi e assicurazione", 1, "pz", 120, "", ""],
 ["Altro", "Spedizioni (stima del primo anno)", 1, "pz", 100, "Costo di vendita, non un acquisto di avvio.", ""],
