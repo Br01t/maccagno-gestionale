@@ -37,7 +37,7 @@ let GSA=[];
 let colOpen=new Set(),colEmpty=false,colDirty=false,colMsg="";
 var mgO=null,mgDirty=false;
 const cfg={tilt:0,add:{crop:{},zone:{},line:{},pt:{}},hide:{crop:[],zone:[],line:[],pt:[]},x:{grp:{},gl:null,kr:{},sp:{},sph:[]}},TAB={crop:CROPS,zone:ZONES,line:LINES,pt:PTS};
-const APPV="v52",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
+const APPV="v53",SS={mode:"local",who:"",lastUp:0,lastDown:0,err:"",size:0,note:""};
 const DEV=uid();
 let adopting=false,liveOK=true,ref=null,pushing=false,tm=null,remRev=0,crev=+(lsg(KEY+"-rev")||0),dirty=!!lsg(KEY+"-dirty");
 let crev0=0;
