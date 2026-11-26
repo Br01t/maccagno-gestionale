@@ -14,3 +14,4 @@
 .hrr{align-items:center;gap:8px;margin:6px 0}.hrr input{width:6em}
 #sp-v [hidden]{display:none!important}
 #sp-v .kp.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}#sp-v .kp.k3 b{font-size:16px}#sp-v .kp.k3 span{font-size:11px}
+#sp-v .stm{font-style:normal;font-size:11px;color:#b26a00;margin-top:2px}

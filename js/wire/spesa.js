@@ -1,10 +1,10 @@
 /* wire/spesa.js — Eventi della lista della spesa, delle spese generali e del costo orario. */
 const spSave=()=>{save();spForce=true;spesa();if(!$("p-oggi").hidden)oggi()};
-const spFields=f=>{const v=k=>{const e=f.querySelector('[data-f="'+k+'"]');return e?e.value:""};return{n:v("n").trim(),q:+v("q")||0,u:v("u").trim()||"pz",up:v("up")===""?"":+v("up")||0,cat:v("cat")||"Altro",cid:v("cid"),note:v("note").trim()}};
+const spFields=f=>{const v=k=>{const e=f.querySelector('[data-f="'+k+'"]');return e?e.value:""};return{n:v("n").trim(),q:+v("q")||0,u:v("u").trim()||"pz",up:v("up")===""?"":+v("up")||0,cat:v("cat")||"Altro",cid:v("cid"),note:v("note").trim(),pc:!!(f.querySelector('[data-f="pc"]')||{}).checked}};
 $("sp-v").addEventListener("change",e=>{const t=e.target;
 if(t.id==="sp-l"){spL=t.value;spEd=null;spForce=true;spesa();return}
 if(t.dataset.ck){const x=it.find(o=>o.id===t.dataset.ck);if(!x)return;x.ck=t.checked;x.dt=t.checked?today():"";if(!t.checked)x.ac="";slSync(x);spSave();return}
-if(t.dataset.ac){const x=it.find(o=>o.id===t.dataset.ac);if(!x)return;x.ac=t.value===""?"":Math.max(0,+t.value||0);slSync(x);spSave()}});
+if(t.dataset.ac){const x=it.find(o=>o.id===t.dataset.ac);if(!x)return;x.ac=t.value===""?"":Math.max(0,+t.value||0);if(t.value!=="")x.pc=true;slSync(x);spSave()}});
 $("sp-v").addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const D=b.dataset,L=it.find(o=>o.id===spL);
 if(b.id==="sp-nl"){$("sp-nlf").hidden=false;$("sp-nn").focus();return}
 if(b.id==="sp-nno"){$("sp-nlf").hidden=true;return}
