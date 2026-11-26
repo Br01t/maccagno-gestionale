@@ -13,6 +13,7 @@ if(f)L.push("Fresco: "+fmtkg(f)+" ("+nf(f/a,2)+" kg/m²)");
 if(d)L.push("Essiccato: "+fmtkg(d)+(f?" · resa di essiccazione "+nf(d/f*100,0)+"%":""));
 if(h)L.push(nf(h,1)+" h di lavoro"+(a?" · "+nf(h*60/a,1)+" min/m²":"")+(f?" · "+fmtkg(f/h)+"/h di fresco":"")+(d?" · "+fmtkg(d/h)+"/h di essiccato":""));
 if(e.co||e.ce)L.push("Costi: "+(e.co?"previsti "+eur(e.co):"")+(e.co&&e.ce?" · ":"")+(e.ce?"effettivi "+eur(e.ce):""));
+if(h&&+((cfg.x||{}).hr)&&(e.ce||e.inc))L.push("Dopo il lavoro ("+eur(+cfg.x.hr)+"/h): "+eur(e.inc-e.ce-h*(+cfg.x.hr)));
 if(e.pot)L.push("Ricavo previsto: "+eur(e.pot)+" · margine "+eur(e.pot-e.co)+(a?" · "+nf((e.pot-e.co)/a,2)+" €/m²":"")+(h?" · "+nf((e.pot-e.co)/h,1)+" €/h":""));
 {const IL=logsOf(o).filter(x=>x.tp&&x.tp!=="Lavoro").sort((a,b)=>a.d<b.d?1:-1),td=today(),nx=logsOf(o).filter(x=>x.nx&&x.nx>=td).sort((a,b)=>a.nx<b.nx?-1:1);if(IL[0])L.push("Ultimo intervento: "+IL[0].tp+" il "+fd(IL[0].d));if(nx[0])L.push("Prossimo promemoria: "+(nx[0].tp||"Intervento")+" il "+fd(nx[0].nx))}if(e.inc)L.push("Incassato: "+eur(e.inc)+" ("+e.n+" vendite) · margine reale "+eur(e.inc-(e.ce||e.co)));
 return L}

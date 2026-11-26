@@ -1,14 +1,15 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><script>try{var _t=localStorage.getItem("maccagno-theme");if(_t==="light"||_t==="dark")document.documentElement.dataset.theme=_t}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="referrer" content="no-referrer"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"><title>Mappa dei terreni di Maccagno</title><meta name="theme-color" content="#2f6f4f"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mappa Maccagno"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="icons/icon.svg"><link rel="icon" type="image/png" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="stylesheet" href="css/01-base.css?v=48">
-<link rel="stylesheet" href="css/02-tema.css?v=48">
-<link rel="stylesheet" href="css/03-componenti.css?v=48">
-<link rel="stylesheet" href="css/04-barra-laterale.css?v=48">
-<link rel="stylesheet" href="css/05-vivaio.css?v=48">
-<link rel="stylesheet" href="css/06-gestione-tipi.css?v=48">
-<link rel="stylesheet" href="css/07-gestione-mobile.css?v=48">
-<link rel="stylesheet" href="css/08-moduli.css?v=48">
-<link rel="stylesheet" href="css/09-strumenti-mappa.css?v=48">
-<link rel="stylesheet" href="css/10-rifiniture.css?v=48">
+<link rel="stylesheet" href="css/01-base.css?v=49">
+<link rel="stylesheet" href="css/02-tema.css?v=49">
+<link rel="stylesheet" href="css/03-componenti.css?v=49">
+<link rel="stylesheet" href="css/04-barra-laterale.css?v=49">
+<link rel="stylesheet" href="css/05-vivaio.css?v=49">
+<link rel="stylesheet" href="css/06-gestione-tipi.css?v=49">
+<link rel="stylesheet" href="css/07-gestione-mobile.css?v=49">
+<link rel="stylesheet" href="css/08-moduli.css?v=49">
+<link rel="stylesheet" href="css/09-strumenti-mappa.css?v=49">
+<link rel="stylesheet" href="css/10-rifiniture.css?v=49">
+<link rel="stylesheet" href="css/11-spesa.css?v=49">
 </head>
 <body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v18</small></div><main class="app">
 <header><h1><button id="home" type="button" title="Torna alla mappa" aria-label="Maccagno: torna alla mappa"><img src="icons/icon.svg" alt="" width="26" height="26">Maccagno</button></h1><div id="md-sw" class="seg" role="group" aria-label="Area di lavoro"><button type="button" data-m="map" class="on" aria-pressed="true">Mappa</button><button type="button" data-m="gest" aria-pressed="false">Gestione</button></div><div id="hb"><button id="h-q" type="button" aria-label="Azione rapida"></button><button id="h-s" type="button" aria-label="Cerca (Ctrl+K)" title="Cerca (Ctrl+K)"></button><button id="h-t" type="button"></button></div><div id="tabs" class="bar"></div></header>
@@ -28,6 +29,7 @@
 <div class="pane" id="p-aree" hidden><div id="prl-map"></div></div>
 <div class="pane" id="p-ag" hidden><div class="seg" id="ag-sw"><button data-m="ev">Scadenze</button><button data-m="st">Stagione</button></div><div class="row" style="justify-content:space-between;align-items:center"><button id="a-p">◀</button><b id="a-t"></b><button id="a-n">▶</button></div><div id="a-l"></div><div id="a-s" hidden></div><button id="a-i">Scarica calendario (.ics)</button></div>
 <div class="pane" id="p-di" hidden><details class="newf" id="d-det" open><summary>+ Registra lavoro</summary><div class="f" style="margin-top:0"><select id="d-c" aria-label="Coltura"></select><div class="row"><input type="date" id="d-d" style="width:150px"><input type="number" id="d-h" step="0.25" min="0" placeholder="ore" style="width:64px"><input type="text" id="d-a" list="act" placeholder="Attività" style="flex:1;min-width:80px"></div><div class="row"><select id="d-t" aria-label="Tipo di lavoro"><option>Lavoro</option><option>Potatura</option><option>Concimazione</option><option>Trattamento</option><option>Irrigazione</option><option>Semina/trapianto</option><option>Altro</option></select><select id="d-p" hidden style="flex:1;min-width:0"></select><select id="d-lk" hidden style="flex:1;min-width:0" aria-label="Lotto"></select></div><div class="row"><label class="mut" style="display:flex;gap:6px;align-items:center">Promemoria <input type="date" id="d-nx" style="width:128px"></label></div><input type="text" id="d-n" placeholder="Note (facoltative)"><button id="d-b">Aggiungi al diario</button></div></details><div id="d-l"></div></div>
+<div class="pane" id="p-sp" hidden><div id="sp-v"></div></div>
 <div class="pane" id="p-st" hidden><details class="newf" id="l-det"><summary>+ Nuovo lotto</summary><div class="f" id="l-form" style="margin-top:0"><span class="mut">Prodotto finito da vendere: raccolto, essiccato o trasformato.</span><select id="l-c"></select><select id="l-pr" aria-label="Prodotto del lotto"></select><input type="text" id="l-p" list="prods" placeholder="Nome in etichetta (facoltativo, es. shiitake secchi)"><div class="row"><input type="number" id="l-q" step="any" min="0" placeholder="Quantità" style="flex:1;min-width:70px"><select id="l-u" style="width:auto"><option>kg</option><option>g</option><option>vasetti</option><option>pezzi</option></select><select id="l-f" style="width:auto"><option>fresco</option><option selected>essiccato</option><option>trasformato</option></select></div><div class="row"><label>Prodotto il <input type="date" id="l-d" style="width:128px"></label><label>Scadenza <input type="date" id="l-x" style="width:128px"></label></div><input type="text" id="l-k" placeholder="Codice lotto (se vuoto: automatico)"><button id="l-b">Registra lotto</button></div></details><div id="l-l"></div></div>
 
 
@@ -96,71 +98,74 @@
 </div></main><div id="pa"></div>
 <script src="firebase-config.js"></script>
 <script>if(window.FIREBASE_CONFIG&&FIREBASE_CONFIG.projectId)document.documentElement.classList.add("locked")</script>
-<script src="js/lib/qrcode.js?v=48"></script>
-<script src="js/core/dom.js?v=48"></script>
-<script src="js/core/util.js?v=48"></script>
-<script src="js/core/model.js?v=48"></script>
-<script src="js/core/store.js?v=48"></script>
-<script src="js/core/snapshots.js?v=48"></script>
-<script src="js/core/sync.js?v=48"></script>
-<script src="js/core/pwa.js?v=48"></script>
-<script src="js/ui/modal.js?v=48"></script>
-<script src="js/ui/components.js?v=48"></script>
-<script src="js/ui/nav.js?v=48"></script>
-<script src="js/ui/theme.js?v=48"></script>
-<script src="js/map/geometry.js?v=48"></script>
-<script src="js/map/viewport.js?v=48"></script>
-<script src="js/map/render.js?v=48"></script>
-<script src="js/map/tools.js?v=48"></script>
-<script src="js/features/oggi.js?v=48"></script>
-<script src="js/features/aree.js?v=48"></script>
-<script src="js/features/rotazione.js?v=48"></script>
-<script src="js/features/agenda.js?v=48"></script>
-<script src="js/features/diario.js?v=48"></script>
-<script src="js/features/vivaio.js?v=48"></script>
-<script src="js/features/gestione-tipi.js?v=48"></script>
-<script src="js/features/previsioni.js?v=48"></script>
-<script src="js/features/magazzino.js?v=48"></script>
-<script src="js/features/ricette.js?v=48"></script>
-<script src="js/features/etichette.js?v=48"></script>
-<script src="js/features/riepilogo.js?v=48"></script>
-<script src="js/features/ricerca.js?v=48"></script>
-<script src="js/features/azioni-rapide.js?v=48"></script>
-<script src="js/features/produzione.js?v=48"></script>
-<script src="js/features/dati.js?v=48"></script>
-<script src="js/data/config.js?v=48"></script>
-<script src="js/data/species.js?v=48"></script>
-<script src="js/data/guide.js?v=48"></script>
-<script src="js/data/icons.js?v=48"></script>
-<script src="js/data/vivaio.js?v=48"></script>
-<script src="js/data/gruppi.js?v=48"></script>
-<script src="js/data/calendario.js?v=48"></script>
-<script src="js/data/consociazioni.js?v=48"></script>
-<script src="js/data/ricette.js?v=48"></script>
-<script src="js/data/etichette.js?v=48"></script>
-<script src="js/data/azioni.js?v=48"></script>
-<script src="js/data/macrogruppi.js?v=48"></script>
-<script src="js/state.js?v=48"></script>
-<script src="js/wire/a11y.js?v=48"></script>
-<script src="js/wire/errors.js?v=48"></script>
-<script src="js/wire/nav.js?v=48"></script>
-<script src="js/wire/theme.js?v=48"></script>
-<script src="js/wire/map.js?v=48"></script>
-<script src="js/wire/snapshots.js?v=48"></script>
-<script src="js/wire/oggi.js?v=48"></script>
-<script src="js/wire/agenda.js?v=48"></script>
-<script src="js/wire/diario.js?v=48"></script>
-<script src="js/wire/magazzino.js?v=48"></script>
-<script src="js/wire/ricette.js?v=48"></script>
-<script src="js/wire/etichette.js?v=48"></script>
-<script src="js/wire/riepilogo.js?v=48"></script>
-<script src="js/wire/ricerca.js?v=48"></script>
-<script src="js/wire/azioni-rapide.js?v=48"></script>
-<script src="js/wire/produzione.js?v=48"></script>
-<script src="js/wire/tipi.js?v=48"></script>
-<script src="js/wire/dati.js?v=48"></script>
-<script src="js/wire/sync.js?v=48"></script>
-<script src="js/wire/aree.js?v=48"></script>
-<script src="js/wire/pwa.js?v=48"></script>
-<script src="js/boot.js?v=48"></script>
-<script type="module" src="firebase-sync.js?v=48"></script></body></html>
+<script src="js/lib/qrcode.js?v=49"></script>
+<script src="js/core/dom.js?v=49"></script>
+<script src="js/core/util.js?v=49"></script>
+<script src="js/core/model.js?v=49"></script>
+<script src="js/core/store.js?v=49"></script>
+<script src="js/core/snapshots.js?v=49"></script>
+<script src="js/core/sync.js?v=49"></script>
+<script src="js/core/pwa.js?v=49"></script>
+<script src="js/ui/modal.js?v=49"></script>
+<script src="js/ui/components.js?v=49"></script>
+<script src="js/ui/nav.js?v=49"></script>
+<script src="js/ui/theme.js?v=49"></script>
+<script src="js/map/geometry.js?v=49"></script>
+<script src="js/map/viewport.js?v=49"></script>
+<script src="js/map/render.js?v=49"></script>
+<script src="js/map/tools.js?v=49"></script>
+<script src="js/features/oggi.js?v=49"></script>
+<script src="js/features/aree.js?v=49"></script>
+<script src="js/features/rotazione.js?v=49"></script>
+<script src="js/features/agenda.js?v=49"></script>
+<script src="js/features/diario.js?v=49"></script>
+<script src="js/features/vivaio.js?v=49"></script>
+<script src="js/features/gestione-tipi.js?v=49"></script>
+<script src="js/features/previsioni.js?v=49"></script>
+<script src="js/features/magazzino.js?v=49"></script>
+<script src="js/features/spesa.js?v=49"></script>
+<script src="js/features/ricette.js?v=49"></script>
+<script src="js/features/etichette.js?v=49"></script>
+<script src="js/features/riepilogo.js?v=49"></script>
+<script src="js/features/ricerca.js?v=49"></script>
+<script src="js/features/azioni-rapide.js?v=49"></script>
+<script src="js/features/produzione.js?v=49"></script>
+<script src="js/features/dati.js?v=49"></script>
+<script src="js/data/config.js?v=49"></script>
+<script src="js/data/species.js?v=49"></script>
+<script src="js/data/guide.js?v=49"></script>
+<script src="js/data/icons.js?v=49"></script>
+<script src="js/data/spesa.js?v=49"></script>
+<script src="js/data/vivaio.js?v=49"></script>
+<script src="js/data/gruppi.js?v=49"></script>
+<script src="js/data/calendario.js?v=49"></script>
+<script src="js/data/consociazioni.js?v=49"></script>
+<script src="js/data/ricette.js?v=49"></script>
+<script src="js/data/etichette.js?v=49"></script>
+<script src="js/data/azioni.js?v=49"></script>
+<script src="js/data/macrogruppi.js?v=49"></script>
+<script src="js/state.js?v=49"></script>
+<script src="js/wire/a11y.js?v=49"></script>
+<script src="js/wire/errors.js?v=49"></script>
+<script src="js/wire/nav.js?v=49"></script>
+<script src="js/wire/theme.js?v=49"></script>
+<script src="js/wire/map.js?v=49"></script>
+<script src="js/wire/snapshots.js?v=49"></script>
+<script src="js/wire/oggi.js?v=49"></script>
+<script src="js/wire/agenda.js?v=49"></script>
+<script src="js/wire/diario.js?v=49"></script>
+<script src="js/wire/magazzino.js?v=49"></script>
+<script src="js/wire/spesa.js?v=49"></script>
+<script src="js/wire/ricette.js?v=49"></script>
+<script src="js/wire/etichette.js?v=49"></script>
+<script src="js/wire/riepilogo.js?v=49"></script>
+<script src="js/wire/ricerca.js?v=49"></script>
+<script src="js/wire/azioni-rapide.js?v=49"></script>
+<script src="js/wire/produzione.js?v=49"></script>
+<script src="js/wire/tipi.js?v=49"></script>
+<script src="js/wire/dati.js?v=49"></script>
+<script src="js/wire/sync.js?v=49"></script>
+<script src="js/wire/aree.js?v=49"></script>
+<script src="js/wire/pwa.js?v=49"></script>
+<script src="js/boot.js?v=49"></script>
+<script type="module" src="firebase-sync.js?v=49"></script></body></html>

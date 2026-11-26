@@ -1,9 +1,9 @@
 /* ui/nav.js — Navigazione: modalità Mappa/Gestione, schede, pannelli laterali, ritorno alla home. */
 function sdf_mark(){const x=$("sd").dataset.x;document.querySelectorAll("#sdf button").forEach(b=>b.classList.toggle("on",b.dataset.x===x));document.querySelectorAll("#sdx .xp[data-x=\""+x+"\"] details.sec").forEach(d=>d.open=true)}
 function side(s){if(MODEOF[s]!==mode){setMode(MODEOF[s],s);return}LASTP[mode]=s;$("sd").dataset.p=s;$("sd").dataset.x="";for(const k of PANES){$("p-"+k).hidden=k!==s;{const tb=document.querySelector('#st-tabs [data-s="'+k+'"]');if(tb)tb.classList.toggle("on",k===s)}}document.querySelector(".body").dataset.p=s;const sc=$("sdc");if(sc)sc.scrollTop=0;
-const R={aree:[mapList,"prl-map"],oggi:[oggi,"p-oggi"],prod:[prodList,"prl"],ag:[agenda,"a-l"],di:[diario,"p-di"],st:[magazzino,"p-st"]}[s];if(R)safeR(R[0],$(R[1]),s)}
+const R={aree:[mapList,"prl-map"],oggi:[oggi,"p-oggi"],prod:[prodList,"prl"],ag:[agenda,"a-l"],di:[diario,"p-di"],st:[magazzino,"p-st"],sp:[spesa,"sp-v"]}[s];if(R)safeR(R[0],$(R[1]),s)}
 function safeR(fn,el,s){try{fn()}catch(e){try{console.error(e)}catch(_){}if(el){const d=document.createElement("div");d.className="emp";d.setAttribute("role","alert");d.innerHTML="Questa sezione non è riuscita a caricarsi: "+E(String(e&&e.message||e))+'. <button type="button" data-retry="'+s+'">Riprova</button>';if(s==="di"||s==="st"||s==="oggi")el.prepend(d);else{el.innerHTML="";el.appendChild(d)}}}}
-function refresh(){if(!$("p-oggi").hidden)oggi();if(!$("p-ag").hidden)agenda();if(!$("p-di").hidden)diario();if(!$("p-st").hidden)magazzino()}
+function refresh(){if(!$("p-oggi").hidden)oggi();if(!$("p-ag").hidden)agenda();if(!$("p-di").hidden)diario();if(!$("p-st").hidden)magazzino();if(!$("p-sp").hidden)spesa()}
 const sf=fn=>{try{return fn()||""}catch(e){try{console.error(e)}catch(_){}return""}};
 function ui(){$("fin").hidden=!(cur.length>0&&["crop","zone","line"].includes($("tool").value));$("un").hidden=!(cur.length>0||added>0)}
 const tabsBuild=()=>{$("st-tabs").innerHTML=MTABS[mode].map(k=>`<button data-s="${k}">${ico(k)}<span>${TNM[k]}</span></button>`).join("")};

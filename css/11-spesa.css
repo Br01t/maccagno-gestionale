@@ -1,0 +1,16 @@
+/* 11-spesa.css — Lista della spesa e spese generali. */
+#sp-v .spbar{gap:8px;margin-bottom:8px}#sp-v .spbar select{flex:1;min-width:0}
+#sp-v .sp-h{margin:14px 0 4px;display:flex;justify-content:space-between;font-size:13px;color:var(--mut,#667)}
+#sp-v .si{position:relative;display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px;padding:8px 0;border-bottom:1px solid rgba(128,128,128,.2)}
+#sp-v .sck{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0;cursor:pointer}
+#sp-v .sck input{width:22px;height:22px;flex:none;margin-top:1px}
+#sp-v .sn{display:flex;flex-direction:column;min-width:0}#sp-v .sn small{color:var(--mut,#667);overflow-wrap:anywhere}
+#sp-v .si.ok .sn b{text-decoration:line-through;opacity:.65}
+#sp-v .sib{display:flex;gap:4px}#sp-v .sib button{min-width:36px;min-height:36px}
+#sp-v .sipay{flex-basis:100%;padding-left:32px;display:flex;flex-direction:column;gap:2px}
+#sp-v .sipay input{width:7em}
+#sp-v .spf{flex-basis:100%}
+#sp-v .ev2{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0}
+.hrr{align-items:center;gap:8px;margin:6px 0}.hrr input{width:6em}
+#sp-v [hidden]{display:none!important}
+#sp-v .kp.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}#sp-v .kp.k3 b{font-size:16px}#sp-v .kp.k3 span{font-size:11px}
