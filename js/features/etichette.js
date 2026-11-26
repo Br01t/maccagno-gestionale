@@ -1,0 +1,25 @@
+/* features/etichette.js — Etichette con QR e stampa. */
+function qrSvg(t){try{const q=qrcode(0,"M");q.addData(t);q.make();return q.createSvgTag({scalable:true,margin:0})}catch(_){return""}}
+function lbList(k){
+if(k==="lot")return it.filter(x=>x.t==="lot").sort((a,b)=>a.d<b.d?1:-1).map(l=>({o:l,lab:(l.k||"")+" · "+(l.np||""),code:l.k||"LOT",open:()=>{go("st")}}));
+if(k==="nv")return nvs().map(x=>({o:x,lab:x.sp+" ×"+x.q+" · "+x.st,code:x.lc||("VIV-"+sid(x)),open:()=>openViv()}));
+if(k==="crop")return crops().map(o=>({o,lab:cname(o)+" · "+seasonOf(o),code:"COL-"+sid(o),open:()=>goCrop(o,"data")}));
+if(k==="pl")return crops().flatMap(o=>(o.pl||[]).map((p,i)=>({o:p,c:o,lab:p.n+" ×"+(p.q||1)+" · "+cname(o),code:"PIA-"+(p.id?String(p.id).slice(-5).toUpperCase():sid(o)+i),open:()=>goCrop(o,"pl")})));
+if(k==="tr")return crops().flatMap(o=>(o.tr||[]).map(t=>({o:t,c:o,lab:t.c+" · "+t.sp+" · "+cname(o),code:"TRO-"+sid(o)+"-"+t.c,open:()=>goCrop(o,"tr")})));
+return it.filter(x=>x.t==="hv").sort((a,b)=>a.d<b.d?1:-1).map(h=>{const o=crops().find(c=>c.id===h.cid);return{o:h,c:o,lab:fd(h.d)+" · "+(o?cname(o):"?")+" · "+(h.f?fmtkg(kg(h.f,h.u)):"")+(h.s?" → "+fmtkg(kg(h.s,h.u)):""),code:"RAC-"+(h.d||"").replace(/-/g,"")+"-"+sid(o),open:()=>o&&goCrop(o,"data")}})}
+function lbModel(k,e){const o=e.o,c=e.c,m={code:e.code,lines:[],dates:[]};
+if(k==="lot"){m.t=o.np||"";m.lines.push(nf(+o.q||0,2)+" "+o.u+" · "+(o.f||""));const g=o.ing&&o.ing.length?"Ingredienti: "+o.ing.map(i=>i.n).join(", "):(o.cn&&o.cn!=="Mix"?"Origine: "+o.cn+", Maccagno":"");if(g)m.det=g+((o.or||[]).length?" · Lotto di coltivazione: "+o.or.join(", "):"");m.dates=[["Prod.",o.d],["Scad.",o.x]];m.shop={p:o.np||"",l:o.k||""}}
+else if(k==="nv"){m.t=o.sp;m.lines.push("Piantine ×"+o.q+" · "+o.st);m.det="Vivaio: "+(o.loc||"");m.dates=[["Semina",o.d0],["Trapianto",o.dt]]}
+else if(k==="crop"){m.t=cname(o);m.lines.push(o.k+" · stagione "+seasonOf(o));const rf=hvOf(o).reduce((s,x)=>s+kg(x.f,x.u),0);m.det=nf(ar(o.p),0)+" m²"+(o.v&&o.v!=="all"?" · part. "+o.v:"")+(rf?" · raccolto "+fmtkg(rf):"");m.dates=[["Semina",o.sd],["Raccolto",o.h1]]}
+else if(k==="pl"){m.t=o.n;m.lines.push(o.k+" · ×"+(o.q||1));const g=(o.r||[]).reduce((s,h)=>s+(+h.g||0),0);m.det="In "+cname(c)+(g?" · resa "+gfmt(g):"")}
+else if(k==="tr"){m.t="Tronco "+o.c+" · "+o.sp;m.lines.push("Legno: "+(o.w||"—"));m.det=cname(c);m.dates=[["Inoculo",o.d]]}
+else{m.t="Raccolto · "+(c?cname(c):"");m.lines.push((o.f?"Fresco "+fmtkg(kg(o.f,o.u)):"")+(o.s?(o.f?" · ":"")+"lavorato "+fmtkg(kg(o.s,o.u)):""));if(o.n)m.det=o.n;m.dates=[["Raccolto",o.d]]}
+return m}
+function lbQr(m,o){if(o.qr==="none")return null;if(o.qr==="shop"&&m.shop&&shopU()){const u=shopU(),p=encodeURIComponent(m.shop.p),l=encodeURIComponent(m.shop.l);return/\{(prodotto|lotto)\}/.test(u)?u.replace(/\{prodotto\}/g,p).replace(/\{lotto\}/g,l):u+(u.includes("?")?"&":"?")+"prodotto="+p+"&lotto="+l}return location.href.split("#")[0]+"#find="+encodeURIComponent(m.code)}
+function lbHtml(m,o){const [w,h]=o.s.split("x").map(Number),qs=h<=30?15:h>=70?32:22,fs=h<=30?7:h>=70?12:9,qt=lbQr(m,o),q=qt?`<div class="lq" style="width:${qs}mm;height:${qs}mm">${qrSvg(qt)}</div>`:"";return`<div class="lbl" style="width:${w}mm;height:${h}mm;font-size:${fs}px"><div class="lm"><b class="lt1">${E(m.t)}</b>${m.lines.filter(Boolean).map(l=>`<div>${E(l)}</div>`).join("")}${o.d&&m.det?`<div>${E(m.det)}</div>`:""}<div class="lt2"><span>${E(m.code)}</span>${m.dates.filter(d=>d[1]).map(d=>`<span>${d[0]} ${fl(d[1])}</span>`).join("")}</div>${o.t?`<div class="lt3">${E(o.t)}</div>`:""}</div>${q}<div class="lt4">Maccagno · Lago Maggiore</div></div>`}
+function lbOpts(){return{s:$("lb-s").value,d:$("lb-d").checked,t:$("lb-t").value.trim(),qr:$("lb-q").value}}
+function lbFill(sel){LB.L=lbList(LB.k);$("lb-i").innerHTML=LB.L.map((e,i)=>`<option value="${i}">${E(e.lab)}</option>`).join("")||"<option value=''>Nessun elemento</option>";if(sel!=null&&sel>=0)$("lb-i").value=sel;$("lb-n2").textContent=LB.L.length;lbRender()}
+function lbRender(){const o=lbOpts(),e=LB.L[+$("lb-i").value];$("lb-p").innerHTML=e?lbHtml(lbModel(LB.k,e),o):"<p class='mut'>Niente da etichettare in questa categoria.</p>";$("lb-qn").textContent=o.qr==="shop"&&LB.k==="lot"&&!shopU()?"Imposta qui sotto l’indirizzo del tuo sito per il QR clienti (per ora il QR apre l’app).":o.qr==="shop"&&LB.k!=="lot"?"Il QR clienti vale solo per i lotti prodotto: qui apre l’app.":o.qr==="app"?"Il QR apre questa app sul lotto/elemento (serve il tuo accesso).":""}
+function lbOpen(k,sel){LB.k=k||"lot";$("lb-k").value=LB.k;$("lb-q").value=LB.k==="lot"&&shopU()?"shop":"app";$("lb-u").value=(cfg.x&&cfg.x.shop)||"";$("fam").hidden=true;$("lb").hidden=false;lbFill(sel)}
+function printOut(html,rep){const b=$("lbp");b.className=rep?"rep":"";b.innerHTML=html;document.body.classList.add("print-lb");const done=()=>{document.body.classList.remove("print-lb");removeEventListener("afterprint",done)};addEventListener("afterprint",done);setTimeout(()=>print(),60)}
+const dlt=(a,b)=>b?(a>=b?"+":"")+nf((a-b)/b*100,0)+"%":"—";

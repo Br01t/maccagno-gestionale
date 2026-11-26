@@ -1,0 +1,7 @@
+/* css/08-moduli.css — Moduli comprimibili */
+/* v44 stile */
+.newf>summary{list-style:none;display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--ac);border-radius:10px;font-weight:600;color:var(--ac);cursor:pointer;background:transparent;margin-bottom:10px}
+.newf>summary::-webkit-details-marker{display:none}.newf[open]>summary{border-style:dashed;margin-bottom:8px}
+.pls .rgt{display:none}.rg{border:0!important;padding:4px 0!important;background:transparent!important}
+.pls>summary{font-weight:600;font-size:13.5px}
+.mcb{padding-top:6px}.mcb h5{margin:14px 0 6px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600}

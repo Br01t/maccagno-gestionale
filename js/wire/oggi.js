@@ -1,0 +1,4 @@
+/* wire/oggi.js — Collegamenti: scheda Oggi. */
+$("og").onchange=e=>{const i=e.target.dataset.a;if(i!=null){const x=OG[+i];ckSet(x.o,x.ck,e.target.checked);save()}};
+$("og").onclick=e=>{if(e.target.closest("[data-go]"))return;const sp=e.target.closest("[data-o]");if(sp){const x=OG[+sp.dataset.o];if(x.go){go(x.go);return}if(x.viv){openViv();return}if(x.o.t==="crop")goCrop(x.o,"data");else{sel="p:"+x.o.v;full=true;ptab="data";draw();panel()}return}const c=e.target.closest("[data-c]");if(c){const o=it[+c.dataset.c];if(o)goCrop(o,c.dataset.pt||"data")}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b){if(b.dataset.go==="viv"){if(!vivOn)openViv()}else if(b.dataset.go==="ags"){agMode="st";try{localStorage.setItem("maccagno-agm","st")}catch(_){}agM=new Date(new Date().getFullYear(),new Date().getMonth(),1);go("ag")}else go(b.dataset.go)}});

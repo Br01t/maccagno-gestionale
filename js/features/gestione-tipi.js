@@ -1,0 +1,60 @@
+/* features/gestione-tipi.js — Gestione di gruppi, tipi, specie, zone e punti personalizzati. */
+function kindAdd(c,n,val,g){cfg.add[c][n]=val;TAB[c][n]=val;cfg.hide[c]=cfg.hide[c].filter(x=>x!==n);if(c==="crop"&&g){grMat();cfg.x.grp[n]=g}spRebuild()}
+function kindRen(c,K,n,val,g){if(n===K){cfg.add[c][K]=val;TAB[c][K]=val;if(c==="crop"&&g){grMat();cfg.x.grp[K]=g}spRebuild();return}
+const g0=c==="crop"?(g||KG(K)):null;cfg.add[c][n]=val;TAB[c][n]=val;cfg.hide[c]=cfg.hide[c].filter(x=>x!==n);
+it.forEach(x=>{if(x.t===c&&x.k===K)x.k=n;if(c==="crop"){if(x.t==="crop")(x.pl||[]).forEach(p=>{if(p.k===K)p.k=n});if(x.t==="nv"&&x.k===K)x.k=n}});
+if(c==="crop"){grMat();cfg.x.grp[n]=g0;delete cfg.x.grp[K];Object.keys(cfg.x.kr).forEach(a=>{if(cfg.x.kr[a]===K)cfg.x.kr[a]=n});cfg.x.kr[K]=n;Object.values(cfg.x.sp).forEach(s=>{if(s.k===K)s.k=n})}
+delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K);spRebuild()}
+async function kindDel(c,K){const rest=visK(c).filter(n=>n!==K),used=it.filter(x=>(x.t===c||(c==="crop"&&x.t==="nv"))&&x.k===K).length;if(!rest.length)return"Serve almeno un tipo.";const fb=c==="crop"&&rest.includes("Altro")?"Altro":rest[0];
+const y=await askConfirm("Eliminare il tipo «"+K+"»?",used?used+" elementi che lo usano passeranno a «"+fb+"».":"",{ok:"Elimina",danger:1});if(!y)return null;
+it.forEach(x=>{if((x.t===c||(c==="crop"&&x.t==="nv"))&&x.k===K)x.k=fb;if(c==="crop"&&x.t==="crop")(x.pl||[]).forEach(p=>{if(p.k===K)p.k=fb})});
+delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K);if(c==="crop")Object.values(cfg.x.sp).forEach(s=>{if(s.k===K)s.k=fb});spRebuild();return""}
+function spRebuild(){if(typeof SPB==="undefined")return;const X=cfg.x;for(const k in SP)delete SP[k];for(const k in VW)delete VW[k];
+const kd=k=>{k=X.kr[k]||k;return k in CROPS&&!cfg.hide.crop.includes(k)?k:"Altro"};
+for(const n in SPB){if(X.sph.includes(n))continue;const o=X.sp[n]||{},b=SPB[n],rows=b[2].map(r=>r.slice());if(o.n!=null){const i=rows.findIndex(r=>r[0]==="Note");if(o.n){if(i>=0)rows[i]=["Note",o.n];else rows.push(["Note",o.n])}else if(i>=0)rows.splice(i,1)}
+SP[n]=[kd(o.k||b[0]),b[1],rows];const bw=VWB[n]||["",""],w=(o.ws!=null||o.wt!=null)?[o.ws!=null?o.ws:bw[0],o.wt!=null?o.wt:bw[1]]:VWB[n];if(w&&(w[0]||w[1]))VW[n]=w}
+for(const n in X.sp){if(n in SPB)continue;const o=X.sp[n],rows=(o.rows||[]).map(r=>r.slice());if(o.ws)rows.unshift(["Semina in vivaio",o.ws]);if(o.wt)rows.splice(o.ws?1:0,0,["Trapianto",o.wt]);if(o.n)rows.push(["Note",o.n]);SP[n]=[kd(o.k),o.sub||"",rows];if(o.ws||o.wt)VW[n]=[o.ws||"",o.wt||""]}}
+function spSet(n,p){cfg.x.sp[n]=Object.assign(cfg.x.sp[n]||{},p);spRebuild()}
+function spAdd(n,k,ws,wt,nt){cfg.x.sph=cfg.x.sph.filter(x=>x!==n);cfg.x.sp[n]={k,ws:ws||"",wt:wt||"",n:nt||""};spRebuild()}
+function spRen(o,n){const X=cfg.x,s=SP[o];if(!s)return;const d=Object.assign({},X.sp[o]||{});if(o in SPB){d.rows=s[2].map(r=>r.slice());d.sub=s[1];d.k=s[0];if(VW[o]){d.ws=VW[o][0];d.wt=VW[o][1]}delete d.n;if(!X.sph.includes(o))X.sph.push(o)}else delete X.sp[o];X.sp[n]=d;
+it.forEach(x=>{if(x.t==="nv"&&x.sp===o)x.sp=n;if(x.t==="crop")(x.pl||[]).forEach(p=>{if(p.n===o)p.n=n})});spRebuild()}
+function spDel(n){if(n in SPB){if(!cfg.x.sph.includes(n))cfg.x.sph.push(n)}else delete cfg.x.sp[n];spRebuild()}
+function openMg(c){mgT=MGT.some(x=>x[0]===c)?c:"crop";$("mgm").hidden=false;mgRender()}
+function closeMg(){$("mgm").hidden=true;if(vivOn)renderViv()}
+const mgMsg=t=>{const e=$("mg-m");if(e)e.textContent=t||""};
+function mgDone(){const kv=$("kind").value;fillKind();if([...$("kind").options].some(o=>o.value===kv))$("kind").value=kv;chips();mgRender()}
+function mgRender(){$("mg-tabs").innerHTML=MGT.map(([v,n])=>`<button data-t="${v}" class="${v===mgT?"on":""}">${n}</button>`).join("");const c=mgT,b=$("mg-b");let h="";
+const gsel=(s,a)=>`<select ${a}>${GL().map(g=>`<option${g===s?" selected":""}>${E(g)}</option>`).join("")}</select>`,hn=c in cfg.hide?cfg.hide[c].length:0;
+if(c==="crop"){GL().forEach(g=>{const ks=visK("crop").filter(n=>KG(n)===g);if(!ks.length)return;h+=`<h4>${E(g)}</h4>`+ks.map(n=>`<div class="mr" data-k="${E(n)}"><input type="color" data-c value="${hx6(TAB.crop[n])}" aria-label="Colore"><input type="text" data-n value="${E(n)}" aria-label="Nome">${gsel(KG(n),"data-g aria-label=\"Gruppo\"")}<button data-d title="Elimina" aria-label="Elimina">×</button></div>`).join("")});
+h+=`<h4>Nuovo tipo di coltura</h4><div class="mr"><input type="color" id="mn-c" value="#8a8a8a" aria-label="Colore"><input type="text" id="mn-n" placeholder="Nome (es. Lavanda)">${gsel(GL()[0],'id="mn-g"')}<button id="mn-a" class="pri">Aggiungi</button></div>`}
+else if(c==="grp"){const gl=GL();h+=`<p class="mut">I gruppi servono a ordinare i tipi di coltura nell’elenco. Un tipo sta in un solo gruppo; lo cambi dalla scheda Colture.</p>`+gl.map((g,i)=>{const n=visK("crop").filter(k=>KG(k)===g).length,fb=g===GFB;return`<div class="mr" data-g="${E(g)}">${fb?`<b style="flex:1">${E(g)}</b>`:`<input type="text" data-n value="${E(g)}" aria-label="Nome del gruppo">`}<span class="mut">${n} ${n===1?"tipo":"tipi"}</span><button data-up${i?"":" disabled"} aria-label="Su">▲</button><button data-dn${i<gl.length-1?"":" disabled"} aria-label="Giù">▼</button>${fb?"":`<button data-d title="Elimina" aria-label="Elimina">×</button>`}</div>`}).join("")+`<h4>Nuovo gruppo</h4><div class="mr"><input type="text" id="mn-n" placeholder="Nome del gruppo"><button id="mn-a" class="pri">Aggiungi</button></div>`}
+else if(c==="sp"){const ks=PLK();const row=n=>{const s=SP[n],w=VW[n]||["",""],nt=(s[2].find(r=>r[0]==="Note")||["",""])[1];return`<div class="mr sp" data-s="${E(n)}"><input type="text" data-n value="${E(n)}" aria-label="Nome"><select data-k aria-label="Tipo di coltura">${ks.map(k=>`<option${k===s[0]?" selected":""}>${E(k)}</option>`).join("")}</select><button data-d title="Elimina" aria-label="Elimina">×</button><input type="text" data-ws value="${E(w[0])}" placeholder="Semina in vivaio (es. marzo)"><input type="text" data-wt value="${E(w[1])}" placeholder="Trapianto (es. maggio)"><input type="text" data-nt value="${E(nt)}" placeholder="Note"></div>`};
+h+=`<p class="mut">Le specie compaiono nei suggerimenti delle piante e nel vivaio. Il tipo di coltura è la categoria a cui appartengono.</p><h4>Nuova specie</h4><div class="mr sp"><input type="text" id="mn-n" placeholder="Nome (es. Rucola)"><select id="mn-k">${ks.map(k=>`<option${k==="Erbe aromatiche"?" selected":""}>${E(k)}</option>`).join("")}</select><button id="mn-a" class="pri">Aggiungi</button><input type="text" id="mn-ws" placeholder="Semina in vivaio"><input type="text" id="mn-wt" placeholder="Trapianto"><input type="text" id="mn-nt" placeholder="Note"></div>`;
+ks.forEach(k=>{const a=Object.keys(SP).filter(n=>SP[n][0]===k);if(a.length)h+=`<h4>${E(k)}</h4>`+a.map(row).join("")});if(cfg.x.sph.length)h+=`<button id="mn-rs">Ripristina ${cfg.x.sph.length} specie eliminate</button>`}
+else{const arr=visK(c);h+=arr.map(n=>{const v=TAB[c][n];return`<div class="mr" data-k="${E(n)}">${c==="pt"?`<input type="text" data-e value="${E(v)}" maxlength="3" style="width:52px;flex:none" aria-label="Sigla">`:`<input type="color" data-c value="${hx6(c==="line"?v[0]:v)}" aria-label="Colore">`}<input type="text" data-n value="${E(n)}" aria-label="Nome">${c==="line"?`<select data-ls aria-label="Stile">${[["","continua"],["1.2 .7","tratteggiata"],[".5 .8","punteggiata"]].map(s=>`<option value="${s[0]}"${s[0]===(v[1]||"")?" selected":""}>${s[1]}</option>`).join("")}</select>`:""}<button data-d title="Elimina" aria-label="Elimina">×</button></div>`}).join("")+`<h4>Nuovo tipo</h4><div class="mr">${c==="pt"?`<input type="text" id="mn-e" maxlength="3" placeholder="Sigla" style="width:62px;flex:none">`:`<input type="color" id="mn-c" value="#8a8a8a" aria-label="Colore">`}<input type="text" id="mn-n" placeholder="Nome">${c==="line"?`<select id="mn-ls"><option value="">continua</option><option value="1.2 .7">tratteggiata</option><option value=".5 .8">punteggiata</option></select>`:""}<button id="mn-a" class="pri">Aggiungi</button></div>`}
+if(hn)h+=`<button id="mn-rh">Ripristina ${hn} ${hn===1?"nascosto":"nascosti"}</button>`;b.innerHTML=h}
+function mgInit(){$("mg-x").onclick=closeMg;$("mgm").addEventListener("click",e=>{if(e.target.id==="mgm")closeMg()});
+$("mg-tabs").onclick=e=>{const b=e.target.closest("button");if(b){mgT=b.dataset.t;mgMsg("");mgRender()}};
+$("mg-b").addEventListener("change",e=>{mgMsg("");const c=mgT,r=e.target.closest(".mr");if(!r)return;
+if(c==="grp"){const old=r.dataset.g,nn=(r.querySelector("[data-n]")||{}).value;if(!old)return;const v=(nn||"").trim();if(!v||GL().includes(v)){mgMsg(v?"Esiste già un gruppo con questo nome.":"Scrivi un nome.");mgRender();return}grMat();const i=cfg.x.gl.indexOf(old);cfg.x.gl[i]=v;Object.keys(cfg.x.grp).forEach(k=>{if(cfg.x.grp[k]===old)cfg.x.grp[k]=v});cfgSave();mgDone();return}
+if(c==="sp"){const S=r.dataset.s;if(!S)return;const nn=r.querySelector("[data-n]").value.trim();if(!nn){mgMsg("Scrivi un nome.");mgRender();return}
+if(nn!==S){if(SP[nn]){mgMsg("Esiste già una specie con questo nome.");mgRender();return}spRen(S,nn)}
+spSet(nn,{k:r.querySelector("[data-k]").value,ws:r.querySelector("[data-ws]").value.trim(),wt:r.querySelector("[data-wt]").value.trim(),n:r.querySelector("[data-nt]").value.trim()});cfgSave();save();mgRender();return}
+const K=r.dataset.k;if(!K)return;const nn=r.querySelector("[data-n]").value.trim();if(!nn){mgMsg("Scrivi un nome.");mgRender();return}
+if(nn!==K&&nn in TAB[c]&&!cfg.hide[c].includes(nn)){mgMsg("Esiste già un tipo con questo nome.");mgRender();return}
+const val=c==="pt"?(r.querySelector("[data-e]").value.trim()||nn.slice(0,2)):c==="line"?[r.querySelector("[data-c]").value,r.querySelector("[data-ls]").value]:r.querySelector("[data-c]").value;
+kindRen(c,K,nn,val,c==="crop"?r.querySelector("[data-g]").value:null);cfgSave();save();mgDone()});
+$("mg-b").addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;mgMsg("");const c=mgT,r=b.closest(".mr");
+if(b.id==="mn-rh"){cfg.hide[c]=[];cfgSave();mgDone();return}
+if(b.id==="mn-rs"){cfg.x.sph=[];spRebuild();cfgSave();mgRender();return}
+if(b.id==="mn-a"){const n=$("mn-n").value.trim();if(!n){$("mn-n").focus();return}
+if(c==="grp"){grMat();if(cfg.x.gl.includes(n)){mgMsg("Esiste già un gruppo con questo nome.");return}cfg.x.gl.splice(cfg.x.gl.length-1,0,n);cfgSave();mgDone();return}
+if(c==="sp"){if(SP[n]){mgMsg("Esiste già una specie con questo nome.");return}spAdd(n,$("mn-k").value,$("mn-ws").value.trim(),$("mn-wt").value.trim(),$("mn-nt").value.trim());cfgSave();save();mgRender();return}
+if(n in TAB[c]&&!cfg.hide[c].includes(n)){mgMsg("Esiste già un tipo con questo nome.");return}
+const val=c==="pt"?($("mn-e").value.trim()||n.slice(0,2)):c==="line"?[$("mn-c").value,$("mn-ls").value]:$("mn-c").value;kindAdd(c,n,val,c==="crop"?$("mn-g").value:null);cfgSave();mgDone();return}
+if(!r)return;
+if(b.dataset.up!=null||b.dataset.dn!=null){grMat();const g=r.dataset.g,i=cfg.x.gl.indexOf(g),j=i+(b.dataset.up!=null?-1:1);if(j<0||j>=cfg.x.gl.length)return;[cfg.x.gl[i],cfg.x.gl[j]]=[cfg.x.gl[j],cfg.x.gl[i]];cfgSave();mgDone();return}
+if(b.dataset.d==null)return;
+if(c==="grp"){const g=r.dataset.g,n=visK("crop").filter(k=>KG(k)===g).length;if(await askConfirm("Eliminare il gruppo «"+g+"»?",n?n+" tipi passeranno a «"+GFB+"».":"",{ok:"Elimina",danger:1})){grMat();Object.keys(cfg.x.grp).forEach(k=>{if(cfg.x.grp[k]===g)cfg.x.grp[k]=GFB});cfg.x.gl=cfg.x.gl.filter(x=>x!==g);cfgSave();mgDone()}return}
+if(c==="sp"){const S=r.dataset.s;if(await askConfirm("Eliminare la specie «"+S+"»?","Le piante e i lotti già inseriti con questo nome restano.",{ok:"Elimina",danger:1})){spDel(S);cfgSave();mgRender()}return}
+const m=await kindDel(c,r.dataset.k);if(m===null)return;if(m){mgMsg(m);return}cfgSave();save();mgDone()})}

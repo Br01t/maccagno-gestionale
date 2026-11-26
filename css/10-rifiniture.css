@@ -1,0 +1,22 @@
+/* css/10-rifiniture.css — Rifiniture tipografiche e di interazione */
+/* v42 rifinitura */
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.kp b,.sum,td,th,.bs b,.cs,.tbd,em,.ev2 b{font-variant-numeric:tabular-nums}
+input:not([type=checkbox]):not([type=radio]),select,textarea{border-radius:8px}
+button{transition:background-color .12s,border-color .12s,box-shadow .12s,opacity .12s}
+button:hover:not(:disabled):not(.on):not(.pri){border-color:color-mix(in srgb,var(--ac) 40%,var(--ln))}
+button:active:not(:disabled){transform:translateY(.5px)}
+:focus-visible{outline:2px solid var(--ring,#1a73e8);outline-offset:2px}
+#errt{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;align-items:center;gap:12px;background:#8a2a20;color:#fff;padding:10px 12px 10px 16px;border-radius:12px;font-size:13px;max-width:calc(100vw - 24px)}#errt button{background:#fff;color:#8a2a20;border:0;border-radius:8px;min-height:34px;padding:0 12px}
+button,summary,[role=button]{touch-action:manipulation}
+@media(max-width:760px){.body[data-p="aree"]{grid-template-rows:minmax(110px,24dvh) minmax(0,1fr)!important}}
+#upd{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:80;display:flex;align-items:center;gap:12px;background:var(--fg);color:var(--bg);padding:10px 12px 10px 16px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:13.5px;max-width:calc(100vw - 24px)}#upd button{background:var(--ac);color:var(--onac);border:0;border-radius:8px;min-height:36px;padding:0 14px;font-weight:600}
+@media(min-width:761px){
+.body.gest #sd{max-width:820px;padding:12px 28px 0}
+.body.gest #st-tabs{gap:2px;border-bottom:1px solid var(--ln);padding:0;margin:0 0 14px;background:transparent}
+.body.gest #st-tabs button,.body.gest #st-tabs button.on{flex:0 0 auto;flex-direction:row;gap:8px;min-height:46px;padding:0 16px;font-size:14px;background:transparent;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--mut)}
+.body.gest #st-tabs button:hover{color:var(--fg)}
+.body.gest #st-tabs button.on{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
+.body.gest #st-tabs button span{font-size:14px}
+.body.gest .f{background:var(--card);border:1px solid var(--ln);border-radius:12px;padding:14px 16px;gap:10px}
+}

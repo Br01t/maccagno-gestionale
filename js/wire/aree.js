@@ -1,0 +1,2 @@
+/* wire/aree.js — Collegamenti: aree. */
+$("sm").onclick=()=>{const r=$("rp");if(r.innerHTML){r.innerHTML="";return}const R=summ();r.innerHTML=R.length?"<table><tr><th>Dove</th><th>Voce</th><th>Unità</th><th>Valore</th></tr>"+R.map(x=>"<tr>"+x.map(c=>`<td>${E(c)}</td>`).join("")+"</tr>").join("")+"</table><button id=\"csv\">Scarica CSV</button>":"Nessun elemento ancora.";const c=$("csv");if(c)c.onclick=()=>dl("riepilogo-maccagno.csv","Dove;Voce;Unità;Valore\n"+R.map(x=>x.join(";")).join("\n"),"text/csv")};

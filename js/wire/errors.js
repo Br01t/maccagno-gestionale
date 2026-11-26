@@ -1,0 +1,2 @@
+/* wire/errors.js — Collegamenti: gestione errori globali. */
+window.addEventListener("error",e=>{if($("errt"))return;const d=document.createElement("div");d.id="errt";d.setAttribute("role","alert");d.innerHTML="<span>Si è verificato un errore: "+E(String(e.message||"")).slice(0,140)+"</span><button type=\"button\">Chiudi</button>";d.querySelector("button").onclick=()=>d.remove();document.body.appendChild(d);setTimeout(()=>d.remove(),12000)});

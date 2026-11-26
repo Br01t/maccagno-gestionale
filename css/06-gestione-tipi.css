@@ -1,0 +1,11 @@
+/* css/06-gestione-tipi.css — Gestione tipi, gruppi e specie */
+/* ===== v30: gestione tipi, gruppi, specie ===== */
+#mgm{position:fixed;inset:0;z-index:160;background:rgba(15,20,15,.5);display:flex;align-items:center;justify-content:center;padding:16px}#mgm[hidden]{display:none}
+#mgm .mgc{width:min(680px,100%);max-height:90vh;display:flex;flex-direction:column;gap:10px;overflow:hidden;padding:16px}
+.mgh{display:flex;justify-content:space-between;align-items:center;gap:8px}.mgh h3{margin:0}.mgh button{border:0;background:none;font-size:18px;min-height:36px;width:36px;padding:0;color:var(--mut)}
+#mg-tabs{display:flex;flex-wrap:wrap;gap:4px}#mg-tabs button{flex:1 1 auto;min-height:34px;padding:4px 8px;font-size:13px}
+#mg-b{overflow:auto;flex:1;min-height:0}#mg-b h4{margin:14px 0 6px}
+.mr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}.mr input[type=text]{flex:1 1 130px;min-width:0}.mr select{flex:1 1 130px;min-width:0}.mr input[type=color]{width:38px;height:36px;padding:2px;flex:none}.mr button{flex:none;min-width:36px}
+.mr.sp{border:1px solid var(--ln);border-radius:10px;padding:8px;background:var(--bg)}.mr.sp>input[data-n],.mr.sp>#mn-n{flex:1 1 160px}
+#mn-rh,#mn-rs{margin-top:10px}.lnk{border:0;background:none;color:var(--ac);text-decoration:underline;font-size:13px;padding:4px 2px;min-height:30px;width:auto;align-self:flex-start}
+#mg-m{min-height:1.2em;color:#c0392b;font-size:13px}

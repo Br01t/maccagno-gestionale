@@ -1,0 +1,2 @@
+/* data/ricette.js — Ricorrenze delle ricette. */
+const RPO=[["","una volta"],["3d","↻ ogni 3 giorni"],["1w","↻ ogni settimana"],["2w","↻ ogni 2 settimane"],["1m","↻ ogni mese"],["3m","↻ ogni 3 mesi"],["6m","↻ ogni 6 mesi"],["1y","↻ ogni anno"]],rpOpts=v=>RPO.map(([a,b])=>`<option value="${a}"${a===(v||"")?" selected":""}>${b}</option>`).join(""),rpTxt=v=>(RPO.find(x=>x[0]===v)||[0,""])[1].replace("↻ ","");

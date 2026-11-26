@@ -37,3 +37,7 @@ Limite: tutta la mappa è un unico documento (max 1 MiB, centinaia di elementi).
 
 ## Backup
 "Scarica JSON" esporta tutto. Fallo ogni tanto.
+
+
+## Codice
+Struttura e regole del codice: vedi [docs/ARCHITETTURA.md](docs/ARCHITETTURA.md).

@@ -1,0 +1,4 @@
+/* wire/diario.js — Collegamenti: diario. */
+$("d-c").onchange=diario;
+$("d-b").onclick=()=>{const h=+$("d-h").value||0,tp=$("d-t").value;if(!h&&tp==="Lavoro"&&!$("d-a").value.trim())return;const c=$("d-c").value,o=crops().find(x=>x.id===c);it.push({t:"log",cid:c,cn:o?cname(o):"Generale",d:$("d-d").value||today(),h,tp,pn:$("d-p").hidden?"":$("d-p").value,nx:o?$("d-nx").value:"",lk:$("d-lk").hidden?"":$("d-lk").value,a:$("d-a").value.trim(),n:$("d-n").value.trim(),v:"all",p:[]});$("d-h").value=$("d-a").value=$("d-n").value=$("d-nx").value="";save()};
+$("d-l").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.id==="d-csv")csv("diario-maccagno.csv",[["Data","Coltura","Pianta","Tipo","Attività","Ore","Promemoria","Note"],...it.filter(x=>x.t==="log").sort((a,b)=>a.d<b.d?-1:1).map(x=>[x.d,x.cn,x.pn||"",x.tp||"Lavoro",x.a,x.h,x.nx||"",x.n])]);else if(b.dataset.x!=null){it.splice(it.indexOf(DL[+b.dataset.x]),1);save()}};

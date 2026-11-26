@@ -1,0 +1,6 @@
+/* wire/a11y.js — Collegamenti: accessibilità e gestione del focus nei dialoghi. */
+let a11yT=0;
+try{new MutationObserver(()=>{cancelAnimationFrame(a11yT);a11yT=requestAnimationFrame(a11y)}).observe(document.body,{childList:true,subtree:true})}catch(_){}
+a11y();
+{let pf=null;document.addEventListener("focusin",e=>{if(!e.target.closest(".ovl"))pf=e.target});document.querySelectorAll(".ovl").forEach(o=>new MutationObserver(()=>{if(o.hidden&&pf&&pf.isConnected&&!document.querySelector(".ovl:not([hidden])"))try{pf.focus()}catch(_){}}).observe(o,{attributes:true,attributeFilter:["hidden"]}));
+document.addEventListener("keydown",e=>{const ov=[...document.querySelectorAll(".ovl")].filter(x=>!x.hidden).pop();if(!ov)return;if(e.key==="Escape"&&ov.id==="qs"){ov.hidden=true;return}if(e.key==="Tab"){const f=[...ov.querySelectorAll("button,input,select,textarea,a[href],[tabindex]:not([tabindex='-1'])")].filter(x=>!x.disabled&&!x.hidden&&x.offsetParent!==null);if(!f.length)return;const a=document.activeElement;if(!ov.contains(a)){e.preventDefault();f[0].focus()}else if(e.shiftKey&&a===f[0]){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&a===f[f.length-1]){e.preventDefault();f[0].focus()}}},true)}

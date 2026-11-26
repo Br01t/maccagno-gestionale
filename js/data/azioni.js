@@ -1,0 +1,2 @@
+/* data/azioni.js — Elenco delle azioni rapide. */
+const QA=[["di","Registra lavoro",()=>{go("di");setTimeout(()=>{const e=$("d-h");if(e)e.focus()},60)}],["prod","Registra raccolto",qhOpen],["nv","Nuovo lotto vivaio",()=>{vivFo=true;openViv()}],["st","Nuovo lotto in magazzino",()=>{go("st");setTimeout(()=>{const e=$("l-q");if(e)e.focus()},60)}],["theme","Stampa etichette",()=>lbOpen("lot")],["prod","Riepilogo stagione",rsOpen],["st","Vendita rapida",()=>qsOpen()]];
