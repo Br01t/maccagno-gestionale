@@ -1,15 +1,15 @@
 <!doctype html><html lang="it"><head><meta charset="utf-8"><script>try{var _t=localStorage.getItem("maccagno-theme");if(_t==="light"||_t==="dark")document.documentElement.dataset.theme=_t}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="referrer" content="no-referrer"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"><link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"><title>Mappa dei terreni di Maccagno</title><meta name="theme-color" content="#2f6f4f"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mappa Maccagno"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="icons/icon.svg"><link rel="icon" type="image/png" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="stylesheet" href="css/01-base.css?v=49">
-<link rel="stylesheet" href="css/02-tema.css?v=49">
-<link rel="stylesheet" href="css/03-componenti.css?v=49">
-<link rel="stylesheet" href="css/04-barra-laterale.css?v=49">
-<link rel="stylesheet" href="css/05-vivaio.css?v=49">
-<link rel="stylesheet" href="css/06-gestione-tipi.css?v=49">
-<link rel="stylesheet" href="css/07-gestione-mobile.css?v=49">
-<link rel="stylesheet" href="css/08-moduli.css?v=49">
-<link rel="stylesheet" href="css/09-strumenti-mappa.css?v=49">
-<link rel="stylesheet" href="css/10-rifiniture.css?v=49">
-<link rel="stylesheet" href="css/11-spesa.css?v=49">
+<link rel="stylesheet" href="css/01-base.css?v=50">
+<link rel="stylesheet" href="css/02-tema.css?v=50">
+<link rel="stylesheet" href="css/03-componenti.css?v=50">
+<link rel="stylesheet" href="css/04-barra-laterale.css?v=50">
+<link rel="stylesheet" href="css/05-vivaio.css?v=50">
+<link rel="stylesheet" href="css/06-gestione-tipi.css?v=50">
+<link rel="stylesheet" href="css/07-gestione-mobile.css?v=50">
+<link rel="stylesheet" href="css/08-moduli.css?v=50">
+<link rel="stylesheet" href="css/09-strumenti-mappa.css?v=50">
+<link rel="stylesheet" href="css/10-rifiniture.css?v=50">
+<link rel="stylesheet" href="css/11-spesa.css?v=50">
 </head>
 <body><div class="lock" id="lock"><img src="icons/icon.svg" alt=""><b style="font-size:20px">Mappa dei terreni di Maccagno</b><button id="lk-b" disabled>Accedi con Google</button><div id="lk-m">Verifica accesso…</div><small style="color:#999">v18</small></div><main class="app">
 <header><h1><button id="home" type="button" title="Torna alla mappa" aria-label="Maccagno: torna alla mappa"><img src="icons/icon.svg" alt="" width="26" height="26">Maccagno</button></h1><div id="md-sw" class="seg" role="group" aria-label="Area di lavoro"><button type="button" data-m="map" class="on" aria-pressed="true">Mappa</button><button type="button" data-m="gest" aria-pressed="false">Gestione</button></div><div id="hb"><button id="h-q" type="button" aria-label="Azione rapida"></button><button id="h-s" type="button" aria-label="Cerca (Ctrl+K)" title="Cerca (Ctrl+K)"></button><button id="h-t" type="button"></button></div><div id="tabs" class="bar"></div></header>
@@ -98,74 +98,74 @@
 </div></main><div id="pa"></div>
 <script src="firebase-config.js"></script>
 <script>if(window.FIREBASE_CONFIG&&FIREBASE_CONFIG.projectId)document.documentElement.classList.add("locked")</script>
-<script src="js/lib/qrcode.js?v=49"></script>
-<script src="js/core/dom.js?v=49"></script>
-<script src="js/core/util.js?v=49"></script>
-<script src="js/core/model.js?v=49"></script>
-<script src="js/core/store.js?v=49"></script>
-<script src="js/core/snapshots.js?v=49"></script>
-<script src="js/core/sync.js?v=49"></script>
-<script src="js/core/pwa.js?v=49"></script>
-<script src="js/ui/modal.js?v=49"></script>
-<script src="js/ui/components.js?v=49"></script>
-<script src="js/ui/nav.js?v=49"></script>
-<script src="js/ui/theme.js?v=49"></script>
-<script src="js/map/geometry.js?v=49"></script>
-<script src="js/map/viewport.js?v=49"></script>
-<script src="js/map/render.js?v=49"></script>
-<script src="js/map/tools.js?v=49"></script>
-<script src="js/features/oggi.js?v=49"></script>
-<script src="js/features/aree.js?v=49"></script>
-<script src="js/features/rotazione.js?v=49"></script>
-<script src="js/features/agenda.js?v=49"></script>
-<script src="js/features/diario.js?v=49"></script>
-<script src="js/features/vivaio.js?v=49"></script>
-<script src="js/features/gestione-tipi.js?v=49"></script>
-<script src="js/features/previsioni.js?v=49"></script>
-<script src="js/features/magazzino.js?v=49"></script>
-<script src="js/features/spesa.js?v=49"></script>
-<script src="js/features/ricette.js?v=49"></script>
-<script src="js/features/etichette.js?v=49"></script>
-<script src="js/features/riepilogo.js?v=49"></script>
-<script src="js/features/ricerca.js?v=49"></script>
-<script src="js/features/azioni-rapide.js?v=49"></script>
-<script src="js/features/produzione.js?v=49"></script>
-<script src="js/features/dati.js?v=49"></script>
-<script src="js/data/config.js?v=49"></script>
-<script src="js/data/species.js?v=49"></script>
-<script src="js/data/guide.js?v=49"></script>
-<script src="js/data/icons.js?v=49"></script>
-<script src="js/data/spesa.js?v=49"></script>
-<script src="js/data/vivaio.js?v=49"></script>
-<script src="js/data/gruppi.js?v=49"></script>
-<script src="js/data/calendario.js?v=49"></script>
-<script src="js/data/consociazioni.js?v=49"></script>
-<script src="js/data/ricette.js?v=49"></script>
-<script src="js/data/etichette.js?v=49"></script>
-<script src="js/data/azioni.js?v=49"></script>
-<script src="js/data/macrogruppi.js?v=49"></script>
-<script src="js/state.js?v=49"></script>
-<script src="js/wire/a11y.js?v=49"></script>
-<script src="js/wire/errors.js?v=49"></script>
-<script src="js/wire/nav.js?v=49"></script>
-<script src="js/wire/theme.js?v=49"></script>
-<script src="js/wire/map.js?v=49"></script>
-<script src="js/wire/snapshots.js?v=49"></script>
-<script src="js/wire/oggi.js?v=49"></script>
-<script src="js/wire/agenda.js?v=49"></script>
-<script src="js/wire/diario.js?v=49"></script>
-<script src="js/wire/magazzino.js?v=49"></script>
-<script src="js/wire/spesa.js?v=49"></script>
-<script src="js/wire/ricette.js?v=49"></script>
-<script src="js/wire/etichette.js?v=49"></script>
-<script src="js/wire/riepilogo.js?v=49"></script>
-<script src="js/wire/ricerca.js?v=49"></script>
-<script src="js/wire/azioni-rapide.js?v=49"></script>
-<script src="js/wire/produzione.js?v=49"></script>
-<script src="js/wire/tipi.js?v=49"></script>
-<script src="js/wire/dati.js?v=49"></script>
-<script src="js/wire/sync.js?v=49"></script>
-<script src="js/wire/aree.js?v=49"></script>
-<script src="js/wire/pwa.js?v=49"></script>
-<script src="js/boot.js?v=49"></script>
-<script type="module" src="firebase-sync.js?v=49"></script></body></html>
+<script src="js/lib/qrcode.js?v=50"></script>
+<script src="js/core/dom.js?v=50"></script>
+<script src="js/core/util.js?v=50"></script>
+<script src="js/core/model.js?v=50"></script>
+<script src="js/core/store.js?v=50"></script>
+<script src="js/core/snapshots.js?v=50"></script>
+<script src="js/core/sync.js?v=50"></script>
+<script src="js/core/pwa.js?v=50"></script>
+<script src="js/ui/modal.js?v=50"></script>
+<script src="js/ui/components.js?v=50"></script>
+<script src="js/ui/nav.js?v=50"></script>
+<script src="js/ui/theme.js?v=50"></script>
+<script src="js/map/geometry.js?v=50"></script>
+<script src="js/map/viewport.js?v=50"></script>
+<script src="js/map/render.js?v=50"></script>
+<script src="js/map/tools.js?v=50"></script>
+<script src="js/features/oggi.js?v=50"></script>
+<script src="js/features/aree.js?v=50"></script>
+<script src="js/features/rotazione.js?v=50"></script>
+<script src="js/features/agenda.js?v=50"></script>
+<script src="js/features/diario.js?v=50"></script>
+<script src="js/features/vivaio.js?v=50"></script>
+<script src="js/features/gestione-tipi.js?v=50"></script>
+<script src="js/features/previsioni.js?v=50"></script>
+<script src="js/features/magazzino.js?v=50"></script>
+<script src="js/features/spesa.js?v=50"></script>
+<script src="js/features/ricette.js?v=50"></script>
+<script src="js/features/etichette.js?v=50"></script>
+<script src="js/features/riepilogo.js?v=50"></script>
+<script src="js/features/ricerca.js?v=50"></script>
+<script src="js/features/azioni-rapide.js?v=50"></script>
+<script src="js/features/produzione.js?v=50"></script>
+<script src="js/features/dati.js?v=50"></script>
+<script src="js/data/config.js?v=50"></script>
+<script src="js/data/species.js?v=50"></script>
+<script src="js/data/guide.js?v=50"></script>
+<script src="js/data/icons.js?v=50"></script>
+<script src="js/data/spesa.js?v=50"></script>
+<script src="js/data/vivaio.js?v=50"></script>
+<script src="js/data/gruppi.js?v=50"></script>
+<script src="js/data/calendario.js?v=50"></script>
+<script src="js/data/consociazioni.js?v=50"></script>
+<script src="js/data/ricette.js?v=50"></script>
+<script src="js/data/etichette.js?v=50"></script>
+<script src="js/data/azioni.js?v=50"></script>
+<script src="js/data/macrogruppi.js?v=50"></script>
+<script src="js/state.js?v=50"></script>
+<script src="js/wire/a11y.js?v=50"></script>
+<script src="js/wire/errors.js?v=50"></script>
+<script src="js/wire/nav.js?v=50"></script>
+<script src="js/wire/theme.js?v=50"></script>
+<script src="js/wire/map.js?v=50"></script>
+<script src="js/wire/snapshots.js?v=50"></script>
+<script src="js/wire/oggi.js?v=50"></script>
+<script src="js/wire/agenda.js?v=50"></script>
+<script src="js/wire/diario.js?v=50"></script>
+<script src="js/wire/magazzino.js?v=50"></script>
+<script src="js/wire/spesa.js?v=50"></script>
+<script src="js/wire/ricette.js?v=50"></script>
+<script src="js/wire/etichette.js?v=50"></script>
+<script src="js/wire/riepilogo.js?v=50"></script>
+<script src="js/wire/ricerca.js?v=50"></script>
+<script src="js/wire/azioni-rapide.js?v=50"></script>
+<script src="js/wire/produzione.js?v=50"></script>
+<script src="js/wire/tipi.js?v=50"></script>
+<script src="js/wire/dati.js?v=50"></script>
+<script src="js/wire/sync.js?v=50"></script>
+<script src="js/wire/aree.js?v=50"></script>
+<script src="js/wire/pwa.js?v=50"></script>
+<script src="js/boot.js?v=50"></script>
+<script type="module" src="firebase-sync.js?v=50"></script></body></html>

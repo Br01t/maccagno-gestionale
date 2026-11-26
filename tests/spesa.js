@@ -5,26 +5,26 @@ await p.goto('file://'+require('path').resolve(__dirname,'..','index.html'));awa
 await ev(()=>{const c=cen(P["1241"].p),sq=(x,y)=>[[c[0]+x,c[1]+y],[c[0]+x+5,c[1]+y],[c[0]+x+5,c[1]+y+5],[c[0]+x,c[1]+y+5]];
 it=it.filter(x=>x.t!=="crop");it.push({t:"crop",id:"cZ",k:"Zafferano",l:"Zaff",p:sq(0,7),v:"1241",y:String(YEAR()),pl:[],tr:[],ck:[]});setSeason(String(YEAR()));save()});
 await ev(()=>setMode("gest","sp"));await p.waitForTimeout(200);
-const s0=await ev(()=>({l:slLists().length,i:slItems("seed-sl-test").length,seed:cfg.x.seedSl}));
-chk('lista di partenza creata',s0.l===1&&s0.i>=25&&s0.seed===1,s0);
+const s0=await ev(()=>({l:slLists().length,i:slItems("seed-sl-2027").length,seed:cfg.x.seedSl}));
+chk('lista di partenza creata',s0.l===1&&s0.i>=60&&s0.seed===2,s0);
 await p.reload();await p.waitForTimeout(500);
-chk('seed non duplicato dopo ricarica',await ev(()=>slLists().length===1&&slItems("seed-sl-test").length>=25),0);
+chk('seed non duplicato dopo ricarica',await ev(()=>slLists().length===1&&slItems("seed-sl-2027").length>=60),0);
 // spunta bulbi (coltura zafferano assegnata) → costo sulla coltura
 await ev(()=>setMode("gest","sp"));await p.waitForTimeout(200);
 const id=await ev(()=>it.find(x=>x.t==="si"&&x.n.startsWith("Bulbi")).id);
 await ev(i=>{it.find(x=>x.id===i).cid="cZ"},id);
 await p.check(`[data-ck="${id}"]`);await p.waitForTimeout(200);
 let c=await ev(()=>({co:it.find(x=>x.id==="cZ").co,T:macTot(String(YEAR()))}));
-chk('spunta → costo 175€ sulla coltura',c.co&&c.co.length===1&&c.co[0].e===175&&c.T.c===175,c);
+chk('spunta → costo 294€ sulla coltura',c.co&&c.co.length===1&&c.co[0].e===294&&c.T.c===294,c);
 await p.fill(`[data-ac="${id}"]`,'160');await p.dispatchEvent(`[data-ac="${id}"]`,'change');await p.waitForTimeout(200);
 c=await ev(()=>({co:it.find(x=>x.id==="cZ")&&it.find(x=>x.id==="cZ").co,n:it.filter(x=>x.t==="crop").length,ac:it.find(x=>x.t==="si"&&x.n.startsWith("Bulbi")).ac}));console.log(JSON.stringify(c));chk('importo pagato modificato → 160',c.co&&c.co.length===1&&c.co[0].e===160,c);
 await p.uncheck(`[data-ck="${id}"]`);await p.waitForTimeout(200);
 chk('de-spunta rimuove il costo',await ev(()=>(it.find(x=>x.id==="cZ").co||[]).length===0),0);
 // elemento senza coltura → spesa generale
-const id2=await ev(()=>it.find(x=>x.t==="si"&&x.n.startsWith("Rastrello")).id);
+const id2=await ev(()=>it.find(x=>x.t==="si"&&x.n.startsWith("Martello")).id);
 await p.check(`[data-ck="${id2}"]`);await p.waitForTimeout(200);
 c=await ev(()=>({g:genExp("all"),T:macTot(String(YEAR())).x,sp:it.filter(x=>x.t==="sp").length}));
-chk('senza coltura → spesa generale 12€',c.g===12&&c.sp===1,c);
+chk('senza coltura → spesa generale 10€',c.g===10&&c.sp===1,c);
 // nuova lista, nuovo elemento, modifica, elimina
 await p.click('#sp-nl');await p.fill('#sp-nn','Attrezzi');await p.click('#sp-nok');await p.waitForTimeout(200);
 await ev(()=>{$('sp-add').open=true});await p.fill('#sp-add [data-f="n"]','Pala');await p.fill('#sp-add [data-f="up"]','20');await p.click('#sp-add [data-svi="new"]');await p.waitForTimeout(200);
@@ -43,4 +43,6 @@ const m=await ev(()=>{const T=macTot(String(YEAR()));return[T.h,T.w]});chk('cost
 await ev(()=>{setMode("gest","prod");prodList(true)});await p.waitForTimeout(200);
 chk('KPI margine con lavoro',(await p.textContent('#prl .kp'))?.includes('lavoro'),0);
 await ev(()=>{cfg.x.hr=0;cfgSave()});
+const mg=await ev(()=>{it=it.filter(x=>!(x.t==="sl"||x.t==="si"));it.push({t:"sl",id:"seed-sl-test",n:"vecchia",v:"all",p:[]},{t:"si",id:"seed-si-1",l:"seed-sl-test",n:"x",q:1,u:"pz",up:1,ck:false,v:"all",p:[]});cfg.x.seedSl=1;seedSpesa();return[slLists().map(x=>x.id),it.filter(x=>x.t==="si").length]});
+chk('migrazione: vecchia lista non toccata sostituita dalla nuova',mg[0].length===1&&mg[0][0]==="seed-sl-2027"&&mg[1]>=60,mg);
 console.log(R.join('\n'));console.log('errs',JSON.stringify(errs));await b.close()})();
