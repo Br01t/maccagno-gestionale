@@ -3,8 +3,8 @@
 const SPCATS=["Semi e bulbi","Piante","Funghi","Materiali","Lavorazione e conservazione","Protezione","Attrezzi","Altro"];
 const SPUNITS=["pz","kg","g","m","m²","L","confezioni","sacchi","balle"];
 /* [categoria, nome, quantità, unità, prezzo unitario stimato €, nota, tipo di coltura] */
-const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 100 tronchi",note:"Quantità esatte della Parte L della Guida e del Piano numerico (test 2027): zafferano 1.050 bulbi, peperoncini, aglio, erbe e annuali, 100 tronchi con 2.255 plug e 2 colonne di paglia, 3 arnie. Spesa di avvio del piano: circa 2.544 €. Prezzi stimati, da verificare con i fornitori.",items:[
-["Semi e bulbi", "Bulbi di zafferano, calibro 10+", 1050, "pz", 0.28, "1.000 da piantare in 2 bancali da 10 × 1 m (5 file, 100 bulbi per fila a 10 cm, 10–15 cm di profondità) + 50 in vaso di scorta. Pianta da luglio a settembre, soprattutto agosto (Regione Marche); al Nord entro fine settembre (Ingegnoli). Densità del piano 50/m²: nell'intervallo 10–60 indicato dalla Regione Marche. Prezzo NON confermato: il listino Ingegnoli mostra 5 prezzi (4,20; 39,90; 189; 329; 1.490 €) senza dire a quali quantità corrispondono.", "Zafferano"],
+const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 100 tronchi",note:"Quantità esatte della Parte L della Guida e del Piano numerico (test 2027): zafferano 1.050 bulbi, peperoncini, aglio, erbe e annuali, 100 tronchi con 2.255 plug e 2 colonne di paglia, 3 arnie. Il piano stimava 2.544 €; con i prezzi di listino trovati a novembre 2026 (bulbi, plug, nuclei, essiccatore) il totale sale a circa 3.500 €. Controlla l'etichetta «prezzo da confermare» e chiedi preventivi per le quantità grandi.",items:[
+["Semi e bulbi", "Bulbi di zafferano, calibro 10+", 1050, "pz", 0.42, "1.000 da piantare in 2 bancali da 10 × 1 m (5 file, 100 bulbi per fila a 10 cm, 10–15 cm di profondità) + 50 in vaso di scorta. Pianta da luglio a settembre, soprattutto agosto (Regione Marche); al Nord entro fine settembre (Ingegnoli). Densità del piano 50/m²: nell'intervallo 10–60 indicato dalla Regione Marche. Prezzo di riferimento: 100 bulbi calibro 10–11 a 41,64 € + IVA (venditabulbizafferano.com, al momento esaurito); Floriana Bulbose 100 bulbi a 64,80 €. Per 1.050 bulbi chiedi un preventivo: gli sconti per quantità non sono pubblicati. Resa verificata: prova di 6 anni su corms >2,5 cm, 0,48 g/m² nel 1° anno, 1,05 g/m² nel 3°, picco al 4° anno.", "Zafferano"],
 ["Semi e bulbi", "Semi peperoncini speciali: habanero, Carolina Reaper, Trinidad Scorpion", 3, "confezioni", 4.5, "24 semi in tutto (8 per varietà). Semina fine gennaio a 26–28 °C; in campo 4 piante per varietà.", "Peperoncini"],
 ["Semi e bulbi", "Semi peperoncino comune: cayenna, diavolicchio calabrese", 2, "confezioni", 4, "20 semi in tutto (10 per varietà); in campo 6 piante per varietà.", "Peperoncini"],
 ["Semi e bulbi", "Teste di aglio da seme", 14, "pz", 1.4, "Circa 8 spicchi l'una (112): ne pianti 100 a dicembre, 20 × 20 cm, 5–6 cm di profondità, punta in su, in 4 m².", "Aglio"],
@@ -19,18 +19,18 @@ const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 100 tronchi",note:"Quanti
 ["Semi e bulbi", "Semi di fiordaliso", 1, "confezioni", 1.5, "Circa 50 semi, semina diretta marzo–aprile; ~40 piante, 1 m².", "Fiori"],
 ["Piante", "Piantine di salvia", 6, "pz", 3, "Campo a maggio, 3 piante per fila a 66 cm.", "Erbe aromatiche"],
 ["Piante", "Piantine di elicriso", 8, "pz", 3.5, "Campo ad aprile, 4 piante per fila a 50 cm.", "Erbe aromatiche"],
-["Funghi", "Tronchi di castagno per shiitake (100 cm, Ø 10–20 cm)", 30, "pz", 0, "Taglio dicembre–febbraio con il via libera della Comunità Montana (in tutto circa 1,3 m³ di legno per 100 tronchi). Riposo 2–4 settimane prima dell'inoculo (Virginia Tech). Il castagno non è tra le specie citate dalle fonti consultate (querce, carpini, faggio, betulla, noce americano): conferma con il fornitore del micelio.", "Funghi"],
+["Funghi", "Tronchi di castagno per shiitake (100 cm, Ø 10–20 cm)", 30, "pz", 0, "Taglio dicembre–febbraio con il via libera della Comunità Montana (in tutto circa 1,3 m³ di legno per 100 tronchi). Riposo 2–4 settimane prima dell'inoculo (Virginia Tech). Castagno adatto secondo il fornitore del micelio (primordiafunghi.com). Per il taglio in Lombardia serve la denuncia di taglio sul portale SISCO: nel 15% dei casi serve l'autorizzazione dell'ente forestale (silenzio-assenso dopo 45 o 60 giorni), quindi presentala subito.", "Funghi"],
 ["Funghi", "Tronchi di faggio, quercia o betulla per hericium (100 cm)", 12, "pz", 0, "Taglio dicembre–febbraio.", "Funghi"],
 ["Funghi", "Tronchi di pioppo, salice o betulla per pioppino (50 cm)", 22, "pz", 0, "Taglio dicembre–febbraio.", "Funghi"],
 ["Funghi", "Tronchi di pioppo, salice o betulla per pleurotus (50 cm)", 22, "pz", 0, "Taglio dicembre–febbraio.", "Funghi"],
 ["Funghi", "Tronchi di sambuco, quercia o pioppo per auricularia, prova (50 cm)", 10, "pz", 0, "Prova.", "Funghi"],
 ["Funghi", "Tronchi di pioppo o salice per flammulina, prova (50 cm)", 4, "pz", 0, "Prova.", "Funghi"],
-["Funghi", "Plug di shiitake", 950, "pz", 0.1, "30 fori per tronco × 30 tronchi = 900 + scorta. Prezzo NON confermato. Fori ogni 10–15 cm sulla fila e 5–10 cm tra le file (Virginia Tech), circa 30 per tronco da 100 cm.", "Funghi"],
-["Funghi", "Plug di hericium", 380, "pz", 0.1, "30 fori × 12 tronchi = 360 + scorta.", "Funghi"],
-["Funghi", "Plug di pioppino", 350, "pz", 0.1, "15 fori × 22 tronchi = 330 + scorta. Inoculo a marzo.", "Funghi"],
-["Funghi", "Plug di pleurotus", 350, "pz", 0.1, "15 fori × 22 tronchi = 330 + scorta. Inoculo ad aprile; è quello che dà i primi funghi in autunno.", "Funghi"],
-["Funghi", "Plug di auricularia (prova)", 160, "pz", 0.1, "15 fori × 10 tronchi = 150 + scorta.", "Funghi"],
-["Funghi", "Plug di flammulina (prova)", 65, "pz", 0.1, "15 fori × 4 tronchi = 60 + scorta.", "Funghi"],
+["Funghi", "Plug di shiitake", 950, "pz", 0.31, "30 fori per tronco × 30 tronchi = 900 + scorta. Fori ogni 10–15 cm sulla fila e 5–10 cm tra le file (Virginia Tech), circa 30 per tronco da 100 cm. Prezzo di riferimento: kit da 100 plug a 30,99 € IVA inclusa (primordiafunghi.com), per 950 plug chiedi un preventivo. Legni adatti secondo il fornitore: quercia, ontano, tiglio, betulla, castagno.", "Funghi"],
+["Funghi", "Plug di hericium", 380, "pz", 0.21, "30 fori × 12 tronchi = 360 + scorta. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
+["Funghi", "Plug di pioppino", 350, "pz", 0.21, "15 fori × 22 tronchi = 330 + scorta. Inoculo a marzo. Prezzo di riferimento: 100 chiodi a 20,99 € IVA inclusa (primordiafunghi.com; 500 pezzi in preordine). Legni adatti secondo il fornitore: pioppo, faggio, betulla, olmo, salice, acero, ontano, tiglio.", "Funghi"],
+["Funghi", "Plug di pleurotus", 350, "pz", 0.21, "15 fori × 22 tronchi = 330 + scorta. Inoculo ad aprile; è quello che dà i primi funghi in autunno. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
+["Funghi", "Plug di auricularia (prova)", 160, "pz", 0.21, "15 fori × 10 tronchi = 150 + scorta. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
+["Funghi", "Plug di flammulina (prova)", 65, "pz", 0.21, "15 fori × 4 tronchi = 60 + scorta. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
 ["Funghi", "Semente di pleurotus in grani (colonne di paglia)", 2, "kg", 12, "Prova con 2 colonne da circa 10 kg di substrato: una ad aprile (ceppo per il caldo), una a settembre (ostreatus, 10–15 °C). Servono 1–2 kg.", "Funghi"],
 ["Funghi", "Tubolari per le colonne di paglia", 4, "pz", 3, "", "Funghi"],
 ["Funghi", "Paglia per le colonne", 2, "balle", 7, "Circa 5–6 kg di paglia secca per colonna da bagnare.", "Funghi"],
@@ -52,7 +52,7 @@ const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 100 tronchi",note:"Quanti
 ["Materiali", "Rete antitopo per 20 m²", 20, "m²", 1.5, "Da stendere sui bancali dello zafferano.", "Zafferano"],
 ["Materiali", "Irrigazione a goccia per 100 m²", 1, "pz", 300, "Già predisposta su tutto il recinto, anche per il raddoppio.", ""],
 ["Protezione", "Recinzione elettrica per il recinto di 100 m²", 1, "pz", 450, "Circa 40 m di perimetro, 3–4 fili (160 m di filo) e 12 pali. Misura il recinto prima di comprare.", ""],
-["Lavorazione e conservazione", "Essiccatore a 6–10 ripiani con termostato", 1, "pz", 150, "", ""],
+["Lavorazione e conservazione", "Essiccatore a 6–10 ripiani con termostato", 1, "pz", 253, "Riferimento: Biosec Domus B10 (Tauro), 10 ripiani, 480 W, 253 € scontato da 275 € (macrolibrarsi.it).", ""],
 ["Lavorazione e conservazione", "Macinino per spezie", 1, "pz", 25, "", ""],
 ["Lavorazione e conservazione", "Bilancia al decimo di grammo", 1, "pz", 20, "", ""],
 ["Lavorazione e conservazione", "Vasetti da 50–100 ml", 150, "pz", 0.6, "", ""],
@@ -65,6 +65,7 @@ const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 100 tronchi",note:"Quanti
 ["Attrezzi", "Martello di gomma", 1, "pz", 10, "", "Funghi"],
 ["Attrezzi", "Attrezzi da giardino (cesoie, rastrello, zappa, annaffiatoio)", 1, "pz", 115, "Se non li hai già.", ""],
 ["Altro", "Api: cera, sciroppo e trattamento antivarroa", 1, "pz", 40, "", "Api e miele"],
-["Altro", "Nuclei di api per 3 arnie", 3, "pz", 0, "Prezzo da chiedere a un apicoltore. Non sono nei costi del piano. Uno studio su 5 aziende piemontesi (2020–2024) indica un costo medio di gestione di circa 350 € a colonia: i 40 € del piano coprono solo cera, sciroppo e trattamenti.", "Api e miele"],
+["Altro", "Nuclei di api per 3 arnie", 3, "pz", 115, "Non sono nei costi del piano. Uno studio su 5 aziende piemontesi (2020–2024) indica un costo medio di gestione di circa 350 € a colonia: i 40 € del piano coprono solo cera, sciroppo e trattamenti. Riferimento: 115 € + IVA a nucleo su 5 telaini con regina dell'anno precedente, consegna aprile, cassa a perdere 5 € (apicolturalaterza.it, Puglia: chiedi anche a un apicoltore lombardo per evitare la spedizione).", "Api e miele"],
 ["Altro", "Notifica ATS, analisi e assicurazione", 1, "pz", 120, "", ""],
-["Altro", "Spedizioni (stima del primo anno)", 1, "pz", 100, "Costo di vendita, non un acquisto di avvio.", ""]]};
+["Altro", "Spedizioni (stima del primo anno)", 1, "pz", 100, "Costo di vendita, non un acquisto di avvio.", ""],
+["Protezione","Guanti in nitrile, mascherine FFP2 e occhiali",1,"pz","","Per maneggiare e macinare i peperoncini (non è nella guida): inserisci il prezzo quando lo sai.","Peperoncini"]]};

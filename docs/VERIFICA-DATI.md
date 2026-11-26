@@ -1,4 +1,4 @@
-# Verifica dei dati (26 novembre 2026)
+# Verifica dei dati (aggiornata il 26 novembre 2026, seconda ricerca)
 
 Per ogni numero del piano: **confermato** (fonte consultata), **compatibile** (dentro un intervallo di fonte, ma non identico) o **non confermato** (nessuna fonte trovata). I prezzi non si possono "confermare" senza un preventivo: nella lista della spesa ogni elemento ha la casella «Prezzo confermato».
 
@@ -25,3 +25,14 @@ Per ogni numero del piano: **confermato** (fonte consultata), **compatibile** (d
 - Costo di gestione: circa 350 € a colonia contro i 40 € del piano (solo materiali).
 ## Altro
 Prezzi di semi, vasi, attrezzi, recinzione, essiccatore, imballaggi: non confermati (stime del piano).
+
+## Aggiornamento dopo la seconda ricerca
+- **Zafferano, resa:** una prova di 6 anni (Notulae Botanicae Horti Agrobotanici, bulbi >2,5 cm) dà 0,48 g/m² nel 1° anno, 0,55 nel 2°, 1,05 nel 3°, 1,09 nel 4°; con bulbi <2,5 cm 0,06, 0,21, 0,76, 1,31 g/m². Il piano (0,22 g/m² al 1° anno, 0,6 al 3°) è quindi prudente. La produzione cala dal 5° anno: la prova conclude che gli ultimi anni «non hanno interesse commerciale».
+- **Zafferano, prezzo:** 100 bulbi calibro 10–11 a 41,64 € + IVA (venditabulbizafferano.com, esaurito) = 0,42 €/bulbo; Floriana Bulbose 100 bulbi a 64,80 €. Il piano usava 0,28 €. Prezzi per 1.000 bulbi non pubblicati: serve un preventivo.
+- **Plug:** shiitake 100 a 30,99 € IVA inclusa; pioppino 100 a 20,99 € IVA inclusa (Primordia Funghi). Il piano usava 0,10 €/plug: i prezzi reali sono 0,21–0,31 €. Con 2.255 plug la spesa passa da circa 225 € a circa 570 € (prima di eventuali sconti su quantità). Per hericium, pleurotus, auricularia e flammulina il prezzo non è verificato.
+- **Legni:** shiitake su quercia, ontano, tiglio, betulla, castagno; pioppino su pioppo, faggio, betulla, olmo, salice, acero, ontano, tiglio (Primordia Funghi).
+- **Hericium:** su ceppaie di faggio il picco di produzione è nel 3°–4° anno e simile a quello dello shiitake (Agroforestry Systems, 2015). Nessun dato numerico trovato.
+- **Nuclei:** 115 € + IVA a nucleo su 5 telaini con regina dell'anno precedente, consegna in aprile (Apicoltura Laterza, Puglia). Il piano non li contava: 3 nuclei = 345 € + IVA.
+- **Essiccatore:** Biosec Domus B10, 10 ripiani, 480 W, 253 € (macrolibrarsi.it). Il piano usava 150 €.
+- **Taglio dei tronchi in Lombardia:** serve sempre la denuncia di taglio sul portale SISCO; nell'85% dei casi il permesso è immediato, nel 15% serve l'autorizzazione dell'ente forestale con silenzio-assenso dopo 45 o 60 giorni (Regione Lombardia). Comunità montana per i boschi di montagna fuori dalle aree protette.
+- **Non trovati:** prezzo del kit di recinzione elettrica (pagine non leggibili), prezzo dei semi di Reaper e Scorpion, rese su tronco di pioppino, pleurotus, auricularia e flammulina.

@@ -10,8 +10,8 @@ const c=slCost(x);if(!x.ck||!(c>0))return;const o=x.cid&&crops().find(q=>q.id===
 if(o)(o.co=o.co||[]).push({n:x.n,v:"",e:c,pn:"",d,sl:x.id});else it.push({t:"sp",id:"sp-"+x.id,si:x.id,d,n:x.n,e:c,cat:x.cat||"",v:"all",p:[]})}
 function slDelItem(x){it.forEach(o=>{if(o.t==="crop"&&o.co)o.co=o.co.filter(c=>c.sl!==x.id)});it=it.filter(o=>o!==x&&!(o.t==="sp"&&o.si===x.id))}
 /* Lista di partenza: creata una sola volta (id fissi, così più dispositivi non la duplicano). */
-function seedSpesa(){cfg.x=cfg.x||{};if((+cfg.x.seedSl||0)>=2)return false;cfg.x.seedSl=2;cfgSave();let ch=false;
-const old="seed-sl-test",oi=slItems(old);if(it.some(x=>x.id===old)&&!oi.some(x=>x.ck)){oi.forEach(slDelItem);it=it.filter(x=>x.id!==old);ch=true}
+function seedSpesa(){cfg.x=cfg.x||{};if((+cfg.x.seedSl||0)>=3)return false;cfg.x.seedSl=3;cfgSave();let ch=false;
+["seed-sl-test","seed-sl-2027"].forEach(old=>{const oi=slItems(old);if(it.some(x=>x.id===old)&&!oi.some(x=>x.ck||x.pc)){oi.forEach(slDelItem);it=it.filter(x=>x.id!==old);ch=true}});
 if(it.some(x=>x.id===SPSEED.id))return ch;const d=today();it.push({t:"sl",id:SPSEED.id,n:SPSEED.n,note:SPSEED.note,d,v:"all",p:[]});
 SPSEED.items.forEach((r,i)=>{const cs=r[6]?crops().filter(o=>o.k===r[6]):[];it.push({t:"si",id:"s27-si-"+(i+1),l:SPSEED.id,cat:r[0],n:r[1],q:r[2],u:r[3],up:r[4],note:r[5],k:r[6],cid:cs.length===1?cs[0].id:"",ck:false,pc:false,dt:"",ac:"",v:"all",p:[]})});return true}
 const spCropOpt=sel=>`<option value="">Spesa generale (azienda)</option>`+crops().map(o=>`<option value="${o.id}"${o.id===sel?" selected":""}>${E(cname(o))} · ${E(o.k)}${o.v&&o.v!=="all"?" · part. "+E(o.v):""} · ${E(seasonOf(o))}</option>`).join("");
