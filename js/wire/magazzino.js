@@ -5,6 +5,6 @@ if(b.id==="l-csv")csv("magazzino-maccagno.csv",[["Lotto","Coltura","Prodotto","Q
 else if(b.dataset.a!=null){const l=LS[+b.dataset.a],f=b.parentElement,g=k=>f.querySelector('[data-s="'+k+'"]').value,q=+g("q");if(!q)return;(l.sa=l.sa||[]).push({d:g("d")||today(),q,p:+g("p")||0,c:g("c")});save()}
 else if(b.dataset.orx!=null){const[i,j]=b.dataset.orx.split(".");const l=LS[+i];if(l&&l.or){l.or.splice(+j,1);save()}}
 else if(b.dataset.r!=null){const[i,j]=b.dataset.r.split(".");LS[+i].sa.splice(+j,1);save()}
-else if(b.dataset.d!=null){const l=LS[+b.dataset.d];if(l&&l.rc)it.forEach(x=>{if(x.t==="lot"&&x.sa)x.sa=x.sa.filter(q=>!(q.m==="mix"&&q.mk===l.k))});it.splice(it.indexOf(l),1);save()}};
+else if(b.dataset.d!=null){const l=LS[+b.dataset.d];if(l)delLot(l)}};
 $("l-c").addEventListener("change",lotPr);
 $("l-l").addEventListener("change",e=>{const t=e.target;if(t.dataset.orsel!=null){const l=LS[+t.dataset.orsel];if(l&&t.value){l.or=l.or||[];if(!l.or.includes(t.value))l.or.push(t.value);save()}return}if(t.dataset.lp==null)return;const l=LS[+t.dataset.lp];if(l){l.pn=t.value;const o=crops().find(x=>x.id===l.cid),g=o&&macsAll().find(q=>q.ks.includes(o.k));l.pg=g?g.n:"";save()}});

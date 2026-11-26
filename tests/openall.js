@@ -1,0 +1,1 @@
+module.exports=`new MutationObserver(()=>{document.querySelectorAll('details.pls:not([data-o]),details.newf:not([data-o])').forEach(d=>{d.setAttribute('data-o','1');d.open=true})}).observe(document,{childList:true,subtree:true})`;

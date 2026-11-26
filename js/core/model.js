@@ -1,6 +1,6 @@
 /* core/model.js — Modello dati: accesso a colture, lotti, raccolte, ore, stagioni, vivaio e statistiche. */
 const pnote=k=>it.find(o=>o.t==="pn"&&o.v===k)||{t:"pn",v:k,p:[],n:"",_new:1};
-function desc(o){const w=o.v==="all"?"fuori dalle particelle":"particella "+o.v;return o.t==="crop"?`Coltura: ${o.l||o.k} (${o.k}) · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="zone"?`Zona: ${o.l||o.k} · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="line"?`${o.k}: ${Math.round(len(o.p))} m · ${w}`:o.t==="slope"?`Pendenza ${o.l} · ${w}`:o.t==="pt"?`Punto ${o.k} · ${w}`:`Nota · ${w}`}
+function desc(o){const w=o.v==="all"?"fuori dalle particelle":"particella "+o.v;return o.t==="crop"?`Coltura: ${o.l&&o.l!==o.k?o.l+" ("+o.k+")":o.k} · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="zone"?`Zona: ${o.l&&o.l!==o.k?o.l+" ("+o.k+")":o.k} · ${Math.round(ar(o.p))} m² · ${w}`:o.t==="line"?`${o.k}: ${Math.round(len(o.p))} m · ${w}`:o.t==="slope"?`Pendenza ${o.l} · ${w}`:o.t==="pt"?`Punto ${o.k} · ${w}`:`Nota · ${w}`}
 function totals(o){const r=o.pr||[];return{f:r.reduce((s,x)=>s+kg(x.f,x.u),0),d:r.reduce((s,x)=>s+kg(x.d,x.u),0),a:ar(o.p),h:hrs(o)}}
 const tip=o=>[desc(o),o.sd?"Semina "+fd(o.sd):"",o.h1?"Raccolto "+fd(o.h1)+(o.h2?"–"+fd(o.h2):""):"",...(o.t==="crop"?ind(o):[]),o.irr?"Irrigazione: "+o.irr:"",o.man?"Manutenzione: "+o.man:"",o.n?"Note: "+o.n:""].filter(Boolean).join("\n");
 const crops=()=>it.filter(o=>o.t==="crop"),cid=o=>o.id||(o.id=uid()),cname=o=>o.l||o.k;
@@ -36,3 +36,12 @@ function seasonStats(y){const C=crops().filter(o=>seasonOf(o)===y),rows=C.map(o=
 const lotStock=l=>(+l.q||0)-sld(l);
 const ptg=()=>{const o=Object.entries(PG).map(([g,v])=>[g,Object.keys(v).filter(k=>!cfg.hide.pt.includes(k))]),cu=Object.keys(cfg.add.pt).filter(k=>!cfg.hide.pt.includes(k));if(cu.length)o.push(["Personalizzati",cu]);return o.filter(x=>x[1].length)};
 const lsg=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lss=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+
+/* Appartenenza a un macro gruppo: un lotto collegato a una coltura segue la coltura; altrimenti vale il gruppo salvato nel lotto. */
+const cropGrp=o=>{const g=macsAll().find(q=>q.ks.includes(o.k));return g?g.n:o.k};
+const lotGrp=x=>{const o=x.cid&&crops().find(c=>c.id===x.cid);return o?cropGrp(o):(x.pg||"")};
+/* Elimina una coltura insieme ai suoi dati; i lotti restano in magazzino, collegati al macro gruppo. Restituisce true se eliminata. */
+async function delCrop(o,ask){const L=logsOf(o).length,H=hvOf(o).length,lt=lotsOf(o),P=[];if(L)P.push(L+(L>1?" registrazioni di lavoro":" registrazione di lavoro"));if(H)P.push(H+(H>1?" raccolti":" raccolto"));
+if(ask!==false&&!await askConfirm("Eliminare "+NOUN(o)+"?",(P.length?"Verranno eliminati anche: "+P.join(" e ")+". ":"")+(lt.length?(lt.length>1?"I "+lt.length+" lotti in magazzino restano":"Il lotto in magazzino resta")+" (collegat"+(lt.length>1?"i":"o")+" al macro gruppo). ":"")+"L'operazione non può essere annullata.",{ok:"Elimina",danger:1}))return false;
+const gn=cropGrp(o);lt.forEach(l=>{l.pg=gn;l.cn=l.cn||cname(o);l.cid=""});
+it=it.filter(x=>!((x.t==="log"||x.t==="hv")&&x.cid===o.id));const i=it.indexOf(o);if(i>=0)it.splice(i,1);return true}

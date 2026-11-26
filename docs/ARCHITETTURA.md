@@ -18,6 +18,7 @@ Solo `firebase-sync.js` è un modulo ES (usa Firebase da CDN).
 | `js/state.js` | Variabili di stato condivise e valori iniziali. |
 | `js/wire/` | Collegamento degli eventi agli elementi della pagina, un file per funzionalità. |
 | `js/boot.js` | Avvio dell'app. |
+| `tests/` | Scenari end-to-end (Playwright): `tests/run.sh`. |
 | `tools/` | `bump.sh` (cambia versione ovunque), `check.sh` (controlla sintassi e file mancanti). |
 
 ## Ordine di caricamento (e perché)

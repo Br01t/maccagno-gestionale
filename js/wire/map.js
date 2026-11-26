@@ -2,7 +2,7 @@
 $("plc").onclick=e=>{const b=e.target.closest("[data-p]");if(!b)return;const k=b.dataset.p,F=fo();if(k==="out"){focusOff();return}if(k==="tr"&&F){goCrop(F,"tr");return}if(k==="pn"&&F){goCrop(F,"pl");return}if(k==="pl"&&F){const q=(F.tr||[]).map((t,i)=>[t,i]).filter(x=>!x[0].p).map(x=>x[1]),q2=(F.pl||[]).map((t,i)=>[t,i]).filter(x=>!x[0].p).map(x=>x[1]);if(q.length)startPlace(F,q,"tr");else if(q2.length)startPlace(F,q2,"pl");else sy("Tutto è già posizionato: aggiungi piante dalla scheda «Piante»","ok");return}if(!placing)return;if(k==="end"){endPlace();return}placing.q.shift();if(!placing.q.length)endPlace();else updPlace()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("dlg").hidden){if(placing)endPlace();else if(focus)focusOff()}});
 svg.addEventListener("click",e=>{if(mv){mv=0;return}if(placing){const p=pos(e),o=placing.o,t=o[placing.a][placing.q[0]];if(o.p.length>2&&!pip([p[0],p[1]],o.p)){sy("Fuori dall’area: tocca dentro lo spazio dei funghi","err");return}t.p=[+p[0].toFixed(2),+p[1].toFixed(2)];placing.q.shift();save();if(!placing.q.length)endPlace();else{updPlace();draw()}return}const t=$("tool").value,g=e.target.closest("[data-i]"),tg=e.target.closest("[data-tr]"),pg=e.target.closest("[data-pn]");if(t==="info"&&pg&&!g){const ci=+pg.dataset.pn.split(".")[0];if(it[ci])goCrop(it[ci],"pl");return}if(t==="info"&&tg&&!g){const[ci,ti]=tg.dataset.tr.split(".").map(Number);if(it[ci]){trOpen=ti;goCrop(it[ci],"tr")}return}if(t==="info"){const q=e.target.closest("[data-p]");sel=g?+g.dataset.i:q?"p:"+q.dataset.p:null;full=false;draw();panel();return}
-if(t==="del"){if(g){sel=null;it.splice(+g.dataset.i,1);save();draw();panel();toSel()}return}
+if(t==="del"){if(g){const o=it[+g.dataset.i];if(o&&o.t==="crop"){delCrop(o).then(y=>{if(y){sel=null;save();draw();panel();toSel()}});return}sel=null;it.splice(+g.dataset.i,1);save();draw();panel();toSel()}return}
 if(t==="edit"){if(g){it[+g.dataset.i].l=$("lab").value;save();draw();toSel()}return}
 if(t==="pan")return;const p=pos(e),k=$("kind").value,l=$("lab").value,v=vtag(p);
 if(t==="crop"||t==="zone"||t==="line"||t==="meas"){cur.push(p);draw()}
@@ -27,7 +27,7 @@ if(Math.abs(dy)>=50&&!e.deltaX){zoom(Math.exp(Math.max(-100,Math.min(100,dy))*.0
 const r=svg.getBoundingClientRect();vb.x+=e.deltaX/r.width*vb.w;vb.y+=dy/r.height*vb.h;sched()},{passive:false});
 $("tool").onchange=fillKind;
 $("fin").onclick=fin;
-$("un").onclick=()=>{if(cur.length)cur.pop();else{let i=it.length;while(i--&&NG.includes(it[i].t));if(i>=0)it.splice(i,1);sel=null}save();draw()};
+$("un").onclick=()=>{if(cur.length)cur.pop();else{let i=it.length;while(i--&&NG.includes(it[i].t));if(i>=0){const o=it[i];if(o.t==="crop"&&(logsOf(o).length||hvOf(o).length||lotsOf(o).length)){delCrop(o).then(y=>{if(y){sel=null;save();draw()}});return}it.splice(i,1)}sel=null}save();draw()};
 $("gr").onchange=$("cx").onchange=()=>draw();
 (()=>{const b=document.querySelector(".body"),h=$("sdh"),ap=c=>{b.classList.toggle("col",c);h.setAttribute("aria-expanded",String(!c));$("sdt").textContent=c?"Mostra strumenti":"Nascondi strumenti";try{localStorage.setItem("maccagno-col",c?"1":"")}catch(e){}};h.onclick=()=>ap(!b.classList.contains("col"));try{if(localStorage.getItem("maccagno-col")==="1")ap(true)}catch(e){}})();
 new ResizeObserver(()=>{const r=svg.getBoundingClientRect();if(!r.width||!r.height)return;const a=r.height/r.width;if(Math.abs(vb.h/vb.w-a)>.003){const cy=vb.y+vb.h/2;vb.h=vb.w*a;vb.y=cy-vb.h/2;draw()}}).observe($("w"));

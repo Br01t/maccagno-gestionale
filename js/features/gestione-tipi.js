@@ -3,7 +3,7 @@ function kindAdd(c,n,val,g){cfg.add[c][n]=val;TAB[c][n]=val;cfg.hide[c]=cfg.hide
 function kindRen(c,K,n,val,g){if(n===K){cfg.add[c][K]=val;TAB[c][K]=val;if(c==="crop"&&g){grMat();cfg.x.grp[K]=g}spRebuild();return}
 const g0=c==="crop"?(g||KG(K)):null;cfg.add[c][n]=val;TAB[c][n]=val;cfg.hide[c]=cfg.hide[c].filter(x=>x!==n);
 it.forEach(x=>{if(x.t===c&&x.k===K)x.k=n;if(c==="crop"){if(x.t==="crop")(x.pl||[]).forEach(p=>{if(p.k===K)p.k=n});if(x.t==="nv"&&x.k===K)x.k=n}});
-if(c==="crop"){grMat();cfg.x.grp[n]=g0;delete cfg.x.grp[K];Object.keys(cfg.x.kr).forEach(a=>{if(cfg.x.kr[a]===K)cfg.x.kr[a]=n});cfg.x.kr[K]=n;Object.values(cfg.x.sp).forEach(s=>{if(s.k===K)s.k=n})}
+if(c==="crop"){grMat();cfg.x.grp[n]=g0;delete cfg.x.grp[K];Object.keys(cfg.x.kr).forEach(a=>{if(cfg.x.kr[a]===K)cfg.x.kr[a]=n});cfg.x.kr[K]=n;Object.values(cfg.x.sp).forEach(s=>{if(s.k===K)s.k=n});if(macs().some(g=>g.ks.includes(K)||(g.sk||[]).includes(K)))macEdit(M=>M.forEach(g=>{g.ks=g.ks.map(k=>k===K?n:k);g.sk=(g.sk||[]).map(k=>k===K?n:k)}))}
 delete cfg.add[c][K];delete TAB[c][K];if(!cfg.hide[c].includes(K))cfg.hide[c].push(K);spRebuild()}
 async function kindDel(c,K){const rest=visK(c).filter(n=>n!==K),used=it.filter(x=>(x.t===c||(c==="crop"&&x.t==="nv"))&&x.k===K).length;if(!rest.length)return"Serve almeno un tipo.";const fb=c==="crop"&&rest.includes("Altro")?"Altro":rest[0];
 const y=await askConfirm("Eliminare il tipo «"+K+"»?",used?used+" elementi che lo usano passeranno a «"+fb+"».":"",{ok:"Elimina",danger:1});if(!y)return null;
