@@ -36,3 +36,11 @@ Prezzi di semi, vasi, attrezzi, recinzione, essiccatore, imballaggi: non conferm
 - **Essiccatore:** Biosec Domus B10, 10 ripiani, 480 W, 253 € (macrolibrarsi.it). Il piano usava 150 €.
 - **Taglio dei tronchi in Lombardia:** serve sempre la denuncia di taglio sul portale SISCO; nell'85% dei casi il permesso è immediato, nel 15% serve l'autorizzazione dell'ente forestale con silenzio-assenso dopo 45 o 60 giorni (Regione Lombardia). Comunità montana per i boschi di montagna fuori dalle aree protette.
 - **Non trovati:** prezzo del kit di recinzione elettrica (pagine non leggibili), prezzo dei semi di Reaper e Scorpion, rese su tronco di pioppino, pleurotus, auricularia e flammulina.
+
+## Schede dei macro gruppi e delle specie (27 novembre 2026)
+- **Shiitake:** ombra 60–85%, tronchi sollevati da terra, incubazione 6–18 mesi, acqua nel legno 35–55%, forzatura con 24 ore in acqua fredda (raccolta dopo 7–10 giorni), cappello ancora arrotondato, querce al picco 2°–3° anno e vita 4–5 anni, taglio dopo la caduta delle foglie e riposo 2–4 settimane: confermato (Virginia Tech ANR-102).
+- **Pleurotus su paglia:** paglia trinciata 2–5 cm, substrato bianco in circa 20 giorni, ostreatus a 10–15 °C con calo di 8–10 °C, florida a 22–27 °C, primi funghi dopo 25–30 giorni, 2–3 raccolti: confermato (Rivista di Agraria, 2023). Semente 2–6% del peso del substrato, pastorizzazione a circa 65 °C per fermentazione: tesi dell'Università di Padova (per sacchi da 20–30 kg, non per colonne all'aperto).
+- **Flammulina:** fruttifica a 10–15 °C (10–20 °C): confermato, ma le fonti riguardano letti e sacchi, non tronchi.
+- **Pioppino, hericium, auricularia su tronco:** legni confermati dal fornitore o dalla guida; tempi, temperature e rese **non confermati** (nessuna fonte trovata). Le schede lo dicono e rimandano alle istruzioni del fornitore.
+- **Spezie, fiori, frutti di bosco, aronia, castagne, api, ortica, bosco:** le checklist derivano dalle schede tecniche già presenti nell'app (stesse cifre); nessun dato nuovo.
+- **Prato e Altro:** nessuna scheda da fonte, solo un promemoria da compilare.

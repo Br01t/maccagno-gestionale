@@ -31,7 +31,7 @@ const SPSEED={id:"seed-sl-2027",n:"Test 2027: 54 m² e 30 tronchi",note:"Parte L
 ["Funghi", "Plug di pleurotus", 100, "pz", 0.2099, "1 confezione da 100. Inoculo ad aprile; è quello che dà i primi funghi in autunno. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
 ["Funghi", "Plug di auricularia (prova)", 100, "pz", 0.2099, "1 confezione da 100. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
 ["Funghi", "Plug di flammulina (prova)", 100, "pz", 0.2099, "1 confezione da 100. Prezzo NON verificato per questa specie: usato quello del pioppino (20,99 € ogni 100); chiedi il listino.", "Funghi"],
-["Funghi", "Semente di pleurotus in grani (colonne di paglia)", 2, "kg", 12, "Prova con 2 colonne da circa 10 kg di substrato: una ad aprile (ceppo per il caldo), una a settembre (ostreatus, 10–15 °C). Servono 1–2 kg.", "Funghi"],
+["Funghi", "Semente di pleurotus in grani (colonne di paglia)", 1, "kg", 12, "Prova con 2 colonne da circa 10 kg di substrato: una ad aprile (ceppo per il caldo), una a settembre (ostreatus, 10–15 °C). La semente è il 2–6% del peso del substrato (tesi dell'Università di Padova): circa 1 kg per 20 kg. Il piano ne prevedeva 2 kg.", "Funghi"],
 ["Funghi", "Tubolari per le colonne di paglia", 4, "pz", 3, "", "Funghi"],
 ["Funghi", "Paglia per le colonne", 2, "balle", 7, "Circa 5–6 kg di paglia secca per colonna da bagnare.", "Funghi"],
 ["Funghi", "Cera per sigillare i fori", 1, "kg", 6, "Per circa 600 fori.", "Funghi"],
